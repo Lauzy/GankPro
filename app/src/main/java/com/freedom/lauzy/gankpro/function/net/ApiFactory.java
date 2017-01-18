@@ -1,0 +1,33 @@
+package com.freedom.lauzy.gankpro.function.net;
+
+import com.freedom.lauzy.gankpro.function.entity.GankData;
+
+import rx.Observable;
+import rx.Subscriber;
+
+/**
+ * API
+ * Created by Lauzy on 2017/1/18.
+ */
+
+public class ApiFactory extends RetrofitHttp {
+
+    public static ApiFactory getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    private static class SingletonHolder {
+        private static final ApiFactory INSTANCE = new ApiFactory();
+    }
+
+    /**
+     * 干货数据
+     * @param subscriber 订阅者
+     * @param type 类型
+     * @param page 页数
+     */
+    public void getGankData(Subscriber<GankData> subscriber, String type, int page) {
+        Observable<GankData> observable = apiService.getGankData(type, page);
+        toSubscribe(observable, subscriber);
+    }
+}
