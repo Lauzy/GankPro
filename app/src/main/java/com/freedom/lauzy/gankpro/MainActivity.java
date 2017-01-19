@@ -1,19 +1,26 @@
 package com.freedom.lauzy.gankpro;
 
+import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
+import com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
-import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 import com.freedom.lauzy.gankpro.function.net.RetrofitUtil;
 import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
 
-import rx.Subscriber;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    /*@BindView(R.id.main_frame)
+    FrameLayout mMainFrame;
+    @BindView(R.id.main_tab_host)
+    LyFragmentTabHost mMainTabHost;*/
 
     @Override
     protected int setLayoutId() {

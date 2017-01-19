@@ -8,17 +8,19 @@
     android:orientation="vertical"
     tools:context="com.freedom.lauzy.gankpro.MainActivity">
 
+    <include layout="@layout/layout_toolbar"/>
+
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost
+   <!-- <com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost
         android:id="@+id/main_tab_host"
         android:background="@color/color_white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55">
-    </com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost>
+    </com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost>-->
 
 </LinearLayout>
