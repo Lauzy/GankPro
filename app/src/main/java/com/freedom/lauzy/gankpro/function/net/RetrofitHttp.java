@@ -155,7 +155,7 @@ public class RetrofitHttp {
 
 
 
-    public <T> void toSubscribe(Observable<T> observable, Subscriber<T> s) {
+    public <T> void toSubscribe(Observable<T> observable, LySubscriber<T> s) {
         observable.subscribeOn(Schedulers.io())
 //                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -10,5 +10,5 @@ public class NetConstants {
     public static final String GANK_URL = "data/";
 
 
-    public static final int DefaultSize = 10;
+    public static final int defaultSize = 10;
 }

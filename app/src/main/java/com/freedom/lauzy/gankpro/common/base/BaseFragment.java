@@ -18,14 +18,14 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
-    protected Activity mActivity;
-    private View rootView;
+    /*protected Activity mActivity;
+//    private View rootView;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (Activity) context;
-    }
+    }*/
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -39,17 +39,18 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (rootView == null) {
+        /*if (rootView == null) {
             rootView = inflater.inflate(getLayoutResource(), container, false);
             ButterKnife.bind(this, rootView);
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
             parent.removeView(rootView);
-        }
-
-        ButterKnife.bind(this, rootView);
-        return rootView;
+        }*/
+        View view = inflater.inflate(getLayoutResource(), container, false);
+        ButterKnife.bind(this, view);
+//        ButterKnife.bind(this, rootView);
+        return view;
     }
 
     @Override

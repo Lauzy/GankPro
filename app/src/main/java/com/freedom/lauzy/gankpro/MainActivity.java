@@ -6,13 +6,17 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
-import com.freedom.lauzy.gankpro.view.AndroidFragment;
-import com.freedom.lauzy.gankpro.view.BeautyFragment;
-import com.freedom.lauzy.gankpro.view.CategoryFragment;
-import com.freedom.lauzy.gankpro.view.MineFragment;
+import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.function.net.RetrofitUtil;
+import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
+import com.freedom.lauzy.gankpro.view.fragment.AndroidFragment;
+import com.freedom.lauzy.gankpro.view.fragment.BeautyFragment;
+import com.freedom.lauzy.gankpro.view.fragment.CategoryFragment;
+import com.freedom.lauzy.gankpro.view.fragment.MineFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
 
 //    private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -39,7 +44,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     protected void loadData() {
-        /*RetrofitUtil.loadGankData("Android", 1, new OnResponse<GankData>() {
+        RetrofitUtil.loadGankData("Android", 1, new OnResponse<GankData>() {
             @Override
             public void onSuccess(GankData gankData) {
                 int size = gankData.getResults().size();
@@ -50,7 +55,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             public void onError(Throwable e) {
                 e.printStackTrace();
             }
-        });*/
+        });
     }
 
     @Override

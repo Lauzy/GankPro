@@ -4,7 +4,7 @@ package com.freedom.lauzy.gankpro.function.entity;
  * Created by Lauzy on 2017/1/18.
  */
 
-public class AndroidBean {
+public class ItemBean {
 
     private String _id;
     private String createdAt;

@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro.view;
+package com.freedom.lauzy.gankpro.view.fragment;
 
 
 import android.os.Bundle;

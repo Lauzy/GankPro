@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro.view;
+package com.freedom.lauzy.gankpro.view.fragment;
 
 
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 
 import com.freedom.lauzy.gankpro.R;
 
-public class CategoryFragment extends Fragment {
+public class AndroidFragment extends Fragment {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -17,11 +18,11 @@ public class CategoryFragment extends Fragment {
     private String mParam2;
 
 
-    public CategoryFragment() {
+    public AndroidFragment() {
     }
 
-    public static CategoryFragment newInstance(String param1, String param2) {
-        CategoryFragment fragment = new CategoryFragment();
+    public static AndroidFragment newInstance(String param1, String param2) {
+        AndroidFragment fragment = new AndroidFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -41,7 +42,7 @@ public class CategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        return inflater.inflate(R.layout.fragment_android, container, false);
     }
 
 }

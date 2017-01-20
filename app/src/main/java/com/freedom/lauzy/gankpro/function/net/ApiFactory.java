@@ -1,5 +1,6 @@
 package com.freedom.lauzy.gankpro.function.net;
 
+import com.freedom.lauzy.gankpro.function.entity.DailyData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 
 import rx.Observable;
@@ -22,12 +23,18 @@ public class ApiFactory extends RetrofitHttp {
 
     /**
      * 干货数据
+     *
      * @param subscriber 订阅者
-     * @param type 类型
-     * @param page 页数
+     * @param type       类型
+     * @param page       页数
      */
-    public void getGankData(Subscriber<GankData> subscriber, String type, int page) {
+    public void getGankData(LySubscriber<GankData> subscriber, String type, int page) {
         Observable<GankData> observable = apiService.getGankData(type, page);
+        toSubscribe(observable, subscriber);
+    }
+
+    public void getDailyData(LySubscriber<DailyData> subscriber, int year, int month, int day) {
+        Observable<DailyData> observable = apiService.getDailyData(year, month, day);
         toSubscribe(observable, subscriber);
     }
 }
