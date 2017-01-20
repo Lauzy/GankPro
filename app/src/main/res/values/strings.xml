@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GankPro</string>
+
+    <string name="bottom_main_item_beauty">妹纸</string>
+    <string name="bottom_main_item_android">安卓</string>
+    <string name="bottom_main_item_category">分类</string>
+    <string name="bottom_main_item_mine">我的</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

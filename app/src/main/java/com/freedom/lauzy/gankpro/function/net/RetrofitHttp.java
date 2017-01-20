@@ -107,11 +107,11 @@ public class RetrofitHttp {
                             .build();
                 } else {
                     Log.d("OkHttp", "网络不可用响应拦截");
-//                    int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
-//                    response= response.newBuilder()
-//                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-//                            .removeHeader("Pragma")
-//                            .build();
+                    int maxStale = 60 * 60 * 24 * 5; // 无网络，5天
+                    response= response.newBuilder()
+                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                            .removeHeader("Pragma")
+                            .build();
                 }
                 return response;
 
