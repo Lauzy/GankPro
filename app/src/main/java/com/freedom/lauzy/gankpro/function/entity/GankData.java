@@ -3,9 +3,10 @@ package com.freedom.lauzy.gankpro.function.entity;
 import java.util.List;
 
 /**
+ * bean
  * Created by Lauzy on 2017/1/18.
  */
-
+@SuppressWarnings("unused")
 public class GankData{
 
     private boolean error;

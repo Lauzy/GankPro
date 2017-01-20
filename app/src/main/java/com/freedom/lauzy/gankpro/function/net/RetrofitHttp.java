@@ -22,7 +22,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -32,16 +31,16 @@ import static com.freedom.lauzy.gankpro.function.net.NetConstants.BASE_URL;
  * RTHttp
  * Created by Lauzy on 2017/1/18.
  */
-
+@SuppressWarnings("unused")
 public class RetrofitHttp {
 
-    public ApiService apiService;
+    ApiService apiService;
     private static Retrofit retrofit = null;
     private static OkHttpClient okHttpClient = null;
 
     private Context mContext;
 
-    //缓存设置0不缓存
+    //cache
     private boolean isUseCache;
     private int maxCacheTime = 60;
 
@@ -71,35 +70,36 @@ public class RetrofitHttp {
 
     private void initOkHttp() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        //打印请求log日志
+        //print log
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
 
-        // 缓存 http://www.jianshu.com/p/93153b34310e
+        // cache reference http://www.jianshu.com/p/93153b34310e
         File cacheFile = new File(CacheUtils.getCacheDir(mContext), "httpCache");
-//        Log.d("OkHttp", "缓存目录---" + cacheFile.getAbsolutePath());
+//        Log.d("OkHttp", "Cache File---" + cacheFile.getAbsolutePath());
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
         Interceptor cacheInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!NetUtils.isNetworkConnected(mContext) || isUseCache) {//如果网络不可用或者设置只用网络
+                //network is useless
+                if (!NetUtils.isNetworkConnected(mContext) || isUseCache) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
-//                    Log.d("OkHttp", "网络不可用请求拦截");
+//                    Log.d("OkHttp", "net work is useless, request intercept");
                 } else if (NetUtils.isNetworkConnected(mContext) && !isUseCache) {//网络可用
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_NETWORK)
                             .build();
-//                    Log.d("OkHttp", "网络可用请求拦截");
+//                    Log.d("OkHttp", "net work is useful, request intercept");
                 }
                 Response response = chain.proceed(request);
                 if (NetUtils.isNetworkConnected(mContext)) {//如果网络可用
-//                    Log.d("OkHttp", "网络可用响应拦截");
+//                    Log.d("OkHttp", "net work is useless, response intercept");
                     response = response.newBuilder()
                             //覆盖服务器响应头的Cache-Control,用我们自己的,因为服务器响应回来的可能不支持缓存
                             .header("Cache-Control", "public,max-age=" + maxCacheTime)
@@ -107,7 +107,7 @@ public class RetrofitHttp {
                             .build();
                 } else {
                     Log.d("OkHttp", "网络不可用响应拦截");
-                    int maxStale = 60 * 60 * 24 * 5; // 无网络，5天
+                    int maxStale = 60 * 60 * 24 * 5; // no network，five days
                     response= response.newBuilder()
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")

@@ -12,7 +12,7 @@ import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
 
 public class BeautyModel implements BaseModel {
 
-    private void getBeautyDataFromNet(String type, int page, final OnResponse<GankData> response) {
+    public void getBeautyDataFromNet(String type, int page, final OnResponse<GankData> response) {
         ApiFactory.getInstance().getGankData(new LySubscriber<GankData>() {
             @Override
             public void onNext(GankData o) {

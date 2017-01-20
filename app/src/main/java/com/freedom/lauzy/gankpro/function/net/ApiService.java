@@ -14,7 +14,7 @@ import static com.freedom.lauzy.gankpro.function.net.NetConstants.*;
  * Created by Lauzy on 2017/1/18.
  */
 
-public interface ApiService {
+interface ApiService {
 
     @GET(GANK_URL + "{type}/" + defaultSize + "/{page}")
     Observable<GankData> getGankData(@Path("type") String type, @Path("page") int page);

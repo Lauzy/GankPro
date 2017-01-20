@@ -1,9 +1,10 @@
 package com.freedom.lauzy.gankpro.function.entity;
 
 /**
+ * item bean
  * Created by Lauzy on 2017/1/18.
  */
-
+@SuppressWarnings("unused")
 public class ItemBean {
 
     private String _id;

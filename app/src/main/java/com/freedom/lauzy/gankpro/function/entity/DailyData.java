@@ -5,9 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
+ * bean
  * Created by Lauzy on 2017/1/20.
  */
-
+@SuppressWarnings("unused")
 public class DailyData {
 
 
@@ -39,21 +40,21 @@ public class DailyData {
         this.category = category;
     }
 
-    public static class ResultsBean {
+    private static class ResultsBean {
         @SerializedName("Android")
-        public List<ItemBean> androidList;
+        private List<ItemBean> androidList;
         @SerializedName("休息视频")
-        public List<ItemBean> restVideoList;
+        private List<ItemBean> restVideoList;
         @SerializedName("iOS")
-        public List<ItemBean> iOSList;
+        private List<ItemBean> iOSList;
         @SerializedName("福利")
-        public List<ItemBean> beautyList;
+        private List<ItemBean> beautyList;
         @SerializedName("拓展资源")
-        public List<ItemBean> expandList;
+        private List<ItemBean> expandList;
         @SerializedName("瞎推荐")
-        public List<ItemBean> recommendList;
+        private List<ItemBean> recommendList;
         @SerializedName("App")
-        public List<ItemBean> appList;
+        private List<ItemBean> appList;
 
         public List<ItemBean> getAndroidList() {
             return androidList;

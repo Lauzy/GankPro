@@ -21,13 +21,6 @@ public class ApiFactory extends RetrofitHttp {
         private static final ApiFactory INSTANCE = new ApiFactory();
     }
 
-    /**
-     * 干货数据
-     *
-     * @param subscriber 订阅者
-     * @param type       类型
-     * @param page       页数
-     */
     public void getGankData(LySubscriber<GankData> subscriber, String type, int page) {
         Observable<GankData> observable = apiService.getGankData(type, page);
         toSubscribe(observable, subscriber);

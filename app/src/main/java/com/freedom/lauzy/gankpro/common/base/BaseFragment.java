@@ -18,14 +18,14 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
-    /*protected Activity mActivity;
+    protected Activity mActivity;
 //    private View rootView;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (Activity) context;
-    }*/
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -52,6 +52,14 @@ public abstract class BaseFragment extends Fragment {
 //        ButterKnife.bind(this, rootView);
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews();
+    }
+
+    protected abstract void initViews();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

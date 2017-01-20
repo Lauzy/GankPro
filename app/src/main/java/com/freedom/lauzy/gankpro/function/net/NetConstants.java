@@ -1,14 +1,13 @@
 package com.freedom.lauzy.gankpro.function.net;
 
 /**
- * Net常量类
+ * Net
  * Created by Lauzy on 2017/1/18.
  */
 
-public class NetConstants {
-    public static final String BASE_URL = "http://gank.io/api/";
-    public static final String GANK_URL = "data/";
+class NetConstants {
+    static final String BASE_URL = "http://gank.io/api/";
+    static final String GANK_URL = "data/";
 
-
-    public static final int defaultSize = 10;
+    static final int defaultSize = 10;
 }

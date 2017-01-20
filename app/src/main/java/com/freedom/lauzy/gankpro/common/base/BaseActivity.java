@@ -13,10 +13,10 @@ import com.freedom.lauzy.gankpro.R;
 import butterknife.ButterKnife;
 
 /**
- * 基类
+ * base
  * Created by Lauzy on 2017/1/17.
  */
-
+@SuppressWarnings("unused")
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
@@ -36,7 +36,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         loadData();
     }
 
-    @SuppressWarnings("unused")
     protected void setActTitle(String title){
         if (mTitleTextView != null) {
             mTitleTextView.setText(title);
@@ -50,7 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressWarnings("unused")
     protected void setBtnBackClickListener(View.OnClickListener listener) {
         if (mBackImageView != null) {
             mBackImageView.setVisibility(View.VISIBLE);

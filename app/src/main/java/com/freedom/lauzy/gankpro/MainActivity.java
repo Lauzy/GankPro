@@ -13,10 +13,10 @@ import com.freedom.lauzy.gankpro.common.base.BaseActivity;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.net.RetrofitUtil;
 import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
-import com.freedom.lauzy.gankpro.view.fragment.AndroidFragment;
-import com.freedom.lauzy.gankpro.view.fragment.BeautyFragment;
-import com.freedom.lauzy.gankpro.view.fragment.CategoryFragment;
-import com.freedom.lauzy.gankpro.view.fragment.MineFragment;
+import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
+import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
+import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
+import com.freedom.lauzy.gankpro.ui.fragment.MineFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             @Override
             public void onSuccess(GankData gankData) {
                 int size = gankData.getResults().size();
-                Log.e(TAG, "onSuccess: " + size);
+                Log.i(TAG, "onSuccess: " + size);
             }
 
             @Override
