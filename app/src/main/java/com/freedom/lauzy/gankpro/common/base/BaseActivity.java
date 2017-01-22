@@ -3,6 +3,7 @@ package com.freedom.lauzy.gankpro.common.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,10 +29,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
         ButterKnife.bind(this);
-
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_common);
         mTitleTextView = (TextView) findViewById(R.id.txt_toolbar_title);
         mBackImageView = (ImageView) findViewById(R.id.img_back);
-
+       /* setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏标题*/
         initViews();
         loadData();
     }

@@ -16,7 +16,11 @@ public class BeautyModel implements BaseModel {
         ApiFactory.getInstance().getGankData(new LySubscriber<GankData>() {
             @Override
             public void onNext(GankData o) {
-                response.onSuccess(o);
+                if (o == null) {
+                    response.onError(new Throwable("data is null"));
+                } else {
+                    response.onSuccess(o);
+                }
             }
 
             @Override

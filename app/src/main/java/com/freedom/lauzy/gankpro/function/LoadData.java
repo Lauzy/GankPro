@@ -5,7 +5,7 @@ package com.freedom.lauzy.gankpro.function;
  */
 
 public enum LoadData {
-    INIT_DATA(1), REFRESH_DATA(2), LOAD_MORE_DATA(3);
+    INIT_DATA_TYPE(1), REFRESH_DATA_TYPE(2), LOAD_MORE_DATA_TYPE(3);
 
     private int mLoadType;
 
