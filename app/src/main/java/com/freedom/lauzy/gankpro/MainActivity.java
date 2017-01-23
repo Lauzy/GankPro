@@ -41,24 +41,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     protected void loadData() {
-        /*RetrofitUtil.loadGankData("Android", 1, new OnResponse<GankData>() {
-            @Override
-            public void onSuccess(GankData gankData) {
-                int size = gankData.getResults().size();
-                Log.i(TAG, "onSuccess: " + size);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-        });*/
     }
 
     @Override
     protected void initViews() {
+        setStatusColor(R.color.colorPrimaryDark);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
-        onNavigationItemSelected(item);
+        onNavigationItemSelected(item);//默认选中第一个
         mBottomMainNavigation.setOnNavigationItemSelectedListener(this);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏标题

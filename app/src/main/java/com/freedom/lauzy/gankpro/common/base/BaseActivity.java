@@ -1,15 +1,26 @@
 package com.freedom.lauzy.gankpro.common.base;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
+import com.freedom.lauzy.gankpro.app.GankApp;
+import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
+import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 
 import butterknife.ButterKnife;
 
@@ -23,28 +34,49 @@ public abstract class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private TextView mTitleTextView;
     private ImageView mBackImageView;
+    private View mStatusView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
         ButterKnife.bind(this);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_common);
+        if (Build.VERSION.SDK_INT >= 19) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
+            mStatusView = new View(this);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getStatusHeight(this));
+            Log.e(TAG, "onCreate: 状态栏高度: " + ScreenUtils.getStatusHeight(this));
+            params.gravity = Gravity.TOP;
+
+            mStatusView.setLayoutParams(params);
+            mStatusView.setVisibility(View.VISIBLE);
+            decorViewGroup.addView(mStatusView);
+        }
+
         mTitleTextView = (TextView) findViewById(R.id.txt_toolbar_title);
         mBackImageView = (ImageView) findViewById(R.id.img_back);
-       /* setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏标题*/
+
         initViews();
         loadData();
     }
 
-    protected void setActTitle(String title){
+    /*protected void setStatusColor(int color) {
+        mStatusView.setBackgroundColor(color);
+    }*/
+
+    protected void setStatusColor(int colorRes){
+        mStatusView.setBackgroundResource(colorRes);
+    }
+
+    protected void setActTitle(String title) {
         if (mTitleTextView != null) {
             mTitleTextView.setText(title);
         }
     }
 
-    protected void setActTitle(int titleRes,int color){
+    protected void setActTitle(int titleRes, int color) {
         if (mTitleTextView != null) {
             mTitleTextView.setText(titleRes);
             mTitleTextView.setTextColor(color);
@@ -55,7 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mBackImageView != null) {
             mBackImageView.setVisibility(View.VISIBLE);
             mBackImageView.setOnClickListener(listener);
-        }else {
+        } else {
             Log.e(TAG, "setBtnBackClickListener: backImg is null, WTF");
         }
     }
