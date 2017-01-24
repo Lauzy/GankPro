@@ -87,7 +87,6 @@ public class BeautyFragment extends BaseFragment {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                startActivity(new Intent(mActivity,DailyActivity.class));
-
             }
         });
     }

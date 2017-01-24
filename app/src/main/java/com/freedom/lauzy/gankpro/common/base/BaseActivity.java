@@ -1,11 +1,9 @@
 package com.freedom.lauzy.gankpro.common.base;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -14,12 +12,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
-import com.freedom.lauzy.gankpro.app.GankApp;
-import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 
 import butterknife.ButterKnife;
@@ -41,19 +36,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
         ButterKnife.bind(this);
-        if (Build.VERSION.SDK_INT >= 19) {
+        /*if (Build.VERSION.SDK_INT >= 19) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
             mStatusView = new View(this);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getStatusHeight(this));
-            Log.e(TAG, "onCreate: 状态栏高度: " + ScreenUtils.getStatusHeight(this));
+//            Log.e(TAG, "onCreate: 状态栏高度: " + ScreenUtils.getStatusHeight(this));
             params.gravity = Gravity.TOP;
 
             mStatusView.setLayoutParams(params);
             mStatusView.setVisibility(View.VISIBLE);
             decorViewGroup.addView(mStatusView);
-        }
+        }*/
 
         mTitleTextView = (TextView) findViewById(R.id.txt_toolbar_title);
         mBackImageView = (ImageView) findViewById(R.id.img_back);
@@ -66,9 +61,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         mStatusView.setBackgroundColor(color);
     }*/
 
-    protected void setStatusColor(int colorRes){
+    /*protected void setStatusColor(int colorRes){
         mStatusView.setBackgroundResource(colorRes);
-    }
+    }*/
 
     protected void setActTitle(String title) {
         if (mTitleTextView != null) {

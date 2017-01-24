@@ -2,6 +2,9 @@ package com.freedom.lauzy.gankpro.view;
 
 import com.freedom.lauzy.gankpro.common.base.BaseView;
 import com.freedom.lauzy.gankpro.function.entity.DailyData;
+import com.freedom.lauzy.gankpro.function.entity.ItemBean;
+
+import java.util.List;
 
 /**
  * daily
@@ -9,7 +12,7 @@ import com.freedom.lauzy.gankpro.function.entity.DailyData;
  */
 
 public interface DailyView extends BaseView {
-    void initRvData(DailyData data);
-    void refreshRvData(DailyData refreshData);
+    void initRvData(List<ItemBean> data);
+    void refreshRvData(List<ItemBean> refreshData);
     void refreshError(Throwable e);
 }

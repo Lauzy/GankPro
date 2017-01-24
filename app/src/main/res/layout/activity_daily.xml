@@ -11,16 +11,14 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="@dimen/app_bar_height">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
-            android:fitsSystemWindows="true"
             app:collapsedTitleGravity="center"
+            app:collapsedTitleTextAppearance="@style/WhiteText"
             app:contentScrim="@color/color_style_gray"
             app:expandedTitleGravity="center|bottom"
             app:expandedTitleTextAppearance="@style/TransparentText"
@@ -41,24 +39,22 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"/>
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
-    <!--<include layout="@layout/content_daily"/>-->
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_daily"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_daily"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/app_bar_height">
+            android:paddingBottom="@dimen/dp_22">
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -67,12 +63,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
         app:borderWidth="0dp"
         app:elevation="6dp"
         app:layout_anchor="@id/rv_daily"
         app:layout_anchorGravity="bottom|end"
         app:pressedTranslationZ="12dp"
-        app:rippleColor="@color/color_style_gray"
+        app:rippleColor="@drawable/fab_selector"
         app:srcCompat="@mipmap/icon_beauty_float_btn"/>
+
+    <ViewStub
+        android:id="@+id/stub_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_empty_view"/>
+    <!--app:rippleColor="@color/color_style_gray"-->
 
 </android.support.design.widget.CoordinatorLayout>

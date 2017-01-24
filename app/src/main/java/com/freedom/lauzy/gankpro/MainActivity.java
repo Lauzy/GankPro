@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     protected void initViews() {
-        setStatusColor(R.color.colorPrimaryDark);
+//        setStatusColor(R.color.colorPrimaryDark);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
         onNavigationItemSelected(item);//默认选中第一个
         mBottomMainNavigation.setOnNavigationItemSelectedListener(this);

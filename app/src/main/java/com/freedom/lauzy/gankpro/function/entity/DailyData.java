@@ -40,7 +40,7 @@ public class DailyData {
         this.category = category;
     }
 
-    private static class ResultsBean {
+    public class ResultsBean {
         @SerializedName("Android")
         private List<ItemBean> androidList;
         @SerializedName("休息视频")
@@ -55,6 +55,16 @@ public class DailyData {
         private List<ItemBean> recommendList;
         @SerializedName("App")
         private List<ItemBean> appList;
+        @SerializedName("前端")
+        private List<ItemBean> frontList;
+
+        public List<ItemBean> getFrontList() {
+            return frontList;
+        }
+
+        public void setFrontList(List<ItemBean> frontList) {
+            this.frontList = frontList;
+        }
 
         public List<ItemBean> getAndroidList() {
             return androidList;
