@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.freedom.lauzy.gankpro.R;
+import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
+import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
 import com.freedom.lauzy.gankpro.function.utils.DateUtils;
@@ -104,7 +106,8 @@ public class DailyActivity extends BaseActivity {
         mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
         mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
-
+        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getAppContext());
+        setSupportActionBar(mToolbar);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvDaily.setLayoutManager(linearLayoutManager);

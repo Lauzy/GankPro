@@ -4,10 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_common"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_40"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/color_style_gray"
     android:elevation="@dimen/dp_4"
     app:contentInsetStart="0dp">
+
+    <!--<TextView
+        android:id="@+id/txt_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

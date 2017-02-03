@@ -1,5 +1,6 @@
 package com.freedom.lauzy.gankpro.common.base;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,13 +43,23 @@ public abstract class BaseActivity extends AppCompatActivity {
             ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
             mStatusView = new View(this);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getStatusHeight(this));
-//            Log.e(TAG, "onCreate: 状态栏高度: " + ScreenUtils.getStatusHeight(this));
+            Log.e(TAG, "onCreate: 状态栏高度: " + ScreenUtils.getStatusHeight(this));
             params.gravity = Gravity.TOP;
 
             mStatusView.setLayoutParams(params);
             mStatusView.setVisibility(View.VISIBLE);
             decorViewGroup.addView(mStatusView);
         }*/
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            Window window = getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
 
         mTitleTextView = (TextView) findViewById(R.id.txt_toolbar_title);
         mBackImageView = (ImageView) findViewById(R.id.img_back);

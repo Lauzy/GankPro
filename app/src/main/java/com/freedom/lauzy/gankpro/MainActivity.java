@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
+import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -49,8 +51,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
         onNavigationItemSelected(item);//默认选中第一个
         mBottomMainNavigation.setOnNavigationItemSelectedListener(this);
+        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getAppContext());
+        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getAppContext()), 0, 0);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏标题
     }
 
     @Override
