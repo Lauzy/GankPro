@@ -6,11 +6,11 @@ import com.freedom.lauzy.gankpro.function.entity.GankData;
 import java.util.List;
 
 /**
- * view
- * Created by Lauzy on 2017/1/20.
+ * 分类View
+ * Created by Lauzy on 2017/2/4.
  */
 
-public interface BeautyView extends BaseView {
+public interface CategoryGankView extends BaseView {
     void initRvData(List<GankData.ResultsBean> data);
     void refreshRvData(List<GankData.ResultsBean> refreshData);
     void loadMoreRvData(List<GankData.ResultsBean> loadMoreData);

@@ -1,9 +1,6 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,13 +9,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.presenter.BeautyPresenter;
-import com.freedom.lauzy.gankpro.ui.activity.DailyActivity;
 import com.freedom.lauzy.gankpro.ui.adapter.BeautyAdapter;
 import com.freedom.lauzy.gankpro.view.BeautyView;
 
@@ -136,6 +131,12 @@ public class BeautyFragment extends BaseFragment {
                     mAdapter.loadMoreComplete();
                 }
                 mBeautyRefreshLayout.setEnabled(true);
+            }
+
+            @Override
+            public void initError(Throwable e) {
+                mAdapter.setEmptyView(mEmptyView);
+                mBeautyRefreshLayout.setRefreshing(false);
             }
 
             @Override

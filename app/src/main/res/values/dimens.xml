@@ -12,6 +12,8 @@
     <dimen name="dp_40">40dp</dimen>
     <dimen name="dp_55">55dp</dimen>
 
+    <dimen name="dp_72">72dp</dimen>
+
     <dimen name="dp_200">200dp</dimen>
 
     <dimen name="app_bar_height">200dp</dimen>

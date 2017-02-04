@@ -4,8 +4,8 @@ import com.freedom.lauzy.gankpro.common.base.BasePresenter;
 import com.freedom.lauzy.gankpro.function.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
-import com.freedom.lauzy.gankpro.model.BeautyModel;
-import com.freedom.lauzy.gankpro.view.BeautyView;
+import com.freedom.lauzy.gankpro.model.AndroidModel;
+import com.freedom.lauzy.gankpro.view.AndroidView;
 
 import java.util.List;
 
@@ -14,22 +14,21 @@ import static com.freedom.lauzy.gankpro.function.LoadData.LOAD_MORE_DATA_TYPE;
 import static com.freedom.lauzy.gankpro.function.LoadData.REFRESH_DATA_TYPE;
 
 /**
- * Created by Lauzy on 2017/1/20.
+ * Created by Lauzy on 2017/2/4.
  */
 
-public class BeautyPresenter extends BasePresenter<BeautyView> {
-
-    private BeautyModel mBeautyModel;
+public class AndroidPresenter extends BasePresenter<AndroidView> {
+    private AndroidModel mAndroidModel;
     private LoadData GET_DATA_TYPE;
     private OnResponse<GankData> mGankDataResponse;
     private int page = 1;
 
-    public BeautyPresenter(BeautyView beautyView) {
-        attachView(beautyView);
-        mBeautyModel = new BeautyModel();
+    public AndroidPresenter(AndroidView androidView) {
+        attachView(androidView);
+        mAndroidModel = new AndroidModel();
     }
 
-    public void initData() {
+    public void initData(){
         GET_DATA_TYPE = INIT_DATA_TYPE;
         mGankDataResponse = new OnResponse<GankData>() {
             @Override
@@ -46,9 +45,7 @@ public class BeautyPresenter extends BasePresenter<BeautyView> {
 
             @Override
             public void onError(Throwable e) {
-                e.printStackTrace();
                 if (GET_DATA_TYPE == INIT_DATA_TYPE) {
-                    getMvpBaseView().initError(e);
                 } else if (GET_DATA_TYPE == REFRESH_DATA_TYPE) {
                     getMvpBaseView().refreshError(e);
                 } else if (GET_DATA_TYPE == LOAD_MORE_DATA_TYPE) {
@@ -56,17 +53,17 @@ public class BeautyPresenter extends BasePresenter<BeautyView> {
                 }
             }
         };
-        mBeautyModel.getBeautyDataFromNet("福利", 1, mGankDataResponse);
+        mAndroidModel.getAndroidDataFromNet("Android", 1, mGankDataResponse);
     }
 
     public void refreshData() {
         page = 1;
         GET_DATA_TYPE = REFRESH_DATA_TYPE;
-        mBeautyModel.getBeautyDataFromNet("福利", 1, mGankDataResponse);
+        mAndroidModel.getAndroidDataFromNet("Android", 1, mGankDataResponse);
     }
 
     public void loadMoreData() {
         GET_DATA_TYPE = LOAD_MORE_DATA_TYPE;
-        mBeautyModel.getBeautyDataFromNet("福利", ++page, mGankDataResponse);
+        mAndroidModel.getAndroidDataFromNet("Android", ++page, mGankDataResponse);
     }
 }
