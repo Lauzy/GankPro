@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:orientation="horizontal">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dp_5"
+    android:paddingTop="@dimen/dp_5">
 
     <ProgressBar
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:id="@+id/pb_footer"
         android:layout_width="25dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="25dp"
+        android:layout_gravity="center"/>
 
     <TextView
+        android:id="@+id/txt_footer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="加载中……"/>
 
 </LinearLayout>
