@@ -3,6 +3,7 @@ package com.freedom.lauzy.gankpro.ui.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +36,12 @@ public class AndroidFragment extends BaseFragment {
     private CategoryGankPresenter mGankPresenter;
     private List<GankData.ResultsBean> mResultsBeen = new ArrayList<>();
     private AndroidAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     protected void initViews() {
-        mLinearLayoutManager = new LinearLayoutManager(mActivity);
-        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRvAndroid.setLayoutManager(mLinearLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRvAndroid.setLayoutManager(linearLayoutManager);
         mAdapter = new AndroidAdapter(mActivity, mResultsBeen, R.layout.layout_android_item);
         mRvAndroid.setAdapter(mAdapter);
 
@@ -63,7 +63,13 @@ public class AndroidFragment extends BaseFragment {
             public void loadMore() {
                 mGankPresenter.loadMoreData();
             }
+
+            @Override
+            public void reloadMore() {
+                mGankPresenter.reloadMoreData();
+            }
         });
+
         mRvAndroid.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvAndroid, new RvItemClickListener() {
             @Override
             public void rvItemClick(int position) {

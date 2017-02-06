@@ -33,7 +33,7 @@ public class AndroidAdapter extends CommonAdapter<GankData.ResultsBean>{
         }
     }
 
-    public void addData(List<GankData.ResultsBean> refreshData,int headerCount) {
+    /*public void addData(List<GankData.ResultsBean> refreshData,int headerCount) {
         if (refreshData != null) {
             mData.addAll(refreshData);
 //            notifyDataSetChanged();
@@ -43,11 +43,10 @@ public class AndroidAdapter extends CommonAdapter<GankData.ResultsBean>{
                 notifyDataSetChanged();
             }
         }
-
     }
 
     public void removeAllData() {
         mData.clear();
         notifyDataSetChanged();
-    }
+    }*/
 }

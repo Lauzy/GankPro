@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.freedom.lauzy.gankpro.function.entity.GankData;
+
 import java.util.List;
 
 /**
@@ -73,5 +75,22 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<RvViewHolder
             return mMultiTypeSupport.getLayoutId(mData.get(position), position);
         }
         return super.getItemViewType(position);
+    }
+
+    public void removeAllData() {
+        mData.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<T> newData, int headerCount) {
+        if (newData != null) {
+            mData.addAll(newData);
+            notifyDataSetChanged();
+            /*notifyItemRangeInserted(mData.size() - newData.size() + headerCount, newData.size());
+            int dataSize = mData == null ? 0 : mData.size();
+            if (dataSize == newData.size()){
+                notifyDataSetChanged();
+            }*/
+        }
     }
 }

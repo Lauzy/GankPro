@@ -1,5 +1,7 @@
 package com.freedom.lauzy.gankpro.presenter;
 
+import android.util.Log;
+
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
 import com.freedom.lauzy.gankpro.function.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
@@ -19,6 +21,7 @@ import static com.freedom.lauzy.gankpro.function.LoadData.REFRESH_DATA_TYPE;
  */
 
 public class CategoryGankPresenter extends BasePresenter<CategoryGankView> {
+    private static final String LYTAG = CategoryGankPresenter.class.getSimpleName();
     private CategoryGankModel mGankModel;
     private LoadData GET_DATA_TYPE;
     private OnResponse<GankData> mGankDataResponse;
@@ -69,5 +72,14 @@ public class CategoryGankPresenter extends BasePresenter<CategoryGankView> {
     public void loadMoreData() {
         GET_DATA_TYPE = LOAD_MORE_DATA_TYPE;
         mGankModel.getCategoryGankData(mType, ++page, mGankDataResponse);
+        Log.e(LYTAG, "loadMoreData: " + page);
     }
+
+    public void reloadMoreData() {
+        GET_DATA_TYPE = LOAD_MORE_DATA_TYPE;
+        mGankModel.getCategoryGankData(mType, page, mGankDataResponse);
+        Log.e(LYTAG, "reloadMoreData: " + page);
+    }
+
+    ;
 }
