@@ -3,8 +3,9 @@ package com.freedom.lauzy.gankpro.function.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.afa.tourism.greendao.gen.CollectionEntityDao;
-import com.afa.tourism.greendao.gen.DaoMaster;
+import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
+import com.freedom.lauzy.gankpro.function.greendao.DaoMaster;
+
 
 /**
  * Created by Lauzy on 2017/1/23.

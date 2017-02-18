@@ -6,17 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
-import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 
 import butterknife.ButterKnife;
 

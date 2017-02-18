@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.afa.tourism.greendao.gen.DaoMaster;
-import com.afa.tourism.greendao.gen.DaoSession;
 import com.freedom.lauzy.gankpro.function.db.LyDaoHelper;
+import com.freedom.lauzy.gankpro.function.greendao.DaoMaster;
+import com.freedom.lauzy.gankpro.function.greendao.DaoSession;
 import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 
 /**

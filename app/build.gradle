@@ -24,7 +24,7 @@ apply plugin: 'org.greenrobot.greendao'
 greendao {
     schemaVersion 1
     targetGenDir 'src/main/java'
-    daoPackage'com.afa.tourism.greendao.gen'
+    daoPackage'com.freedom.lauzy.gankpro.function.greendao'
 }
 
 dependencies {

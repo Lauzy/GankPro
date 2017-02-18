@@ -21,14 +21,14 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
     private AndroidModel mAndroidModel;
     private LoadData GET_DATA_TYPE;
     private OnResponse<GankData> mGankDataResponse;
-    private int page = 1;
+    private int page = 2;
 
     public AndroidPresenter(AndroidView androidView) {
         attachView(androidView);
         mAndroidModel = new AndroidModel();
     }
 
-    public void initData(){
+    public void initData() {
         GET_DATA_TYPE = INIT_DATA_TYPE;
         mGankDataResponse = new OnResponse<GankData>() {
             @Override
@@ -39,6 +39,7 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
                 } else if (GET_DATA_TYPE == REFRESH_DATA_TYPE) {
                     getMvpBaseView().refreshRvData(gankDataResults);
                 } else if (GET_DATA_TYPE == LOAD_MORE_DATA_TYPE) {
+                    page++;
                     getMvpBaseView().loadMoreRvData(gankDataResults);
                 }
             }
@@ -64,6 +65,6 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
 
     public void loadMoreData() {
         GET_DATA_TYPE = LOAD_MORE_DATA_TYPE;
-        mAndroidModel.getAndroidDataFromNet("Android", ++page, mGankDataResponse);
+        mAndroidModel.getAndroidDataFromNet("Android", page, mGankDataResponse);
     }
 }

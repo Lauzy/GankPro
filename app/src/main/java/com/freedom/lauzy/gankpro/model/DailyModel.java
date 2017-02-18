@@ -1,6 +1,5 @@
 package com.freedom.lauzy.gankpro.model;
 
-import com.freedom.lauzy.gankpro.common.base.BaseModel;
 import com.freedom.lauzy.gankpro.function.entity.DailyData;
 import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 import com.freedom.lauzy.gankpro.function.net.LySubscriber;
@@ -10,7 +9,7 @@ import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
  * Created by Lauzy on 2017/1/23.
  */
 
-public class DailyModel implements BaseModel {
+public class DailyModel {
 
     public void getDailyDataFromNet(final OnResponse<DailyData> response, int year, int month, int day) {
         ApiFactory.getInstance().getDailyData(new LySubscriber<DailyData>() {
