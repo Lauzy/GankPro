@@ -6,5 +6,11 @@
     <string name="bottom_main_item_category">分类</string>
     <string name="bottom_main_item_mine">我的</string>
 
+    <string name="transition_img">transitionImg</string>
+
+    <string name="txt_no_data">没有数据</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_daily">DailyActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -1,48 +1,147 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.freedom.lauzy.gankpro.R;
+import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.common.widget.adapter.RvItemClickListener;
+import com.freedom.lauzy.gankpro.common.widget.adapter.RvItemTouchListener;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyLoadMoreRecyclerView;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.OnLoadMoreListener;
+import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.presenter.CategoryGankPresenter;
+import com.freedom.lauzy.gankpro.ui.adapter.AndroidAdapter;
+import com.freedom.lauzy.gankpro.view.CategoryGankView;
 
-public class AndroidFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import butterknife.BindView;
 
-    private String mParam1;
-    private String mParam2;
+public class AndroidFragment extends BaseFragment {
 
+    private static final String LYTAG = AndroidFragment.class.getSimpleName();
+    @BindView(R.id.rv_android)
+    LyLoadMoreRecyclerView mRvAndroid;
+    @BindView(R.id.android_refresh_layout)
+    SwipeRefreshLayout mAndroidRefreshLayout;
+    @BindView(R.id.empty_view)
+    View mEmptyView;
+    private CategoryGankPresenter mGankPresenter;
+    private List<GankData.ResultsBean> mResultsBeen = new ArrayList<>();
+    private AndroidAdapter mAdapter;
 
-    public AndroidFragment() {
-    }
+    @Override
+    protected void initViews() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRvAndroid.setLayoutManager(linearLayoutManager);
+        mAdapter = new AndroidAdapter(mActivity, mResultsBeen, R.layout.layout_android_item);
+        mRvAndroid.setAdapter(mAdapter);
 
-    public static AndroidFragment newInstance(String param1, String param2) {
-        AndroidFragment fragment = new AndroidFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        View headerView = LayoutInflater.from(mActivity).inflate(R.layout.layout_header_view, mRvAndroid, false);
+        mRvAndroid.addHeaderView(headerView);
+
+        mAndroidRefreshLayout.setColorSchemeResources(R.color.color_style_gray);
+        mAndroidRefreshLayout.setRefreshing(true);
+        mAndroidRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mGankPresenter.refreshData();
+                mAndroidRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        mRvAndroid.setLoadMore(1, new OnLoadMoreListener() {
+            @Override
+            public void loadMore() {
+                mGankPresenter.loadMoreData();
+            }
+
+            @Override
+            public void reloadMore() {
+                mGankPresenter.reloadMoreData();
+            }
+        });
+
+        mRvAndroid.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvAndroid, new RvItemClickListener() {
+            @Override
+            public void rvItemClick(int position) {
+                Log.e(LYTAG, "rvItemClick: " + position);
+            }
+
+            @Override
+            public void rvItemLongClick(int position) {
+
+            }
+        }));
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    protected int getLayoutResource() {
+        return R.layout.fragment_android;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_android, container, false);
-    }
+    protected void loadData() {
+        mGankPresenter = new CategoryGankPresenter(new CategoryGankView() {
+            @Override
+            public void initRvData(List<GankData.ResultsBean> data) {
+                if (data != null) {
+                    Log.e(LYTAG, "initRvData: Android: " + data.size());
+                    mResultsBeen.addAll(data);
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    Log.e(LYTAG, "initRvData: + empty ");
+                    mRvAndroid.addEmptyView(mEmptyView);
+                }
+                mAndroidRefreshLayout.setRefreshing(false);
+            }
 
+            @Override
+            public void refreshRvData(List<GankData.ResultsBean> refreshData) {
+                if (refreshData != null) {
+                    mAdapter.removeAllData();
+                    mAdapter.addData(refreshData, 1);
+                    mRvAndroid.enableLoadMore();
+                }
+                mAndroidRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void loadMoreRvData(List<GankData.ResultsBean> loadMoreData) {
+                if (mAdapter.getItemCount() == 100) {
+                    Log.e(LYTAG, "loadMoreRvData: noData");
+                    mRvAndroid.loadMoreFinish();
+                } else {
+                    mAdapter.addData(loadMoreData, 1);
+                }
+                mAndroidRefreshLayout.setEnabled(true);
+            }
+
+            @Override
+            public void initError(Throwable e) {
+                Log.e(LYTAG, "initError: ");
+                mRvAndroid.addEmptyView(mEmptyView);
+                mAndroidRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void refreshError(Throwable e) {
+                mAndroidRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void loadMoreError(Throwable e) {
+                mRvAndroid.loadMoreError();
+                mAndroidRefreshLayout.setEnabled(true);
+            }
+        }, "Android");
+        mGankPresenter.initData();
+    }
 }

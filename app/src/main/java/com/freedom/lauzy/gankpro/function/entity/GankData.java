@@ -1,5 +1,8 @@
 package com.freedom.lauzy.gankpro.function.entity;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,18 +31,31 @@ public class GankData{
         this.results = results;
     }
 
-    public static class ResultsBean {
+    public static class ResultsBean  implements MultiItemEntity{
+
+        private int itemType;
+        public static final int TYPE_ONE = 1;
+        public static final int TYPE_TWO = 2;
+        public static final int TYPE_THREE = 3;
 
         private String _id;
         private String createdAt;
         private String desc;
-        private String publishedAt;
+        private Date publishedAt;
         private String source;
         private String type;
         private String url;
         private boolean used;
         private String who;
         private List<String> images;
+
+        public ResultsBean(int itemType) {
+            this.itemType = itemType;
+        }
+
+        public void setItemType(int itemType) {
+            this.itemType = itemType;
+        }
 
         public String get_id() {
             return _id;
@@ -65,11 +81,11 @@ public class GankData{
             this.desc = desc;
         }
 
-        public String getPublishedAt() {
+        public Date getPublishedAt() {
             return publishedAt;
         }
 
-        public void setPublishedAt(String publishedAt) {
+        public void setPublishedAt(Date publishedAt) {
             this.publishedAt = publishedAt;
         }
 
@@ -119,6 +135,11 @@ public class GankData{
 
         public void setImages(List<String> images) {
             this.images = images;
+        }
+
+        @Override
+        public int getItemType() {
+            return itemType;
         }
     }
 }

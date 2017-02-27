@@ -106,7 +106,7 @@ public class RetrofitHttp {
                             .removeHeader("Pragma")
                             .build();
                 } else {
-                    Log.d("OkHttp", "网络不可用响应拦截");
+                    Log.d("OkHttp", "网络不可用");
                     int maxStale = 60 * 60 * 24 * 5; // no network，five days
                     response= response.newBuilder()
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
@@ -152,8 +152,6 @@ public class RetrofitHttp {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
-
-
 
     public <T> void toSubscribe(Observable<T> observable, LySubscriber<T> s) {
         observable.subscribeOn(Schedulers.io())

@@ -8,6 +8,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.freedom.lauzy.gankpro.MainActivity">
+    <!--    android:fitsSystemWindows="true"
+    android:clipToPadding="true"-->
 
     <include layout="@layout/layout_toolbar"/>
 
@@ -24,12 +26,5 @@
         app:itemIconTint="@color/bottom_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <!-- <com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost
-         android:id="@+id/main_tab_host"
-         android:background="@color/color_white"
-         android:layout_width="match_parent"
-         android:layout_height="@dimen/dp_55">
-     </com.freedom.lauzy.gankpro.common.widget.LyFragmentTabHost>-->
 
 </LinearLayout>

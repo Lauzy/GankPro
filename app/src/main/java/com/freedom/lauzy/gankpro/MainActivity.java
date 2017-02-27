@@ -6,13 +6,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
-import com.freedom.lauzy.gankpro.function.entity.GankData;
-import com.freedom.lauzy.gankpro.function.net.RetrofitUtil;
-import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
+import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -24,12 +23,12 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = MainActivity.class.getSimpleName();
 
-//    private static final String TAG = MainActivity.class.getSimpleName();
-
+    //    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.bottom_main_navigation)
     BottomNavigationView mBottomMainNavigation;
+    @BindView(R.id.toolbar_common)
+    Toolbar mToolbar;
 
     private List<Fragment> mFragments = new ArrayList<>();
     private BeautyFragment mBeautyFragment;
@@ -44,25 +43,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     protected void loadData() {
-        RetrofitUtil.loadGankData("Android", 1, new OnResponse<GankData>() {
-            @Override
-            public void onSuccess(GankData gankData) {
-                int size = gankData.getResults().size();
-                Log.i(TAG, "onSuccess: " + size);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     @Override
     protected void initViews() {
+//        setStatusColor(R.color.colorPrimaryDark);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
-        onNavigationItemSelected(item);
+        onNavigationItemSelected(item);//默认选中第一个
         mBottomMainNavigation.setOnNavigationItemSelectedListener(this);
+        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getAppContext());
+        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getAppContext()), 0, 0);
+        setSupportActionBar(mToolbar);
     }
 
     @Override
