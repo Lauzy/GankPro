@@ -6,5 +6,4 @@ package com.freedom.lauzy.gankpro.common.widget.recyclerview;
 
 public interface OnLoadMoreListener {
     void loadMore();
-    void reloadMore();
 }

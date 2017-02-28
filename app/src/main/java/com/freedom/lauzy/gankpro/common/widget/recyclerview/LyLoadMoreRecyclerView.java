@@ -49,7 +49,6 @@ public class LyLoadMoreRecyclerView extends LyRecyclerView {
         mTxtFooter = (TextView) mLoadMoreView.findViewById(R.id.txt_footer);
     }
 
-    private boolean isError;
     OnLoadMoreListener mLoadMoreListener;
 
     public void setLoadMore(final int headerCount, final OnLoadMoreListener loadMore) {
@@ -64,13 +63,8 @@ public class LyLoadMoreRecyclerView extends LyRecyclerView {
                 enableLoadMore();
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && mLastVisibleItemPosition + 1 == mAdapter.getItemCount() + headerCount + 1) {
-                    if (isError) {
-                        mLoadMoreListener.reloadMore();
-                        isError = false;
-                    } else {
-                        mLoadMoreListener.loadMore();
-                    }
-                    Log.e(LYTAG, "onScrollStateChanged: ");
+                    mLoadMoreListener.loadMore();
+                    Log.i(LYTAG, "onScrollStateChanged: ");
                 }
             }
 
@@ -99,14 +93,12 @@ public class LyLoadMoreRecyclerView extends LyRecyclerView {
     }
 
     public void loadMoreError() {
-        isError = true;
         mPbFooter.setVisibility(GONE);
         mTxtFooter.setText("加载失败点击重试");
         mTxtFooter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 enableLoadMore();
-                mLoadMoreListener.reloadMore();
             }
         });
     }

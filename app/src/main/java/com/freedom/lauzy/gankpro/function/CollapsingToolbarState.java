@@ -5,4 +5,7 @@ package com.freedom.lauzy.gankpro.function;
  */
 
 public enum CollapsingToolbarState {
+    EXPANDED,
+    COLLAPSED,
+    INTERMEDIATE
 }

@@ -16,8 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.freedom.lauzy.gankpro.function.ValueContants.ImageValue.IMAGE_URL;
-import static com.freedom.lauzy.gankpro.function.ValueContants.ImageValue.PUBLISH_DATE;
+import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
+import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
 
 /**
  * BaseQuickAdapter方便添加header，footer，emptyView，以及加载更多

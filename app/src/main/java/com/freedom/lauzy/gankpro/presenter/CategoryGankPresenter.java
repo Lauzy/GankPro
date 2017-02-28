@@ -75,11 +75,4 @@ public class CategoryGankPresenter extends BasePresenter<CategoryGankView> {
         Log.e(LYTAG, "loadMoreData: " + page);
     }
 
-    public void reloadMoreData() {
-        GET_DATA_TYPE = LOAD_MORE_DATA_TYPE;
-        mGankModel.getCategoryGankData(mType, page, mGankDataResponse);
-        Log.e(LYTAG, "reloadMoreData: " + page);
-    }
-
-    ;
 }

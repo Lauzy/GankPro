@@ -54,7 +54,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         } else if (Build.VERSION.SDK_INT >= 19) {
             Window window = getWindow();
-            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 
         mTitleTextView = (TextView) findViewById(R.id.txt_toolbar_title);
