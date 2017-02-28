@@ -6,8 +6,8 @@ import android.widget.ImageView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
-import com.freedom.lauzy.gankpro.common.widget.adapter.CommonAdapter;
-import com.freedom.lauzy.gankpro.common.widget.adapter.RvViewHolder;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.CommonAdapter;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvViewHolder;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 
 import java.util.List;

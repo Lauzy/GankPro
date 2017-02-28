@@ -1,12 +1,10 @@
-package com.freedom.lauzy.gankpro.common.widget.adapter;
+package com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.freedom.lauzy.gankpro.function.entity.GankData;
 
 import java.util.List;
 

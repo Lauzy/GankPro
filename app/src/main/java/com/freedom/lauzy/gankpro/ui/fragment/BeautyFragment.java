@@ -37,6 +37,11 @@ public class BeautyFragment extends BaseFragment {
     private View mEmptyView;
 
     @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_beauty;
+    }
+
+    @Override
     protected void initViews() {
         initEmptyView();
        /* final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -88,11 +93,6 @@ public class BeautyFragment extends BaseFragment {
 
     private void initEmptyView() {
         mEmptyView = View.inflate(mActivity, R.layout.layout_empty_view, null);
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_beauty;
     }
 
     @Override

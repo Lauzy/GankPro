@@ -57,11 +57,6 @@ public class DailyActivity extends BaseActivity {
     private DailyPresenter mDailyPresenter;
 
     @Override
-    protected int setLayoutId() {
-        return R.layout.activity_daily;
-    }
-
-    @Override
     protected void loadData() {
         String imgUrl = getIntent().getStringExtra(IMAGE_URL);
 //        Bitmap img_data = getIntent().getParcelableExtra("img_data");
@@ -102,11 +97,16 @@ public class DailyActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_daily;
+    }
+
+    @Override
     protected void initViews() {
         mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
         mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
-        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getAppContext());
+        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
         setSupportActionBar(mToolbar);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro.common.widget.adapter;
+package com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter;
 
 /**
  * 多布局
