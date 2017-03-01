@@ -49,8 +49,6 @@ public class AndroidFragment extends BaseFragment {
         mAdapter = new AndroidAdapter(mActivity, mResultsBeen, R.layout.layout_android_item);
         mRvAndroid.setAdapter(mAdapter);
 
-        View headerView = LayoutInflater.from(mActivity).inflate(R.layout.layout_header_view, mRvAndroid, false);
-        mRvAndroid.addHeaderView(headerView);
 
         mAndroidRefreshLayout.setColorSchemeResources(R.color.color_style_gray);
         mAndroidRefreshLayout.setRefreshing(true);
@@ -62,7 +60,7 @@ public class AndroidFragment extends BaseFragment {
             }
         });
 
-        mRvAndroid.setLoadMore(1, new OnLoadMoreListener() {
+        mRvAndroid.setLoadMore(0, new OnLoadMoreListener() {
             @Override
             public void loadMore() {
                 mGankPresenter.loadMoreData();

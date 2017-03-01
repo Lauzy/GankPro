@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.function;
 
 /**
+ * 获取数据类型
  * Created by Lauzy on 2017/1/20.
  */
 
