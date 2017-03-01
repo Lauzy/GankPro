@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
+import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.CollapsingToolbarState;
@@ -37,13 +37,13 @@ import butterknife.OnClick;
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
 
-public class DailyActivity extends BaseActivity {
+public class DailyActivity extends BaseToolbarActivity {
 
 
-    private static final String TAG = DailyActivity.class.getSimpleName();
+    private static final String LYTAG = DailyActivity.class.getSimpleName();
     @BindView(R.id.img_title)
     ImageView mImgTitle;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.toolbar_daily)
     Toolbar mToolbar;
     @BindView(R.id.toolbar_layout)
     CollapsingToolbarLayout mToolbarLayout;
@@ -71,7 +71,7 @@ public class DailyActivity extends BaseActivity {
         CollectionEntity entity = entityDao.queryBuilder().where(CollectionEntityDao.Properties.Id.eq(img_id)).build().list().get(0);*/
         ImageLoader.loadImage(this, imgUrl, mImgTitle);
         if (mPublishDate == null) {
-            Log.e(TAG, "loadData: date is null");
+            Log.i(LYTAG, "loadData: date is null");
         }
         mDailyPresenter = new DailyPresenter(new DailyView() {
             @Override
@@ -113,7 +113,10 @@ public class DailyActivity extends BaseActivity {
         mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
         mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
+        Log.e(LYTAG, "initViews: " + mToolbar.getLayoutParams().height);
         mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
+        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);
+        Log.e(LYTAG, "initViews: " + ScreenUtils.getStatusHeight(GankApp.getInstance()));
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.mipmap.icon_arrow_white_back);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -127,12 +130,15 @@ public class DailyActivity extends BaseActivity {
                     /*if (mToolbarState != CollapsingToolbarState.EXPANDED){
                         mToolbarState = CollapsingToolbarState.EXPANDED;
                     }*/
+//                    mToolbar.getNavigationIcon().setAlpha(1);
                 }else if (Math.abs(verticalOffset) >= mAppBarLayout.getTotalScrollRange()){
                     /*if (mToolbarState != CollapsingToolbarState.COLLAPSED) {
                         mImgBack.setVisibility(View.VISIBLE);
                         mToolbarState = CollapsingToolbarState.COLLAPSED;
                     }*/
+//                    mToolbar.getNavigationIcon().setAlpha(verticalOffset / mAppBarLayout.getTotalScrollRange());
                 }else {
+//                    mToolbar.getNavigationIcon().setAlpha(0);
                     /*if (mToolbarState != CollapsingToolbarState.INTERMEDIATE) {
                         if(mToolbarState == CollapsingToolbarState.COLLAPSED){
                             mImgBack.setVisibility(View.GONE);

@@ -1,6 +1,5 @@
 package com.freedom.lauzy.gankpro;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -9,9 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.freedom.lauzy.gankpro.app.GankApp;
-import com.freedom.lauzy.gankpro.common.base.BaseActivity;
-import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
+import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -22,7 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseToolbarActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     //    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.bottom_main_navigation)
@@ -37,7 +34,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private MineFragment mMineFragment;
 
     @Override
-    protected int setLayoutId() {
+    protected int getLayoutResId() {
         return R.layout.activity_main;
     }
 
@@ -51,8 +48,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
         onNavigationItemSelected(item);//默认选中第一个
         mBottomMainNavigation.setOnNavigationItemSelectedListener(this);
-        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getAppContext());
-        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getAppContext()), 0, 0);
+        /*mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
+        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);*/
         setSupportActionBar(mToolbar);
     }
 
@@ -65,7 +62,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         switch (item.getItemId()) {
             case R.id.menu_main_item_beauty:
-                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
+//                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
                     transaction.add(R.id.main_frame, mBeautyFragment);
@@ -75,7 +72,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 }
                 break;
             case R.id.menu_main_item_android:
-                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
+//                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
                 if (mAndroidFragment == null) {
                     mAndroidFragment = new AndroidFragment();
                     transaction.add(R.id.main_frame, mAndroidFragment);
@@ -85,7 +82,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 }
                 break;
             case R.id.menu_main_item_category:
-                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
+//                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
                     transaction.add(R.id.main_frame, mCategoryFragment);
@@ -95,7 +92,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 }
                 break;
             case R.id.menu_main_item_mine:
-                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
+//                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();
                     transaction.add(R.id.main_frame, mMineFragment);

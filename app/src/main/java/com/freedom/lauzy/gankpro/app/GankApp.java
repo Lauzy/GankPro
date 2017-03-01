@@ -22,6 +22,7 @@ public class GankApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        sContext = this;
         ApiFactory.getInstance().init(this);
         initDataBase();
     }

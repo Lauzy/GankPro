@@ -35,19 +35,13 @@
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"/>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_daily"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:paddingTop="24dp"
+                android:layout_height="@dimen/dp_40"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways">
-                <!--<ImageView
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center"
-                    android:src="@mipmap/icon_arrow_white_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>-->
             </android.support.v7.widget.Toolbar>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
