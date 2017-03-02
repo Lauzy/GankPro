@@ -1,5 +1,8 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -9,15 +12,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseActivity;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
+import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.CollapsingToolbarState;
@@ -58,10 +66,13 @@ public class DailyActivity extends BaseToolbarActivity {
     ViewStub mEmptyViewStub;
     @BindView(R.id.app_bar)
     AppBarLayout mAppBarLayout;
+    @BindView(R.id.act_daily)
+    View mContentView;
     private List<ItemBean> mItemBeen = new ArrayList<>();
     private DailyAdapter mAdapter;
     private DailyPresenter mDailyPresenter;
-    private CollapsingToolbarState mToolbarState;
+    private PopupWindow mMenuWindow;
+    private View mMenuView;
 
     @Override
     protected void loadData() {
@@ -123,31 +134,6 @@ public class DailyActivity extends BaseToolbarActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvDaily.setLayoutManager(linearLayoutManager);
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0){
-                    /*if (mToolbarState != CollapsingToolbarState.EXPANDED){
-                        mToolbarState = CollapsingToolbarState.EXPANDED;
-                    }*/
-//                    mToolbar.getNavigationIcon().setAlpha(1);
-                }else if (Math.abs(verticalOffset) >= mAppBarLayout.getTotalScrollRange()){
-                    /*if (mToolbarState != CollapsingToolbarState.COLLAPSED) {
-                        mImgBack.setVisibility(View.VISIBLE);
-                        mToolbarState = CollapsingToolbarState.COLLAPSED;
-                    }*/
-//                    mToolbar.getNavigationIcon().setAlpha(verticalOffset / mAppBarLayout.getTotalScrollRange());
-                }else {
-//                    mToolbar.getNavigationIcon().setAlpha(0);
-                    /*if (mToolbarState != CollapsingToolbarState.INTERMEDIATE) {
-                        if(mToolbarState == CollapsingToolbarState.COLLAPSED){
-                            mImgBack.setVisibility(View.GONE);
-                        }
-                        mToolbarState = CollapsingToolbarState.INTERMEDIATE;
-                    }*/
-                }
-            }
-        });
 
         mSrlDaily.setColorSchemeResources(R.color.color_style_gray);
         mSrlDaily.setRefreshing(true);
@@ -165,9 +151,9 @@ public class DailyActivity extends BaseToolbarActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy <= 0){
+                if (dy <= 0) {
                     mFabBeauty.show();
-                }else {
+                } else {
                     mFabBeauty.hide();
                 }
             }
@@ -175,19 +161,15 @@ public class DailyActivity extends BaseToolbarActivity {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                switch (newState) {
-                    case RecyclerView.SCROLL_STATE_IDLE:
-//                        mFabBeauty.show();
-                        break;
-                    case RecyclerView.SCROLL_STATE_DRAGGING:
-//                        mFabBeauty.hide();
-                        break;
-                    case RecyclerView.SCROLL_STATE_SETTLING:
-//                        mFabBeauty.show();
-                        break;
-                }
             }
         });
+        initMenuView();
+    }
+
+    private void initMenuView() {
+        mMenuView = View.inflate(DailyActivity.this, R.layout.layout_share_menu, null);
+        mMenuWindow = new PopupWindow(mMenuView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mMenuWindow.setFocusable(true);
     }
 
     @Override
@@ -203,5 +185,19 @@ public class DailyActivity extends BaseToolbarActivity {
     @OnClick(R.id.fab_beauty)
     public void onClick() {
         Toast.makeText(this, "hh", Toast.LENGTH_SHORT).show();
+        showMenu();
+    }
+
+    private void showMenu() {
+        if (mMenuWindow.isShowing()) {
+            mMenuWindow.dismiss();
+        } else {
+            mMenuWindow.setOutsideTouchable(true);
+            mMenuWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+            int offsetX = mFabBeauty.getMeasuredWidth() / 2 + DensityUtils.dp2px(GankApp.getInstance(), 16) - DensityUtils.dp2px(GankApp.getInstance(), 25);
+            int offsetY = mFabBeauty.getMeasuredHeight() * 2 + DensityUtils.dp2px(GankApp.getInstance(), 16);
+            Log.e(LYTAG, "showMenu: " + offsetX + "--" + offsetY);
+            mMenuWindow.showAtLocation(mContentView, Gravity.BOTTOM | Gravity.RIGHT, offsetX, offsetY);
+        }
     }
 }
