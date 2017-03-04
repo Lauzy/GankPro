@@ -27,15 +27,6 @@ public abstract class BaseFragment extends Fragment {
         mActivity = (Activity) context;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            onUserVisible();
-        } else {
-            onUserInVisible();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +38,7 @@ public abstract class BaseFragment extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }*/
-        View view = inflater.inflate(getLayoutResource(), container, false);
+        View view = inflater.inflate(getLayoutResId(), container, false);
         ButterKnife.bind(this, view);
 //        ButterKnife.bind(this, rootView);
         return view;
@@ -56,10 +47,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        setToolBar(view);
         initViews();
     }
-
-    protected abstract void initViews();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -67,21 +57,10 @@ public abstract class BaseFragment extends Fragment {
         loadData();
     }
 
-    protected abstract int getLayoutResource();
+    protected abstract int getLayoutResId();
 
+    protected abstract void initViews();
 
     protected abstract void loadData();
 
-    /**
-     * 当fragment对用户可见时，会调用该方法，可在该方法中懒加载网络数据
-     */
-    public void onUserVisible() {
-    }
-
-    /**
-     * 当fragment对用户不可见时，会调用该方法
-     */
-    public void onUserInVisible() {
-
-    }
 }

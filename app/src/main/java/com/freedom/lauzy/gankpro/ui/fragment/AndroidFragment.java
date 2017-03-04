@@ -9,8 +9,8 @@ import android.view.View;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.common.widget.adapter.RvItemClickListener;
-import com.freedom.lauzy.gankpro.common.widget.adapter.RvItemTouchListener;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemClickListener;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemTouchListener;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyLoadMoreRecyclerView;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.OnLoadMoreListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
@@ -35,6 +35,11 @@ public class AndroidFragment extends BaseFragment {
     private CategoryGankPresenter mGankPresenter;
     private List<GankData.ResultsBean> mResultsBeen = new ArrayList<>();
     private AndroidAdapter mAdapter;
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_android;
+    }
 
     @Override
     protected void initViews() {
@@ -74,11 +79,6 @@ public class AndroidFragment extends BaseFragment {
 
             }
         }));
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_android;
     }
 
     @Override

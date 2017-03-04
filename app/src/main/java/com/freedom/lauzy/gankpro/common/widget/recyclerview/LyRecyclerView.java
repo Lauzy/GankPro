@@ -19,8 +19,6 @@ public class LyRecyclerView extends RecyclerView {
     protected RecyclerView.Adapter mAdapter;
 
     // 增加一些通用功能
-    // 空列表数据应该显示的空View也就是正在获取后台接口页面
-    // 正在加载数据页面，
     private View mEmptyView, mLoadingView;
 
     public LyRecyclerView(Context context) {

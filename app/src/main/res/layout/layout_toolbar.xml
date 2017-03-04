@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/color_style_gray"
-    android:elevation="@dimen/dp_4"
+    android:elevation="@dimen/dp_2"
     app:contentInsetStart="0dp">
 
     <!--<TextView

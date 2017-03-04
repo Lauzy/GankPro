@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by Lauzy on 2017/2/6.
  */
 @SuppressWarnings({"unused", "unchecked"})
-public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private SparseArray<View> mHeaderViews;
     private SparseArray<View> mFooterViews;
 
@@ -23,7 +23,7 @@ public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // 列表的Adapter
     private RecyclerView.Adapter mAdapter;
 
-    public LyWrapAdapter(RecyclerView.Adapter adapter) {
+    LyWrapAdapter(RecyclerView.Adapter adapter) {
         this.mAdapter = adapter;
         mHeaderViews = new SparseArray<>();
         mFooterViews = new SparseArray<>();
@@ -131,7 +131,7 @@ public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     // 添加头部
-    public void addHeaderView(View view) {
+    void addHeaderView(View view) {
         int position = mHeaderViews.indexOfValue(view);
         if (position < 0) {
             mHeaderViews.put(BASE_ITEM_TYPE_HEADER++, view);
@@ -140,7 +140,7 @@ public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     // 添加底部
-    public void addFooterView(View view) {
+    void addFooterView(View view) {
         int position = mFooterViews.indexOfValue(view);
         if (position < 0) {
             mFooterViews.put(BASE_ITEM_TYPE_FOOTER++, view);
@@ -150,7 +150,7 @@ public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     // 移除头部
-    public void removeHeaderView(View view) {
+    void removeHeaderView(View view) {
         int index = mHeaderViews.indexOfValue(view);
         if (index < 0) return;
         mHeaderViews.removeAt(index);
@@ -158,7 +158,7 @@ public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     // 移除底部
-    public void removeFooterView(View view) {
+    void removeFooterView(View view) {
         int index = mFooterViews.indexOfValue(view);
         if (index < 0) return;
         mFooterViews.removeAt(index);
@@ -170,7 +170,7 @@ public class LyWrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
      *
      * @param recyclerView rv
      */
-    public void adjustSpanSize(RecyclerView recyclerView) {
+    void adjustSpanSize(RecyclerView recyclerView) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
             final GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
             layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

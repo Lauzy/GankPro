@@ -1,7 +1,6 @@
 package com.freedom.lauzy.gankpro.app;
 
 import android.app.Application;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.freedom.lauzy.gankpro.function.db.LyDaoHelper;
@@ -16,26 +15,16 @@ import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 @SuppressWarnings("unused")
 public class GankApp extends Application {
 
-    private static Context sContext;
-    private static GankApp sGankApp;
+    private static GankApp sContext;
     private SQLiteDatabase db;
     private DaoSession mDaoSession;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sContext = this;
         ApiFactory.getInstance().init(this);
-        initContext();
         initDataBase();
-        initApplication();
-    }
-
-    private void initApplication() {
-        sGankApp = this;
-    }
-
-    public static GankApp getGankApp(){
-        return sGankApp;
     }
 
     private void initDataBase() {
@@ -53,11 +42,7 @@ public class GankApp extends Application {
         return db;
     }
 
-    private void initContext() {
-        sContext = getApplicationContext();
-    }
-
-    public static Context getAppContext() {
+    public static GankApp getInstance() {
         return sContext;
     }
 }
