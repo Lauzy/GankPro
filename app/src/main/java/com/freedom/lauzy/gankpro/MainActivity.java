@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
@@ -26,6 +27,8 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     BottomNavigationView mBottomMainNavigation;
     @BindView(R.id.toolbar_common)
     Toolbar mToolbar;
+    @BindView(R.id.txt_toolbar_title)
+    TextView mTxtToolbarTitle;
 
     private List<Fragment> mFragments = new ArrayList<>();
     private BeautyFragment mBeautyFragment;
@@ -51,6 +54,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         /*mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
         mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);*/
         setSupportActionBar(mToolbar);
+        mTxtToolbarTitle.setText("妹纸");
     }
 
     @Override
@@ -62,6 +66,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
         switch (item.getItemId()) {
             case R.id.menu_main_item_beauty:
+                mTxtToolbarTitle.setText("妹纸");
 //                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
@@ -72,6 +77,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_android:
+                mTxtToolbarTitle.setText("安卓");
 //                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
                 if (mAndroidFragment == null) {
                     mAndroidFragment = new AndroidFragment();
@@ -82,6 +88,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_category:
+                mTxtToolbarTitle.setText("分类");
 //                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
@@ -92,6 +99,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_mine:
+                mTxtToolbarTitle.setText("我的");
 //                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();

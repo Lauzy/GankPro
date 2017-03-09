@@ -1,5 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
+import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
+import com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * daily
@@ -24,9 +27,11 @@ import butterknife.OnClick;
 public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ItemBean> mItemBeen;
+    private Context mContext;
 
-    public DailyAdapter(List<ItemBean> itemBeen) {
+    public DailyAdapter(Context context, List<ItemBean> itemBeen) {
         mItemBeen = itemBeen;
+        mContext = context;
     }
 
     @Override
@@ -45,6 +50,18 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         ((ViewHolder) holder).mTxtDailyContent.setText(itemBean.getDesc());
         ((ViewHolder) holder).mTxtDailyCategory.setText(itemBean.getType());
+        ((ViewHolder) holder).mCvGankItem.setOnClickListener(gankDetailListener(itemBean));
+    }
+
+    private View.OnClickListener gankDetailListener(final ItemBean itemBean) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GankDetailActivity.class);
+                intent.putExtra(ValueConstants.GANK_DETAIL, itemBean.getUrl());
+                mContext.startActivity(intent);
+            }
+        };
     }
 
     @Override
@@ -74,14 +91,6 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick({R.id.cv_gank_item})
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.cv_gank_item:
-                    break;
-            }
         }
     }
 }

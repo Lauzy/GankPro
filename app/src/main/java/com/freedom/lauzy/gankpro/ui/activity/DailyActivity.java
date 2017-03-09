@@ -1,8 +1,5 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,23 +9,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
-import com.freedom.lauzy.gankpro.common.base.BaseActivity;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
-import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
-import com.freedom.lauzy.gankpro.function.CollapsingToolbarState;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
 import com.freedom.lauzy.gankpro.function.utils.DateUtils;
 import com.freedom.lauzy.gankpro.presenter.DailyPresenter;
@@ -71,8 +62,6 @@ public class DailyActivity extends BaseToolbarActivity {
     private List<ItemBean> mItemBeen = new ArrayList<>();
     private DailyAdapter mAdapter;
     private DailyPresenter mDailyPresenter;
-    private PopupWindow mMenuWindow;
-    private View mMenuView;
 
     @Override
     protected void loadData() {
@@ -131,13 +120,14 @@ public class DailyActivity extends BaseToolbarActivity {
         Log.e(LYTAG, "initViews: " + ScreenUtils.getStatusHeight(GankApp.getInstance()));
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.mipmap.icon_arrow_white_back);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvDaily.setLayoutManager(linearLayoutManager);
 
         mSrlDaily.setColorSchemeResources(R.color.color_style_gray);
         mSrlDaily.setRefreshing(true);
-        mAdapter = new DailyAdapter(mItemBeen);
+        mAdapter = new DailyAdapter(DailyActivity.this, mItemBeen);
         mRvDaily.setAdapter(mAdapter);
 
         mSrlDaily.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -163,13 +153,6 @@ public class DailyActivity extends BaseToolbarActivity {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
-        initMenuView();
-    }
-
-    private void initMenuView() {
-        mMenuView = View.inflate(DailyActivity.this, R.layout.layout_share_menu, null);
-        mMenuWindow = new PopupWindow(mMenuView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        mMenuWindow.setFocusable(true);
     }
 
     @Override
@@ -185,19 +168,6 @@ public class DailyActivity extends BaseToolbarActivity {
     @OnClick(R.id.fab_beauty)
     public void onClick() {
         Toast.makeText(this, "hh", Toast.LENGTH_SHORT).show();
-        showMenu();
     }
 
-    private void showMenu() {
-        if (mMenuWindow.isShowing()) {
-            mMenuWindow.dismiss();
-        } else {
-            mMenuWindow.setOutsideTouchable(true);
-            mMenuWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-            int offsetX = mFabBeauty.getMeasuredWidth() / 2 + DensityUtils.dp2px(GankApp.getInstance(), 16) - DensityUtils.dp2px(GankApp.getInstance(), 25);
-            int offsetY = mFabBeauty.getMeasuredHeight() * 2 + DensityUtils.dp2px(GankApp.getInstance(), 16);
-            Log.e(LYTAG, "showMenu: " + offsetX + "--" + offsetY);
-            mMenuWindow.showAtLocation(mContentView, Gravity.BOTTOM | Gravity.RIGHT, offsetX, offsetY);
-        }
-    }
 }

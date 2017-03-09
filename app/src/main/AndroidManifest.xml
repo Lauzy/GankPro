@@ -24,6 +24,8 @@
             android:label="@string/title_activity_daily"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".ui.activity.GankDetailActivity">
+        </activity>
     </application>
 
 </manifest>
