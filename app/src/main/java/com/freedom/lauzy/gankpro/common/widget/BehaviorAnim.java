@@ -9,9 +9,6 @@ import android.view.View;
 
 public class BehaviorAnim {
 
-    public static final int STATE_HIDE = 10001;
-    public static final int STATE_SHOW = 10002;
-    public int mCurrentState = STATE_SHOW;
     private View mHeadView;
 
     public BehaviorAnim(View headView) {
@@ -20,7 +17,7 @@ public class BehaviorAnim {
 
     public void hideTitle() {
         ValueAnimator va = ValueAnimator.ofFloat(mHeadView.getY(), -mHeadView.getHeight());
-        va.setDuration(300);
+        va.setDuration(400);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -33,7 +30,7 @@ public class BehaviorAnim {
     public void showTitle() {
 
         ValueAnimator va = ValueAnimator.ofFloat(mHeadView.getY(), 0);
-        va.setDuration(300);
+        va.setDuration(400);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -43,12 +40,4 @@ public class BehaviorAnim {
         va.start();
     }
 
-
-    public int getCurrentState() {
-        return mCurrentState;
-    }
-
-    public void setCurrentState(int currentState) {
-        mCurrentState = currentState;
-    }
 }

@@ -7,9 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
+import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
+import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
+import com.freedom.lauzy.gankpro.common.widget.GankBehavior;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -29,12 +33,15 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     Toolbar mToolbar;
     @BindView(R.id.txt_toolbar_title)
     TextView mTxtToolbarTitle;
+    @BindView(R.id.main_frame)
+    FrameLayout mMainFrameLayout;
 
     private List<Fragment> mFragments = new ArrayList<>();
     private BeautyFragment mBeautyFragment;
     private CategoryFragment mCategoryFragment;
     private AndroidFragment mAndroidFragment;
     private MineFragment mMineFragment;
+    private GankBehavior mGankBehavior;
 
     @Override
     protected int getLayoutResId() {
@@ -47,6 +54,8 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
     @Override
     protected void initViews() {
+        mGankBehavior = GankBehavior.from(mToolbar);
+//        mGankBehavior.show();
 //        setStatusColor(R.color.colorPrimaryDark);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
         onNavigationItemSelected(item);//默认选中第一个
@@ -55,6 +64,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);*/
         setSupportActionBar(mToolbar);
         mTxtToolbarTitle.setText("妹纸");
+
     }
 
     @Override
@@ -67,6 +77,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         switch (item.getItemId()) {
             case R.id.menu_main_item_beauty:
                 mTxtToolbarTitle.setText("妹纸");
+                mGankBehavior.show();
 //                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
@@ -77,6 +88,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_android:
+                mGankBehavior.hide();
                 mTxtToolbarTitle.setText("安卓");
 //                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
                 if (mAndroidFragment == null) {
@@ -88,6 +100,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_category:
+                mGankBehavior.hide();
                 mTxtToolbarTitle.setText("分类");
 //                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
                 if (mCategoryFragment == null) {
@@ -99,6 +112,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_mine:
+                mGankBehavior.hide();
                 mTxtToolbarTitle.setText("我的");
 //                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
                 if (mMineFragment == null) {

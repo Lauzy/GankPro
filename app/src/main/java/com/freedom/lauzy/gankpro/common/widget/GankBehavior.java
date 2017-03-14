@@ -6,6 +6,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Lauzy on 2017/3/14.
@@ -15,7 +16,10 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
 
     private static final String LYTAG = GankBehavior.class.getSimpleName();
     private BehaviorAnim mBehaviorAnim;
+    private boolean isHide;
+    private boolean canInit = true;
     //    private static final Interpolator INTERPOLATOR = new FastOutLinearInInterpolator();
+
 
     public GankBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,7 +27,10 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        mBehaviorAnim = new BehaviorAnim(child);
+        if (canInit) {
+            mBehaviorAnim = new BehaviorAnim(child);
+            canInit = false;
+        }
         return super.layoutDependsOn(parent, child, dependency);
     }
 
@@ -35,16 +42,55 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-        if (dy < 0) {
-            if (mBehaviorAnim.getCurrentState() == BehaviorAnim.STATE_HIDE) {
+
+        if (Math.abs(dy) > 10){
+
+            if (dy < 0) {
+            /*if (mBehaviorAnim.getCurrentState() == BehaviorAnim.STATE_HIDE) {
                 mBehaviorAnim.showTitle();
                 mBehaviorAnim.setCurrentState(BehaviorAnim.STATE_SHOW);
-            }
-        } else if (dy > 0) {
-            if (mBehaviorAnim.getCurrentState() == BehaviorAnim.STATE_SHOW){
+            }*/
+                if (isHide) {
+                    mBehaviorAnim.showTitle();
+                    isHide = false;
+                }
+            } else if (dy > 0) {
+            /*if (mBehaviorAnim.getCurrentState() == BehaviorAnim.STATE_SHOW){
                 mBehaviorAnim.hideTitle();
                 mBehaviorAnim.setCurrentState(BehaviorAnim.STATE_HIDE);
+            }*/
+                if (!isHide) {
+                    mBehaviorAnim.hideTitle();
+                    isHide = true;
+                }
             }
         }
     }
+
+    public void show() {
+        if (mBehaviorAnim !=null){
+            isHide = false;
+            mBehaviorAnim.showTitle();
+        }
+    }
+
+    public void hide() {
+        if (mBehaviorAnim !=null){
+            isHide = true;
+            mBehaviorAnim.hideTitle();
+        }
+    }
+
+    public static GankBehavior from(View view) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (!(params instanceof CoordinatorLayout.LayoutParams)) {
+            throw new IllegalArgumentException("The view is not a child of CoordinatorLayout");
+        }
+        CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
+        if (!(behavior instanceof GankBehavior)) {
+            throw new IllegalArgumentException("The view is not associated with ByeBurgerBehavior");
+        }
+        return (GankBehavior) behavior;
+    }
+
 }

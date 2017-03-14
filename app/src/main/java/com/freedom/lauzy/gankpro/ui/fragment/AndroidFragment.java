@@ -3,12 +3,15 @@ package com.freedom.lauzy.gankpro.ui.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.common.widget.GankBehavior;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyLoadMoreRecyclerView;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyRecyclerView;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.OnLoadMoreListener;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemClickListener;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemTouchListener;
@@ -67,7 +70,7 @@ public class AndroidFragment extends BaseFragment {
 
         });
 
-        mRvAndroid.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvAndroid, new RvItemClickListener() {
+       /* mRvAndroid.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvAndroid, new RvItemClickListener() {
             @Override
             public void rvItemClick(int position) {
                 Log.e(LYTAG, "rvItemClick: " + position);
@@ -77,7 +80,7 @@ public class AndroidFragment extends BaseFragment {
             public void rvItemLongClick(int position) {
 
             }
-        }));
+        }));*/
     }
 
     @Override

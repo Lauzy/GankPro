@@ -7,6 +7,7 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/color_style_gray"
     android:elevation="@dimen/dp_2"
+    app:layout_behavior="@string/toolbar_behavior"
     app:contentInsetStart="0dp">
 
     <!--<TextView
