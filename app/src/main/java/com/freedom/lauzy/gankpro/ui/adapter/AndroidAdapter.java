@@ -1,6 +1,9 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -30,6 +33,14 @@ public class AndroidAdapter extends CommonAdapter<GankData.ResultsBean>{
         imageView.setVisibility(item.getImages() == null ? View.GONE : View.VISIBLE);
         if (item.getImages() != null) {
             ImageLoader.loadImage(mContext, item.getImages().get(0) + "?imageView2/0/w/100", imageView);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int[] attrs = new int[]{R.attr.selectableItemBackgroundBorderless};
+            TypedArray typedArray = mContext.obtainStyledAttributes(attrs);
+            int backgroundResource = typedArray.getResourceId(0, 0);
+            typedArray.recycle();
+            holder.getView(R.id.layout_android_item).setForeground(ContextCompat.getDrawable(mContext, backgroundResource));
         }
     }
 

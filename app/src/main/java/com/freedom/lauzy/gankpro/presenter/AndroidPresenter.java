@@ -39,8 +39,8 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
                 } else if (GET_DATA_TYPE == REFRESH_DATA_TYPE) {
                     getMvpBaseView().refreshRvData(gankDataResults);
                 } else if (GET_DATA_TYPE == LOAD_MORE_DATA_TYPE) {
-                    page++;
                     getMvpBaseView().loadMoreRvData(gankDataResults);
+                    page++;
                 }
             }
 
