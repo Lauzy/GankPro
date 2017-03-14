@@ -4,15 +4,14 @@ package com.freedom.lauzy.gankpro.ui.fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemClickListener;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemTouchListener;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyLoadMoreRecyclerView;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.OnLoadMoreListener;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemClickListener;
+import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemTouchListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.presenter.CategoryGankPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.AndroidAdapter;
@@ -87,11 +86,9 @@ public class AndroidFragment extends BaseFragment {
             @Override
             public void initRvData(List<GankData.ResultsBean> data) {
                 if (data != null) {
-                    Log.e(LYTAG, "initRvData: Android: " + data.size());
                     mResultsBeen.addAll(data);
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    Log.e(LYTAG, "initRvData: + empty ");
                     mRvAndroid.addEmptyView(mEmptyView);
                 }
                 mAndroidRefreshLayout.setRefreshing(false);
@@ -109,8 +106,7 @@ public class AndroidFragment extends BaseFragment {
 
             @Override
             public void loadMoreRvData(List<GankData.ResultsBean> loadMoreData) {
-                if (mAdapter.getItemCount() == 100) {
-                    Log.e(LYTAG, "loadMoreRvData: noData");
+                if (loadMoreData == null) {
                     mRvAndroid.loadMoreFinish();
                 } else {
                     mAdapter.addData(loadMoreData, 1);
@@ -120,7 +116,6 @@ public class AndroidFragment extends BaseFragment {
 
             @Override
             public void initError(Throwable e) {
-                Log.e(LYTAG, "initError: ");
                 mRvAndroid.addEmptyView(mEmptyView);
                 mAndroidRefreshLayout.setRefreshing(false);
             }

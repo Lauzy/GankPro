@@ -1,7 +1,5 @@
 package com.freedom.lauzy.gankpro.presenter;
 
-import android.util.Log;
-
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
 import com.freedom.lauzy.gankpro.function.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
@@ -25,7 +23,7 @@ public class CategoryGankPresenter extends BasePresenter<CategoryGankView> {
     private CategoryGankModel mGankModel;
     private LoadData GET_DATA_TYPE;
     private OnResponse<GankData> mGankDataResponse;
-    private int page = 1;
+    private int page = 2;
     private String mType;
 
     public CategoryGankPresenter(CategoryGankView gankView, String type) {
@@ -46,6 +44,7 @@ public class CategoryGankPresenter extends BasePresenter<CategoryGankView> {
                     getMvpBaseView().refreshRvData(gankDataResults);
                 } else if (GET_DATA_TYPE == LOAD_MORE_DATA_TYPE) {
                     getMvpBaseView().loadMoreRvData(gankDataResults);
+                    page++;
                 }
             }
 
@@ -60,19 +59,18 @@ public class CategoryGankPresenter extends BasePresenter<CategoryGankView> {
                 }
             }
         };
-        mGankModel.getCategoryGankData(mType, page, mGankDataResponse);
+        mGankModel.getCategoryGankData(mType, 1, mGankDataResponse);
     }
 
     public void refreshData() {
-        page = 1;
+        page = 2;
         GET_DATA_TYPE = REFRESH_DATA_TYPE;
         mGankModel.getCategoryGankData(mType, 1, mGankDataResponse);
     }
 
     public void loadMoreData() {
         GET_DATA_TYPE = LOAD_MORE_DATA_TYPE;
-        mGankModel.getCategoryGankData(mType, ++page, mGankDataResponse);
-        Log.e(LYTAG, "loadMoreData: " + page);
+        mGankModel.getCategoryGankData(mType, page, mGankDataResponse);
     }
 
 }
