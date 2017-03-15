@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_200"
     android:layout_margin="@dimen/dp_5"
+    android:clickable="true"
     android:id="@+id/cv_beauty_item"
     app:cardCornerRadius="@dimen/dp_4"
     app:cardElevation="@dimen/dp_2">
 
     <ImageView
+        android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:transitionName="@string/transition_img"
         android:id="@+id/img_beauty_item"
