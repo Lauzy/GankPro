@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro.common.widget;
+package com.freedom.lauzy.gankpro.common.widget.behavior;
 
 import android.animation.ValueAnimator;
 import android.view.View;
@@ -7,11 +7,11 @@ import android.view.View;
  * Created by Lauzy on 2017/3/14.
  */
 
-public class BehaviorAnim {
+public class GankBehaviorAnim {
 
     private View mHeadView;
 
-    public BehaviorAnim(View headView) {
+    public GankBehaviorAnim(View headView) {
         mHeadView = headView;
     }
 

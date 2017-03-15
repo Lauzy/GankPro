@@ -5,7 +5,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,6 +12,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.function.view.BeautyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.BeautyPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.BeautyAdapter;
 import com.freedom.lauzy.gankpro.view.BeautyView;
@@ -24,8 +24,7 @@ import butterknife.BindView;
 
 public class BeautyFragment extends BaseFragment {
 
-
-    private static final String TAG = BeautyFragment.class.getSimpleName();
+    private static final String LYTAG = BeautyFragment.class.getSimpleName();
 
     @BindView(R.id.beauty_recycler_view)
     RecyclerView mBeautyRecyclerView;
@@ -44,13 +43,17 @@ public class BeautyFragment extends BaseFragment {
     @Override
     protected void initViews() {
         initEmptyView();
-       /* final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        layoutManager.setItemPrefetchEnabled(false);*/
+       /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        staggeredGridLayoutManager.setAutoMeasureEnabled(true);
+        staggeredGridLayoutManager.setItemPrefetchEnabled(false);*/
+//        mBeautyRecyclerView.setHasFixedSize(true);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity, 2);
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mBeautyRecyclerView.setLayoutManager(gridLayoutManager);
+
+        mBeautyRefreshLayout.setProgressViewOffset(true, 120, 240);
         mBeautyRefreshLayout.setColorSchemeResources(R.color.color_style_gray);
         mBeautyRefreshLayout.setRefreshing(true);
         mAdapter = new BeautyAdapter(R.layout.layout_beauty_item, mResultsBeen);
@@ -70,7 +73,6 @@ public class BeautyFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 mBeautyPresenter.refreshData();
-                mBeautyRefreshLayout.setRefreshing(false);
                 mAdapter.setEnableLoadMore(true);
             }
         });
@@ -89,6 +91,8 @@ public class BeautyFragment extends BaseFragment {
 //                startActivity(new Intent(mActivity,DailyActivity.class));
             }
         });
+
+        mBeautyRecyclerView.addItemDecoration(new BeautyItemDecoration(mActivity));
     }
 
     private void initEmptyView() {
@@ -101,7 +105,6 @@ public class BeautyFragment extends BaseFragment {
         mBeautyPresenter = new BeautyPresenter(new BeautyView() {
             @Override
             public void initRvData(List<GankData.ResultsBean> data) {
-                Log.i(TAG, "initRvData: " + data.size());
                 if (data.size() == 0) {
                     mAdapter.setEmptyView(mEmptyView);
                 } else {
@@ -113,13 +116,11 @@ public class BeautyFragment extends BaseFragment {
 
             @Override
             public void refreshRvData(List<GankData.ResultsBean> refreshData) {
-                if (refreshData == null) {
-                    mBeautyRefreshLayout.setRefreshing(false);
-                } else {
+                if (refreshData != null) {
                     mAdapter.setNewData(refreshData);
-                    mBeautyRefreshLayout.setRefreshing(false);
                     mAdapter.setEnableLoadMore(true);
                 }
+                mBeautyRefreshLayout.setRefreshing(false);
             }
 
             @Override

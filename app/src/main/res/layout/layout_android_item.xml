@@ -24,6 +24,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:maxLines="2"
+            android:lineSpacingExtra="@dimen/dp_4"
+            android:lineSpacingMultiplier="1.2"
             android:ellipsize="end"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

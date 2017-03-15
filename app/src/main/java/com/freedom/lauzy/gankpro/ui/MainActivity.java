@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro;
+package com.freedom.lauzy.gankpro.ui;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,10 +10,9 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
-import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
-import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
-import com.freedom.lauzy.gankpro.common.widget.GankBehavior;
+import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -88,7 +87,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_android:
-                mGankBehavior.hide();
+                mGankBehavior.show();
                 mTxtToolbarTitle.setText("安卓");
 //                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
                 if (mAndroidFragment == null) {
@@ -100,7 +99,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_category:
-                mGankBehavior.hide();
+                mGankBehavior.show();
                 mTxtToolbarTitle.setText("分类");
 //                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
                 if (mCategoryFragment == null) {
@@ -112,7 +111,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_mine:
-                mGankBehavior.hide();
+                mGankBehavior.show();
                 mTxtToolbarTitle.setText("我的");
 //                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
                 if (mMineFragment == null) {

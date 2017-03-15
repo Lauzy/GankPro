@@ -9,6 +9,9 @@
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_15">15dp</dimen>
 
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+
     <dimen name="dp_40">40dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_55">55dp</dimen>

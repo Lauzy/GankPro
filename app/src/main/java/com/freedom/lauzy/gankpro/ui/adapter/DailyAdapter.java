@@ -2,6 +2,9 @@ package com.freedom.lauzy.gankpro.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,15 +45,23 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemBean itemBean = mItemBeen.get(position);
-        if (position == 0) {
+       /* if (position == 0) {
             ((ViewHolder) holder).mTxtDailyCategory.setVisibility(View.VISIBLE);
         } else {
             boolean isCategoryVisible = mItemBeen.get(position - 1).getType().equals(mItemBeen.get(position).getType());
             ((ViewHolder) holder).mTxtDailyCategory.setVisibility(isCategoryVisible ? View.GONE : View.VISIBLE);
         }
+        ((ViewHolder) holder).mTxtDailyCategory.setText(itemBean.getType());*/
         ((ViewHolder) holder).mTxtDailyContent.setText(itemBean.getDesc());
-        ((ViewHolder) holder).mTxtDailyCategory.setText(itemBean.getType());
         ((ViewHolder) holder).mCvGankItem.setOnClickListener(gankDetailListener(itemBean));
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            int[] attrs = new int[]{R.attr.selectableItemBackgroundBorderless};
+            TypedArray typedArray = mContext.obtainStyledAttributes(attrs);
+            int backgroundResource = typedArray.getResourceId(0, 0);
+            typedArray.recycle();
+            ((ViewHolder) holder).mCvGankItem.setForeground(ContextCompat.getDrawable(mContext, backgroundResource));
+        }
     }
 
     private View.OnClickListener gankDetailListener(final ItemBean itemBean) {
@@ -83,8 +94,8 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @BindView(R.id.cv_gank_item)
         CardView mCvGankItem;
-        @BindView(R.id.txt_daily_category)
-        TextView mTxtDailyCategory;
+        /*@BindView(R.id.txt_daily_category)
+        TextView mTxtDailyCategory;*/
         @BindView(R.id.txt_daily_content)
         TextView mTxtDailyContent;
 

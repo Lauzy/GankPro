@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/color_white"
+        app:layout_behavior="@string/bottom_behavior"
         app:itemIconTint="@color/bottom_item_color"
         app:itemTextColor="@color/bottom_item_color"
         app:menu="@menu/menu_bottom_navigation_view"/>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.freedom.lauzy.gankpro.R;
 
 /**
+ * 涉及滑动冲突，暂不使用
  * 加载更多RecyclerView
  * Created by Lauzy on 2017/2/6.
  */

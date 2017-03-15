@@ -22,6 +22,7 @@ import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
 import com.freedom.lauzy.gankpro.function.utils.DateUtils;
+import com.freedom.lauzy.gankpro.function.view.DailyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.DailyPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.DailyAdapter;
 import com.freedom.lauzy.gankpro.view.DailyView;
@@ -71,8 +72,14 @@ public class DailyActivity extends BaseToolbarActivity {
         CollectionEntity entity = entityDao.queryBuilder().where(CollectionEntityDao.Properties.Id.eq(img_id)).build().list().get(0);*/
         ImageLoader.loadImage(this, imgUrl, mImgTitle);
         if (mPublishDate == null) {
-            Log.i(LYTAG, "loadData: date is null");
+            Log.d(LYTAG, "loadData: date is null");
         }
+
+        initPresenter();
+        mDailyPresenter.initData();
+    }
+
+    private void initPresenter() {
         mDailyPresenter = new DailyPresenter(new DailyView() {
             @Override
             public void initRvData(List<ItemBean> data) {
@@ -100,7 +107,6 @@ public class DailyActivity extends BaseToolbarActivity {
                 mSrlDaily.setRefreshing(false);
             }
         }, mPublishDate);
-        mDailyPresenter.initData();
     }
 
     @Override
@@ -114,10 +120,10 @@ public class DailyActivity extends BaseToolbarActivity {
         mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
         mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
-        Log.e(LYTAG, "initViews: " + mToolbar.getLayoutParams().height);
+//        Log.i(LYTAG, "initViews: " + mToolbar.getLayoutParams().height);
         mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
         mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);
-        Log.e(LYTAG, "initViews: " + ScreenUtils.getStatusHeight(GankApp.getInstance()));
+//        Log.i(LYTAG, "initViews: " + ScreenUtils.getStatusHeight(GankApp.getInstance()));
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.mipmap.icon_arrow_white_back);
 
@@ -153,6 +159,9 @@ public class DailyActivity extends BaseToolbarActivity {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
+
+
+        mRvDaily.addItemDecoration(new DailyItemDecoration(DailyActivity.this, mItemBeen));
     }
 
     @Override

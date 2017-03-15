@@ -4,18 +4,13 @@ package com.freedom.lauzy.gankpro.ui.fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.common.widget.GankBehavior;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyLoadMoreRecyclerView;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.LyRecyclerView;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.OnLoadMoreListener;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemClickListener;
-import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvItemTouchListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.function.view.BeautyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.CategoryGankPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.AndroidAdapter;
 import com.freedom.lauzy.gankpro.view.CategoryGankView;
@@ -29,7 +24,7 @@ public class AndroidFragment extends BaseFragment {
 
     private static final String LYTAG = AndroidFragment.class.getSimpleName();
     @BindView(R.id.rv_android)
-    LyLoadMoreRecyclerView mRvAndroid;
+    RecyclerView mRvAndroid;
     @BindView(R.id.android_refresh_layout)
     SwipeRefreshLayout mAndroidRefreshLayout;
     @BindView(R.id.empty_view)
@@ -48,10 +43,11 @@ public class AndroidFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvAndroid.setLayoutManager(linearLayoutManager);
-        mAdapter = new AndroidAdapter(mActivity, mResultsBeen, R.layout.layout_android_item);
+//        mAdapter = new AndroidAdapter(mActivity, mResultsBeen, R.layout.layout_android_item);
+        mAdapter = new AndroidAdapter(R.layout.layout_android_item, mResultsBeen);
         mRvAndroid.setAdapter(mAdapter);
 
-
+        mAndroidRefreshLayout.setProgressViewOffset(true, 120, 240);
         mAndroidRefreshLayout.setColorSchemeResources(R.color.color_style_gray);
         mAndroidRefreshLayout.setRefreshing(true);
         mAndroidRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -62,12 +58,20 @@ public class AndroidFragment extends BaseFragment {
             }
         });
 
-        mRvAndroid.setLoadMore(0, new OnLoadMoreListener() {
+        /*mRvAndroid.setLoadMore(0, new OnLoadMoreListener() {
             @Override
             public void loadMore() {
                 mGankPresenter.loadMoreData();
             }
 
+        });*/
+
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                mGankPresenter.loadMoreData();
+                mAndroidRefreshLayout.setEnabled(false);
+            }
         });
 
        /* mRvAndroid.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvAndroid, new RvItemClickListener() {
@@ -81,6 +85,7 @@ public class AndroidFragment extends BaseFragment {
 
             }
         }));*/
+        mRvAndroid.addItemDecoration(new BeautyItemDecoration(mActivity));
     }
 
     @Override
@@ -92,7 +97,8 @@ public class AndroidFragment extends BaseFragment {
                     mResultsBeen.addAll(data);
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    mRvAndroid.addEmptyView(mEmptyView);
+                    mAdapter.setEmptyView(mEmptyView);
+//                    mRvAndroid.addEmptyView(mEmptyView);
                 }
                 mAndroidRefreshLayout.setRefreshing(false);
             }
@@ -100,9 +106,11 @@ public class AndroidFragment extends BaseFragment {
             @Override
             public void refreshRvData(List<GankData.ResultsBean> refreshData) {
                 if (refreshData != null) {
-                    mAdapter.removeAllData();
-                    mAdapter.addData(refreshData, 1);
-                    mRvAndroid.enableLoadMore();
+                    /*mAdapter.removeAllData();
+                    mAdapter.addData(refreshData);
+                    mRvAndroid.enableLoadMore();*/
+                    mAdapter.setNewData(refreshData);
+                    mAdapter.setEnableLoadMore(true);
                 }
                 mAndroidRefreshLayout.setRefreshing(false);
             }
@@ -110,16 +118,20 @@ public class AndroidFragment extends BaseFragment {
             @Override
             public void loadMoreRvData(List<GankData.ResultsBean> loadMoreData) {
                 if (loadMoreData == null) {
-                    mRvAndroid.loadMoreFinish();
+                    mAdapter.loadMoreEnd();
+//                    mRvAndroid.loadMoreFinish();
                 } else {
-                    mAdapter.addData(loadMoreData, 1);
+//                    mAdapter.addData(loadMoreData);
+                    mAdapter.addData(loadMoreData);
+                    mAdapter.loadMoreComplete();
                 }
                 mAndroidRefreshLayout.setEnabled(true);
             }
 
             @Override
             public void initError(Throwable e) {
-                mRvAndroid.addEmptyView(mEmptyView);
+//                mRvAndroid.addEmptyView(mEmptyView);
+                mAdapter.setEmptyView(mEmptyView);
                 mAndroidRefreshLayout.setRefreshing(false);
             }
 
@@ -130,7 +142,8 @@ public class AndroidFragment extends BaseFragment {
 
             @Override
             public void loadMoreError(Throwable e) {
-                mRvAndroid.loadMoreError();
+//                mRvAndroid.loadMoreError();
+                mAdapter.loadMoreFail();
                 mAndroidRefreshLayout.setEnabled(true);
             }
         }, "Android");

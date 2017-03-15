@@ -1,35 +1,33 @@
-package com.freedom.lauzy.gankpro.common.widget;
+package com.freedom.lauzy.gankpro.common.widget.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Lauzy on 2017/3/14.
+ * Created by Lauzy on 2017/3/15.
  */
 
-public class GankBehavior extends CoordinatorLayout.Behavior<View> {
+public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
 
-    private static final String LYTAG = GankBehavior.class.getSimpleName();
-    private BehaviorAnim mBehaviorAnim;
+    private GankFabBehaviorAnim mGankFabBehaviorAnim;
     private boolean isHide;
-    private boolean canInit = true;
+    private boolean isInit = true;
     //    private static final Interpolator INTERPOLATOR = new FastOutLinearInInterpolator();
 
 
-    public GankBehavior(Context context, AttributeSet attrs) {
+    public GankFabBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        if (canInit) {
-            mBehaviorAnim = new BehaviorAnim(child);
-            canInit = false;
+        if (isInit) {
+            mGankFabBehaviorAnim = new GankFabBehaviorAnim(child);
+            isInit = false;
         }
         return super.layoutDependsOn(parent, child, dependency);
     }
@@ -43,24 +41,15 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
 
-        if (Math.abs(dy) > 10){
-
+        if (Math.abs(dy) > 2){
             if (dy < 0) {
-            /*if (mBehaviorAnim.getCurrentState() == BehaviorAnim.STATE_HIDE) {
-                mBehaviorAnim.showTitle();
-                mBehaviorAnim.setCurrentState(BehaviorAnim.STATE_SHOW);
-            }*/
                 if (isHide) {
-                    mBehaviorAnim.showTitle();
+                    mGankFabBehaviorAnim.showFab();
                     isHide = false;
                 }
             } else if (dy > 0) {
-            /*if (mBehaviorAnim.getCurrentState() == BehaviorAnim.STATE_SHOW){
-                mBehaviorAnim.hideTitle();
-                mBehaviorAnim.setCurrentState(BehaviorAnim.STATE_HIDE);
-            }*/
                 if (!isHide) {
-                    mBehaviorAnim.hideTitle();
+                    mGankFabBehaviorAnim.hideFab();
                     isHide = true;
                 }
             }
@@ -68,20 +57,20 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     public void show() {
-        if (mBehaviorAnim !=null){
+        if (mGankFabBehaviorAnim !=null){
             isHide = false;
-            mBehaviorAnim.showTitle();
+            mGankFabBehaviorAnim.showFab();
         }
     }
 
     public void hide() {
-        if (mBehaviorAnim !=null){
+        if (mGankFabBehaviorAnim !=null){
             isHide = true;
-            mBehaviorAnim.hideTitle();
+            mGankFabBehaviorAnim.hideFab();
         }
     }
 
-    public static GankBehavior from(View view) {
+    public static GankFabBehavior from(View view) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (!(params instanceof CoordinatorLayout.LayoutParams)) {
             throw new IllegalArgumentException("The view is not a child of CoordinatorLayout");
@@ -90,7 +79,8 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
         if (!(behavior instanceof GankBehavior)) {
             throw new IllegalArgumentException("The view is not associated with ByeBurgerBehavior");
         }
-        return (GankBehavior) behavior;
+        return (GankFabBehavior) behavior;
     }
+
 
 }

@@ -6,6 +6,7 @@
     android:id="@+id/act_daily"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     tools:context="com.freedom.lauzy.gankpro.ui.activity.DailyActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -47,6 +48,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_daily"
         android:layout_width="match_parent"
@@ -67,12 +69,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
+        app:layout_behavior="@string/fab_behavior"
         app:borderWidth="0dp"
         app:elevation="6dp"
         app:layout_anchor="@id/rv_daily"
         app:layout_anchorGravity="bottom|end"
-        app:rippleColor="@drawable/fab_selector"
+        app:rippleColor="@color/color_press_gray"
         app:srcCompat="@mipmap/icon_beauty_float_btn"/>
+
 
     <ViewStub
         android:id="@+id/stub_empty_view"

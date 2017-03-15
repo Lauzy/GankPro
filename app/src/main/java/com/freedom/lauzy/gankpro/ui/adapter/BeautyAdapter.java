@@ -3,9 +3,12 @@ package com.freedom.lauzy.gankpro.ui.adapter;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -18,8 +21,10 @@ import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.ui.activity.DailyActivity;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
@@ -41,21 +46,14 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
         //(ImageView) helper.getView(R.id.img_beauty_item)
         Picasso.with(mContext).load(item.getUrl())
                 .into((ImageView) helper.getView(R.id.img_beauty_item));
+        /*ImageView imgItem = helper.getView(R.id.img_beauty_item);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) (DensityUtils.dp2px(mContext, 200) - 100 + Math.random() * 50));
+        imgItem.setLayoutParams(layoutParams);*/
 
         /*CollectionEntityDao entityDao = GankApp.getGankApp().getDaoSession().getCollectionEntityDao();
         CollectionEntity entity = new CollectionEntity((long) helper.getAdapterPosition(), item.getUrl(), item.getDesc(), item.getDesc());
         entityDao.insertOrReplace(entity);*/
-       /* if (helper.getLayoutPosition() == 0) {
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    DensityUtils.dp2px(mContext,200));
-            params.setMargins(6, DensityUtils.dp2px(mContext, 65), 6, 4);
-            helper.getView(R.id.cv_beauty_item).setLayoutParams(params);
-        }else {
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    DensityUtils.dp2px(mContext,200));
-            params.setMargins(6, 4, 6, 4);
-            helper.getView(R.id.cv_beauty_item).setLayoutParams(params);
-        }*/
         helper.getView(R.id.img_beauty_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
