@@ -10,4 +10,10 @@
 
     <include layout="@layout/layout_toolbar"/>
 
+    <com.freedom.lauzy.gankpro.common.widget.ProgressWebView
+        android:id="@+id/wb_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.freedom.lauzy.gankpro.common.widget.ProgressWebView>
+
 </LinearLayout>

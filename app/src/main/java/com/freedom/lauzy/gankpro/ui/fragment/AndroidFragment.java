@@ -131,7 +131,7 @@ public class AndroidFragment extends BaseFragment {
             @Override
             public void initError(Throwable e) {
 //                mRvAndroid.addEmptyView(mEmptyView);
-                mAdapter.setEmptyView(mEmptyView);
+//                mAdapter.setEmptyView(mEmptyView);
                 mAndroidRefreshLayout.setRefreshing(false);
             }
 

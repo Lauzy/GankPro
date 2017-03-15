@@ -3,9 +3,11 @@ package com.freedom.lauzy.gankpro.ui.adapter;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -54,6 +56,15 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
         /*CollectionEntityDao entityDao = GankApp.getGankApp().getDaoSession().getCollectionEntityDao();
         CollectionEntity entity = new CollectionEntity((long) helper.getAdapterPosition(), item.getUrl(), item.getDesc(), item.getDesc());
         entityDao.insertOrReplace(entity);*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int[] attrs = new int[]{R.attr.selectableItemBackgroundBorderless};
+            TypedArray typedArray = mContext.obtainStyledAttributes(attrs);
+            int backgroundResource = typedArray.getResourceId(0, 0);
+            typedArray.recycle();
+            helper.getView(R.id.img_beauty_item).setForeground(ContextCompat.getDrawable(mContext, backgroundResource));
+        }
+
         helper.getView(R.id.img_beauty_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
