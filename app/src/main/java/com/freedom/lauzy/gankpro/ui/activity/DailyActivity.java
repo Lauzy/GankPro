@@ -1,5 +1,8 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -63,14 +66,15 @@ public class DailyActivity extends BaseToolbarActivity {
     private List<ItemBean> mItemBeen = new ArrayList<>();
     private DailyAdapter mAdapter;
     private DailyPresenter mDailyPresenter;
+    private String mImgUrl;
 
     @Override
     protected void loadData() {
-        String imgUrl = getIntent().getStringExtra(IMAGE_URL);
+        mImgUrl = getIntent().getStringExtra(IMAGE_URL);
 //        Bitmap img_data = getIntent().getParcelableExtra("img_data");
         /*CollectionEntityDao entityDao = GankApp.getGankApp().getDaoSession().getCollectionEntityDao();
         CollectionEntity entity = entityDao.queryBuilder().where(CollectionEntityDao.Properties.Id.eq(img_id)).build().list().get(0);*/
-        ImageLoader.loadImage(this, imgUrl, mImgTitle);
+        ImageLoader.loadImage(this, mImgUrl, mImgTitle);
         if (mPublishDate == null) {
             Log.d(LYTAG, "loadData: date is null");
         }
@@ -103,6 +107,11 @@ public class DailyActivity extends BaseToolbarActivity {
             }
 
             @Override
+            public void initError(Throwable e) {
+                mSrlDaily.setRefreshing(false);
+            }
+
+            @Override
             public void refreshError(Throwable e) {
                 mSrlDaily.setRefreshing(false);
             }
@@ -116,16 +125,8 @@ public class DailyActivity extends BaseToolbarActivity {
 
     @Override
     protected void initViews() {
-
-        mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
-        mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
-//        Log.i(LYTAG, "initViews: " + mToolbar.getLayoutParams().height);
-        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
-        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);
-//        Log.i(LYTAG, "initViews: " + ScreenUtils.getStatusHeight(GankApp.getInstance()));
-        setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.mipmap.icon_arrow_white_back);
+        initTitle();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -143,7 +144,7 @@ public class DailyActivity extends BaseToolbarActivity {
                 mDailyPresenter.refreshData();
             }
         });
-        mRvDaily.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*mRvDaily.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -158,25 +159,52 @@ public class DailyActivity extends BaseToolbarActivity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
-        });
-
-
+        });*/
         mRvDaily.addItemDecoration(new DailyItemDecoration(DailyActivity.this, mItemBeen));
+    }
+
+    private void initTitle() {
+        mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
+        mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
+        mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
+        mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.mipmap.icon_arrow_white_back);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+//                finish();
+                onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.fab_beauty)
-    public void onClick() {
-        Toast.makeText(this, "hh", Toast.LENGTH_SHORT).show();
+    @OnClick({R.id.fab_beauty, R.id.img_title})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab_beauty:
+              /*  Toast.makeText(this, "hh", Toast.LENGTH_SHORT).show();
+                break;*/
+            case R.id.img_title:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl), ActivityOptions
+                            .makeSceneTransitionAnimation(this, mImgTitle, "transitionImg").toBundle());
+                } else {
+                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl));
+                }
+                break;
+        }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDailyPresenter != null && mDailyPresenter.isViewAttached()) {
+            mDailyPresenter.detachView();
+        }
+    }
 }

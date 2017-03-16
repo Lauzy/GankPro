@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro.function.utils;
+package com.freedom.lauzy.gankpro.common.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

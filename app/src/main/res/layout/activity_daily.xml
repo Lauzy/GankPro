@@ -12,7 +12,8 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height">
+        android:layout_height="@dimen/app_bar_height"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -69,11 +70,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
-        app:layout_behavior="@string/fab_behavior"
         app:borderWidth="0dp"
         app:elevation="6dp"
         app:layout_anchor="@id/rv_daily"
         app:layout_anchorGravity="bottom|end"
+        app:layout_behavior="@string/fab_behavior"
         app:rippleColor="@color/color_press_gray"
         app:srcCompat="@mipmap/icon_beauty_float_btn"/>
 

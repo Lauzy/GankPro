@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
-import com.freedom.lauzy.gankpro.function.view.BeautyItemDecoration;
+import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.CategoryGankPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.AndroidAdapter;
 import com.freedom.lauzy.gankpro.view.CategoryGankView;
@@ -85,7 +85,7 @@ public class AndroidFragment extends BaseFragment {
 
             }
         }));*/
-        mRvAndroid.addItemDecoration(new BeautyItemDecoration(mActivity));
+        mRvAndroid.addItemDecoration(new AndroidItemDecoration(mActivity));
     }
 
     @Override

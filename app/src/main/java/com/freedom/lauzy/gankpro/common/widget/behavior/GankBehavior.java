@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -41,23 +42,13 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-
-        if (Math.abs(dy) > 10){
-
+        if (Math.abs(dy) > 10) {
             if (dy < 0) {
-            /*if (mGankBehaviorAnim.getCurrentState() == GankBehaviorAnim.STATE_HIDE) {
-                mGankBehaviorAnim.showTitle();
-                mGankBehaviorAnim.setCurrentState(GankBehaviorAnim.STATE_SHOW);
-            }*/
                 if (isHide) {
                     mGankBehaviorAnim.showTitle();
                     isHide = false;
                 }
             } else if (dy > 0) {
-            /*if (mGankBehaviorAnim.getCurrentState() == GankBehaviorAnim.STATE_SHOW){
-                mGankBehaviorAnim.hideTitle();
-                mGankBehaviorAnim.setCurrentState(GankBehaviorAnim.STATE_HIDE);
-            }*/
                 if (!isHide) {
                     mGankBehaviorAnim.hideTitle();
                     isHide = true;
@@ -66,15 +57,33 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
         }
     }
 
+    @Override
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+        /*if (Math.abs(dyConsumed) > 10) {
+            if (dyConsumed < 0) {
+                if (isHide) {
+                    mGankBehaviorAnim.showTitle();
+                    isHide = false;
+                }
+            } else if (dyConsumed > 0) {
+                if (!isHide) {
+                    mGankBehaviorAnim.hideTitle();
+                    isHide = true;
+                }
+            }
+        }*/
+    }
+
     public void show() {
-        if (mGankBehaviorAnim !=null){
+        if (mGankBehaviorAnim != null) {
             isHide = false;
             mGankBehaviorAnim.showTitle();
         }
     }
 
     public void hide() {
-        if (mGankBehaviorAnim !=null){
+        if (mGankBehaviorAnim != null) {
             isHide = true;
             mGankBehaviorAnim.hideTitle();
         }

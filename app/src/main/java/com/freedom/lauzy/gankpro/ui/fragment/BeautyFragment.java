@@ -101,13 +101,19 @@ public class BeautyFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
+        initPresenter();
+        mBeautyPresenter.initData();
+    }
 
+    private void initPresenter() {
         mBeautyPresenter = new BeautyPresenter(new BeautyView() {
             @Override
             public void initRvData(List<GankData.ResultsBean> data) {
-                if (data.size() == 0) {
+                if (data == null || data.size() == 0) {
+                    mBeautyRecyclerView.setNestedScrollingEnabled(false);
                     mAdapter.setEmptyView(mEmptyView);
                 } else {
+                    mBeautyRecyclerView.setNestedScrollingEnabled(true);
                     mResultsBeen.addAll(data);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -117,6 +123,7 @@ public class BeautyFragment extends BaseFragment {
             @Override
             public void refreshRvData(List<GankData.ResultsBean> refreshData) {
                 if (refreshData != null) {
+                    mBeautyRecyclerView.setNestedScrollingEnabled(true);
                     mAdapter.setNewData(refreshData);
                     mAdapter.setEnableLoadMore(true);
                 }
@@ -151,6 +158,5 @@ public class BeautyFragment extends BaseFragment {
                 mAdapter.loadMoreFail();
             }
         });
-        mBeautyPresenter.initData();
     }
 }

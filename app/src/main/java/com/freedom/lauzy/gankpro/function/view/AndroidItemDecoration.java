@@ -16,13 +16,12 @@ import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
  * Created by Lauzy on 2017/3/15.
  */
 
-public class BeautyItemDecoration extends RecyclerView.ItemDecoration {
+public class AndroidItemDecoration extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
     private int mTitleHeight;
-    private static final int COLOR_STYLE = Color.parseColor("#f0000000");
 
-    public BeautyItemDecoration(Context context) {
+    public AndroidItemDecoration(Context context) {
         mPaint = new Paint();
         float toolbarHeight = 40 + DensityUtils.px2dp(context,ScreenUtils.getStatusHeight(context));
         mTitleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toolbarHeight, context.getResources().getDisplayMetrics());
@@ -61,7 +60,7 @@ public class BeautyItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawEmpty(Canvas c, int left, int right, View child, RecyclerView.LayoutParams params, int position) {
-        mPaint.setColor(COLOR_STYLE);
+        mPaint.setColor(Color.WHITE);
         c.drawRect(left, child.getTop() - params.topMargin - mTitleHeight, right, child.getTop() - params.topMargin, mPaint);
     }
 }

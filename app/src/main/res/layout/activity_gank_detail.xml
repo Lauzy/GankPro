@@ -8,12 +8,12 @@
     android:orientation="vertical"
     tools:context="com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_toolbar_web"/>
 
-    <com.freedom.lauzy.gankpro.common.widget.ProgressWebView
+    <com.freedom.lauzy.gankpro.common.widget.LyWebView
         android:id="@+id/wb_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.freedom.lauzy.gankpro.common.widget.ProgressWebView>
+    </com.freedom.lauzy.gankpro.common.widget.LyWebView>
 
 </LinearLayout>

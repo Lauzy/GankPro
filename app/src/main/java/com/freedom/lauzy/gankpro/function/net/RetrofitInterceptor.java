@@ -3,7 +3,7 @@ package com.freedom.lauzy.gankpro.function.net;
 import android.content.Context;
 import android.util.Log;
 
-import com.freedom.lauzy.gankpro.function.utils.NetUtils;
+import com.freedom.lauzy.gankpro.common.utils.NetUtils;
 
 import java.io.IOException;
 

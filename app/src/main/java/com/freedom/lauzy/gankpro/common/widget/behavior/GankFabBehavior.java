@@ -2,8 +2,10 @@ package com.freedom.lauzy.gankpro.common.widget.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,8 +42,7 @@ public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-
-        if (Math.abs(dy) > 2){
+        /*if (Math.abs(dy) > 2){
             if (dy < 0) {
                 if (isHide) {
                     mGankFabBehaviorAnim.showFab();
@@ -53,7 +54,40 @@ public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
                     isHide = true;
                 }
             }
+        }*/
+
+        if (dy < 0) {
+            if (isHide) {
+                mGankFabBehaviorAnim.showFab();
+                isHide = false;
+            }
+        } else if (dy > 0) {
+            if (!isHide) {
+                mGankFabBehaviorAnim.hideFab();
+                isHide = true;
+            }
         }
+    }
+
+    @Override
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+        if (dyConsumed < 0) {
+            if (isHide) {
+                mGankFabBehaviorAnim.showFab();
+                isHide = false;
+            }
+        } else if (dyConsumed > 0) {
+            if (!isHide) {
+                mGankFabBehaviorAnim.hideFab();
+                isHide = true;
+            }
+        }
+    }
+
+    @Override
+    public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
+        return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
     }
 
     public void show() {

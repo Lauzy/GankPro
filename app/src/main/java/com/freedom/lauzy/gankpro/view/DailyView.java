@@ -14,5 +14,6 @@ import java.util.List;
 public interface DailyView extends BaseView {
     void initRvData(List<ItemBean> data);
     void refreshRvData(List<ItemBean> refreshData);
+    void initError(Throwable e);
     void refreshError(Throwable e);
 }

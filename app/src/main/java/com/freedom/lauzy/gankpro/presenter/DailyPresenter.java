@@ -60,12 +60,14 @@ public class DailyPresenter extends BasePresenter<DailyView> {
 
             @Override
             public void onError(Throwable e) {
-                if (GET_DATA_TYPE == LoadData.REFRESH_DATA_TYPE) {
+                if (GET_DATA_TYPE == LoadData.INIT_DATA_TYPE) {
+                    getMvpBaseView().initError(e);
+                } else if (GET_DATA_TYPE == LoadData.REFRESH_DATA_TYPE) {
                     getMvpBaseView().refreshError(e);
                 }
             }
         };
-        Log.e(TAG, "initData: 初始化：年：" + mCalendar.get(Calendar.YEAR) + " 月：" +
+        Log.i(TAG, "initData: 初始化：年：" + mCalendar.get(Calendar.YEAR) + " 月：" +
                 (mCalendar.get(Calendar.MONTH) + 1) + " 日:" + mCalendar.get(Calendar.DAY_OF_MONTH));
         mDailyModel.getDailyDataFromNet(mDailyDataOnResponse, mCalendar.get(Calendar.YEAR),
                 mCalendar.get(Calendar.MONTH) + 1, mCalendar.get(Calendar.DAY_OF_MONTH));

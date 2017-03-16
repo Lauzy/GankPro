@@ -3,7 +3,6 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -27,45 +26,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/color_white"
+        android:background="@color/color_transparent_white"
         app:layout_behavior="@string/bottom_behavior"
         app:itemIconTint="@color/bottom_item_color"
         app:itemTextColor="@color/bottom_item_color"
         app:menu="@menu/menu_bottom_navigation_view"/>
-
-    <!--<android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_common"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_style_gray"
-        android:elevation="@dimen/dp_2"
-        app:contentInsetStart="0dp"
-        app:layout_behavior="@string/toolbar_behavior">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40">
-
-            <ImageView
-                android:id="@+id/img_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:src="@mipmap/icon_back"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:id="@+id/txt_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/color_title_white"/>
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>-->
-
 
 </android.support.design.widget.CoordinatorLayout>
 

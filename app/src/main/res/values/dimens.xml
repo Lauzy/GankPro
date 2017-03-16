@@ -6,6 +6,7 @@
 
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_15">15dp</dimen>
 
@@ -27,5 +28,6 @@
 
     <dimen name="txt_daily_item_category_size">18sp</dimen>
     <dimen name="text_sp_18">18sp</dimen>
+
 
 </resources>

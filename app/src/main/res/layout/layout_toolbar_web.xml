@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_common"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_style_gray"
+        android:elevation="@dimen/dp_2"
+        app:popupTheme="@style/ToolbarPopupTheme">
+        <!--app:contentInsetStart="0dp"-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="@color/color_white"
+                android:fontFamily="sans-serif-smallcaps"
+                android:maxLines="1"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:textColor="@color/color_white"
+                android:id="@+id/toolbar_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:fontFamily="serif-monospace"
+                android:maxLines="1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ProgressBar
+        android:layout_marginTop="@dimen/dp_1"
+        android:elevation="@dimen/dp_2"
+        android:progressDrawable="@drawable/web_progress_style"
+        android:id="@+id/web_progressbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:maxHeight="@dimen/dp_3"
+        android:minHeight="@dimen/dp_3"
+        android:progress="0"/>
+
+</LinearLayout>
+
