@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -13,7 +14,9 @@ import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.CommonAdapter;
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvViewHolder;
+import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity;
 
 import java.util.List;
 
@@ -45,6 +48,19 @@ public class AndroidAdapter extends BaseQuickAdapter<GankData.ResultsBean,BaseVi
             typedArray.recycle();
             helper.getView(R.id.layout_android_item).setForeground(ContextCompat.getDrawable(mContext, backgroundResource));
         }
+
+        helper.getView(R.id.layout_android_item).setOnClickListener(getAndroidListener(item));
+    }
+
+    private View.OnClickListener getAndroidListener(final GankData.ResultsBean item) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GankDetailActivity.class);
+                intent.putExtra(ValueConstants.GANK_DETAIL, item.getUrl());
+                mContext.startActivity(intent);
+            }
+        };
     }
 
    /* public AndroidAdapter(Context context, List<GankData.ResultsBean> data, int layoutId) {

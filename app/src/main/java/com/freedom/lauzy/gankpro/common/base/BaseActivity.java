@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import butterknife.ButterKnife;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * base
@@ -17,6 +19,8 @@ import butterknife.ButterKnife;
  * Created by Lauzy on 2016/11/26.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private CompositeSubscription mCompositeSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +67,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }*/
 
+    public void addSubscription(Subscription s) {
+        if (this.mCompositeSubscription == null) {
+            this.mCompositeSubscription = new CompositeSubscription();
+        }
+
+        this.mCompositeSubscription.add(s);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -101,5 +113,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 //        Log.e("TAG", "onDestroy: ");
+        if (this.mCompositeSubscription != null) {
+            this.mCompositeSubscription.unsubscribe();
+        }
     }
 }

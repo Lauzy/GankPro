@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -21,6 +23,8 @@ import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
+import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
+import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 
@@ -38,6 +42,8 @@ public class GankDetailActivity extends BaseToolbarActivity {
     ProgressBar mWebProgressbar;
     @BindView(R.id.toolbar_common)
     Toolbar mToolbarCommon;
+    @BindView(R.id.nsv_web)
+    NestedScrollView mNsvWeb;
 
     @Override
     protected int getLayoutResId() {
@@ -51,6 +57,13 @@ public class GankDetailActivity extends BaseToolbarActivity {
 //        mToolbarSubtitle.setText(detailUrl);
         mToolbarCommon.setTitle("");
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_close);
+
+        //使用此方法可少嵌套一层，顶部颜色为NestedScrollView的背景色，可自行选择
+        /*int webTopPadding = DensityUtils.dp2px(GankDetailActivity.this, 40) + ScreenUtils.getStatusHeight(GankDetailActivity.this);
+//        WebView.LayoutParams lp = new WebView.LayoutParams(WebView.LayoutParams.MATCH_PARENT,webTopPadding);
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) mWbDetail.getLayoutParams();
+        mlp.topMargin = webTopPadding;
+        mWbDetail.setLayoutParams(mlp);*/
     }
 
     @Override

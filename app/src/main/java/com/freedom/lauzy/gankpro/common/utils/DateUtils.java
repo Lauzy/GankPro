@@ -28,6 +28,18 @@ public class DateUtils {
         return strs;
     }
 
+    public static String toPicDateName(long time) {
+        Date date = new Date(time);
+        String strs = "";
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd", Locale.CHINA);
+            strs = sdf.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strs;
+    }
+
     /**
      * 时间戳转换为时间格式
      * @param time 时间戳

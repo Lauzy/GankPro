@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
+import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PIC_DESC;
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
 
 /**
@@ -71,6 +72,7 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
                 Intent intent = new Intent(mContext, DailyActivity.class);
                 intent.putExtra(IMAGE_URL, item.getUrl());
                 intent.putExtra(PUBLISH_DATE, item.getPublishedAt());
+                intent.putExtra(PIC_DESC, item.getDesc());
                 if (Build.VERSION.SDK_INT >= 21) {
                     mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, v, "transitionImg").toBundle());
                 } else {

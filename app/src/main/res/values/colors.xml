@@ -15,9 +15,11 @@
 
     <color name="color_menu_black">#d9141414</color>
 
+    <color name="color_img_bg">#aa000000</color>
 
     <color name="color_title_white">#f0f0f0</color>
     <color name="color_transparent">#00000000</color>
+    <color name="color_wb_gray_white">#dbdbe2</color>
 
     <color name="color_android">#087915</color>
 </resources>

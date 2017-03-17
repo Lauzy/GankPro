@@ -5,7 +5,7 @@
     android:id="@+id/activity_img_beauty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_style_gray"
+    android:background="@color/color_img_bg"
     android:orientation="vertical"
     tools:context="com.freedom.lauzy.gankpro.ui.activity.ImgBeautyActivity">
 

@@ -38,6 +38,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
+import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PIC_DESC;
 import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
 
 public class DailyActivity extends BaseToolbarActivity {
@@ -67,10 +68,12 @@ public class DailyActivity extends BaseToolbarActivity {
     private DailyAdapter mAdapter;
     private DailyPresenter mDailyPresenter;
     private String mImgUrl;
+    private String mPicDesc;
 
     @Override
     protected void loadData() {
         mImgUrl = getIntent().getStringExtra(IMAGE_URL);
+        mPicDesc = getIntent().getStringExtra(PIC_DESC);
 //        Bitmap img_data = getIntent().getParcelableExtra("img_data");
         /*CollectionEntityDao entityDao = GankApp.getGankApp().getDaoSession().getCollectionEntityDao();
         CollectionEntity entity = entityDao.queryBuilder().where(CollectionEntityDao.Properties.Id.eq(img_id)).build().list().get(0);*/
@@ -191,10 +194,10 @@ public class DailyActivity extends BaseToolbarActivity {
                 break;*/
             case R.id.img_title:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl), ActivityOptions
+                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc), ActivityOptions
                             .makeSceneTransitionAnimation(this, mImgTitle, "transitionImg").toBundle());
                 } else {
-                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl));
+                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc));
                 }
                 break;
         }
