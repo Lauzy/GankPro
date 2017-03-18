@@ -22,4 +22,7 @@
     <color name="color_wb_gray_white">#dbdbe2</color>
 
     <color name="color_android">#087915</color>
+
+    <color name="color_positive">#087766</color>
+    <color name="color_negative">#e24107</color>
 </resources>

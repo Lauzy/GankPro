@@ -1,11 +1,15 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,20 +20,20 @@ import android.widget.ProgressBar;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
+import com.freedom.lauzy.gankpro.common.utils.IntentUtils;
 import com.freedom.lauzy.gankpro.common.utils.ToastUtils;
 import com.freedom.lauzy.gankpro.function.utils.RxSavePic;
 import com.freedom.lauzy.gankpro.function.utils.SDCardUtils;
+import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.tbruyelle.rxpermissions.Permission;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 
 import butterknife.BindView;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.functions.Action1;
 
 public class ImgBeautyActivity extends BaseToolbarActivity {
@@ -95,6 +99,7 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -102,23 +107,55 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
                 onBackPressed();
                 break;
             case R.id.menu_save_pic:
-                mRxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        , Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Action1<Permission>() {
-                    @Override
-                    public void call(Permission permission) {
-                        if (permission.granted) {
-                            savePicture();
-                        } else if (permission.shouldShowRequestPermissionRationale) {
 
-                        } else {
-
-                        }
-                    }
-                });
+                /*reQuestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        , Manifest.permission.READ_EXTERNAL_STORAGE)//will emit 2 Permission objects*/
+                reQuestEachPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(new Action1<Permission>() {
+                            @Override
+                            public void call(Permission permission) {
+                                if (permission.granted) {
+                                    savePicture();
+                                } else if (permission.shouldShowRequestPermissionRationale) {
+                                    SnackBarUtils.shortSnackbar(findViewById(android.R.id.content)
+                                            , "您拒绝了权限，无法保存妹纸哦", Color.WHITE, Color.DKGRAY).show();
+                                } else {
+                                    gotoSetting();
+                                }
+                            }
+                        });
 
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void gotoSetting() {
+        AlertDialog alertDialog = new AlertDialog.Builder(ImgBeautyActivity.this)
+                .setMessage("当前应用缺少必要权限\n请点击“设置” - “权限”-打开所需权限。")
+                .setCancelable(true)
+                .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(IntentUtils.openSetting(ImgBeautyActivity.this));
+                    }
+                })
+                .setNegativeButton("取消",null)
+                .create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {                    //
+                ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setTextColor(ContextCompat.getColor(ImgBeautyActivity.this,
+                                R.color.color_positive));
+
+                ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE)
+                        .setTextColor(ContextCompat.getColor(ImgBeautyActivity.this,
+                                R.color.color_negative));
+
+            }
+        });
+        alertDialog.show();
     }
 
     private void savePicture() {
@@ -139,4 +176,5 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
                 });
         addSubscription(picSub);
     }
+
 }

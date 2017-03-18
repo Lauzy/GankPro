@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 
+import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.ButterKnife;
+import rx.Observable;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -57,6 +59,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initViews();
 
     protected abstract void loadData();
+
+    protected Observable<Permission> reQuestEachPermission(String... permissions){
+        return mRxPermissions.requestEach(permissions);
+    }
+
+    protected Observable<Boolean> reQuestPermission(String... permissions){
+        return mRxPermissions.request(permissions);
+    }
 
     /**
      * 若存在toolBar，可使用
@@ -119,5 +129,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }
+
     }
 }

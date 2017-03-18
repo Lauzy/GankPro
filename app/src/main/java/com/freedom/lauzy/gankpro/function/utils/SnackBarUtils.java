@@ -16,10 +16,10 @@ import com.freedom.lauzy.gankpro.R;
 @SuppressWarnings("all")
 public class SnackBarUtils {
 
-    public static final   int Info = 1;
-    public static final  int Confirm = 2;
-    public static final  int Warning = 3;
-    public static final  int Alert = 4;
+    public static final   int Info = 1; //蓝色背景
+    public static final  int Confirm = 2;//绿色背景
+    public static final  int Warning = 3;//橙色背景
+    public static final  int Alert = 4;//红色背景，黄色字体
 
 
     public static  int red = 0xfff44336;
@@ -35,7 +35,7 @@ public class SnackBarUtils {
      * @param backgroundColor
      * @return
      */
-    public static Snackbar ShortSnackbar(View view, String message, int messageColor, int backgroundColor){
+    public static Snackbar shortSnackbar(View view, String message, int messageColor, int backgroundColor){
         Snackbar snackbar = Snackbar.make(view,message, Snackbar.LENGTH_SHORT);
         setSnackbarColor(snackbar,messageColor,backgroundColor);
         return snackbar;
@@ -49,7 +49,7 @@ public class SnackBarUtils {
      * @param backgroundColor
      * @return
      */
-    public static Snackbar LongSnackbar(View view, String message, int messageColor, int backgroundColor){
+    public static Snackbar longSnackbar(View view, String message, int messageColor, int backgroundColor){
         Snackbar snackbar = Snackbar.make(view,message, Snackbar.LENGTH_LONG);
         setSnackbarColor(snackbar,messageColor,backgroundColor);
         return snackbar;
@@ -63,7 +63,7 @@ public class SnackBarUtils {
      * @param backgroundColor
      * @return
      */
-    public static Snackbar IndefiniteSnackbar(View view, String message,int duration,int messageColor, int backgroundColor){
+    public static Snackbar indefiniteSnackbar(View view, String message,int duration,int messageColor, int backgroundColor){
         Snackbar snackbar = Snackbar
                 .make(view,message, Snackbar.LENGTH_INDEFINITE)
                 .setDuration(duration);
@@ -78,7 +78,7 @@ public class SnackBarUtils {
      * @param type
      * @return
      */
-    public static Snackbar ShortSnackbar(View view, String message, int type){
+    public static Snackbar shortSnackbar(View view, String message, int type){
         Snackbar snackbar = Snackbar.make(view,message, Snackbar.LENGTH_SHORT);
         switchType(snackbar,type);
         return snackbar;
@@ -91,7 +91,7 @@ public class SnackBarUtils {
      * @param type
      * @return
      */
-    public static Snackbar LongSnackbar(View view, String message,int type){
+    public static Snackbar longSnackbar(View view, String message,int type){
         Snackbar snackbar = Snackbar.make(view,message, Snackbar.LENGTH_LONG);
         switchType(snackbar,type);
         return snackbar;
@@ -104,7 +104,7 @@ public class SnackBarUtils {
      * @param type
      * @return
      */
-    public static Snackbar IndefiniteSnackbar(View view, String message,int duration,int type){
+    public static Snackbar indefiniteSnackbar(View view, String message,int duration,int type){
         Snackbar snackbar = Snackbar.make(view,message, Snackbar.LENGTH_INDEFINITE).setDuration(duration);
         switchType(snackbar,type);
         return snackbar;
@@ -160,7 +160,7 @@ public class SnackBarUtils {
      * @param layoutId
      * @param index 新加布局在Snackbar中的位置
      */
-    public static void SnackbarAddView( Snackbar snackbar,int layoutId,int index) {
+    public static void snackbarAddView( Snackbar snackbar,int layoutId,int index) {
         View snackbarview = snackbar.getView();
         Snackbar.SnackbarLayout snackbarLayout=(Snackbar.SnackbarLayout)snackbarview;
 

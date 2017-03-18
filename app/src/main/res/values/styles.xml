@@ -24,6 +24,14 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/color_img_bg</item>
+        <item name="alertDialogTheme">@style/LyAlertDialogStyle</item>
+    </style>
+
+    <!--对话框主题样式-->
+    <style name="LyAlertDialogStyle"
+           parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <!--修改AlertDialog按钮的颜色-->
+        <item name="colorAccent">@color/color_positive</item>
     </style>
 
     <style name="TransparentText" parent="@android:style/TextAppearance">
@@ -45,5 +53,6 @@
     <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
     </style>
+
 
 </resources>
