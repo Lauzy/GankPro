@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="me.chkfung.meizhigank.ui.WebActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="me.chkfung.meizhigank.ui.WebActivity">
+
+    <!--设置第四个type为视频，暂不添加收藏
+    <item
+        android:id="@+id/menu_collection"
+        android:icon="@mipmap/icon_collection"
+        android:title="收藏"
+        app:showAsAction="always"/>-->
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@mipmap/icon_share"
+        android:title="分享"
+        app:showAsAction="always"/>
+
 
     <item
         android:id="@+id/menu_refresh"
         android:title="刷新"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/menu_copy"
         android:title="复制链接"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/menu_open_browser"
         android:title="从浏览器打开"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 </menu>

@@ -41,6 +41,7 @@
                 android:id="@+id/toolbar_daily"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
+                android:elevation="@dimen/dp_5"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways">
             </android.support.v7.widget.Toolbar>

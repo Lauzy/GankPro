@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+
+import com.tbruyelle.rxpermissions.RxPermissions;
+
 import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -21,6 +24,7 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private CompositeSubscription mCompositeSubscription;
+    protected RxPermissions mRxPermissions;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,10 +45,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }*/
         //禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //防止软键盘遮挡输入框
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(getLayoutResId());
         ButterKnife.bind(this);
+        mRxPermissions = new RxPermissions(this);
         initViews();
         loadData();
     }

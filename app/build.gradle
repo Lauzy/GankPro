@@ -52,4 +52,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.greenrobot:greendao:3.2.0'
 //    compile'org.greenrobot:greendao-generator:3.0.0'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
 }

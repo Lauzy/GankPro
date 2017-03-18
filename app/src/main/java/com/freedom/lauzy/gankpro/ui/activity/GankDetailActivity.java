@@ -91,12 +91,18 @@ public class GankDetailActivity extends BaseToolbarActivity {
             }
         });
 
-        mWbDetail.setWebViewClient(new WebViewClient(){
-            @Override
+        mWbDetail.setWebViewClient(new WebViewClient() {
+            /*@Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(view.getUrl());
+                mWbDetail.loadUrl(view.getUrl());
                 return true;
-            }
+            }*/
+
+            /*@Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }*/
 
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -104,6 +110,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
                 mToolbarSubtitle.setText(url);
             }
         });
+
     }
 
     @Override
@@ -142,5 +149,26 @@ public class GankDetailActivity extends BaseToolbarActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mWbDetail != null)
+            mWbDetail.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mWbDetail != null)
+            mWbDetail.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWbDetail != null)
+            mWbDetail.destroy();
     }
 }

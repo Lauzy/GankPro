@@ -195,7 +195,7 @@ public class DailyActivity extends BaseToolbarActivity {
             case R.id.img_title:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc), ActivityOptions
-                            .makeSceneTransitionAnimation(this, mImgTitle, "transitionImg").toBundle());
+                            .makeSceneTransitionAnimation(this, mImgTitle, "transitionDetailImg").toBundle());
                 } else {
                     startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc));
                 }

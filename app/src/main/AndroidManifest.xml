@@ -23,10 +23,10 @@
         </activity>
         <activity
             android:name=".ui.activity.DailyActivity"
-            android:label="@string/title_activity_daily"
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_daily">
         </activity>
-        <activity android:name=".ui.activity.GankDetailActivity">
+        <activity
+            android:name=".ui.activity.GankDetailActivity">
         </activity>
         <activity
             android:name=".ui.activity.ImgBeautyActivity"

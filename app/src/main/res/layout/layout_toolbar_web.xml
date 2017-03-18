@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorAccent"
+    android:elevation="@dimen/dp_5"
     app:layout_behavior="@string/toolbar_behavior"
     android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -14,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_style_gray"
-        android:elevation="@dimen/dp_2"
+        android:elevation="@dimen/dp_5"
         app:popupTheme="@style/ToolbarPopupTheme">
         <!--app:contentInsetStart="0dp"-->
         <LinearLayout

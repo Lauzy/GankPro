@@ -1,5 +1,6 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,12 +21,15 @@ import com.freedom.lauzy.gankpro.function.utils.RxSavePic;
 import com.freedom.lauzy.gankpro.function.utils.SDCardUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.tbruyelle.rxpermissions.Permission;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 
 import butterknife.BindView;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 public class ImgBeautyActivity extends BaseToolbarActivity {
@@ -58,7 +62,8 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_back);
         setSupportActionBar(mToolbarCommon);
         mToolbarCommon.setTitle("");
-        ViewCompat.setTransitionName(mImgBeauty, "transitionImg");
+        ViewCompat.setTransitionName(mImgBeauty, "transitionDetailImg");
+
     }
 
     @Override
@@ -97,7 +102,20 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
                 onBackPressed();
                 break;
             case R.id.menu_save_pic:
-                savePicture();
+                mRxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        , Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Action1<Permission>() {
+                    @Override
+                    public void call(Permission permission) {
+                        if (permission.granted) {
+                            savePicture();
+                        } else if (permission.shouldShowRequestPermissionRationale) {
+
+                        } else {
+
+                        }
+                    }
+                });
+
                 break;
         }
         return super.onOptionsItemSelected(item);
