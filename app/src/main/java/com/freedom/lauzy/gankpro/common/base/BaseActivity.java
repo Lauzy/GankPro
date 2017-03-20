@@ -1,12 +1,20 @@
 package com.freedom.lauzy.gankpro.common.base;
 
+import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 
 
+import com.freedom.lauzy.gankpro.common.utils.TransitionHelper;
 import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -129,6 +137,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }
+    }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    protected void transitionTo(Intent intent) {
+        final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, true);
+        ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                pairs);
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 }

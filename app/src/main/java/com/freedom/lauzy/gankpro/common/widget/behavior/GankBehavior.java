@@ -18,6 +18,7 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
     private GankBehaviorAnim mGankBehaviorAnim;
     private boolean isHide;
     private boolean isInit = true;
+    private boolean canScroll = true;
     //    private static final Interpolator INTERPOLATOR = new FastOutLinearInInterpolator();
 
 
@@ -42,20 +43,27 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-        if (Math.abs(dy) > 10) {
-            if (dy < 0) {
-                if (isHide) {
-                    mGankBehaviorAnim.showTitle();
-                    isHide = false;
-                }
-            } else if (dy > 0) {
-                if (!isHide) {
-                    mGankBehaviorAnim.hideTitle();
-                    isHide = true;
+        if (canScroll){
+            if (Math.abs(dy) > 10) {
+                if (dy < 0) {
+                    if (isHide) {
+                        mGankBehaviorAnim.showTitle();
+                        isHide = false;
+                    }
+                } else if (dy > 0) {
+                    if (!isHide) {
+                        mGankBehaviorAnim.hideTitle();
+                        isHide = true;
+                    }
                 }
             }
         }
     }
+
+    public void setCanScroll(boolean canScroll) {
+        this.canScroll = canScroll;
+    }
+
 
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {

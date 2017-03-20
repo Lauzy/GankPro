@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,12 +10,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -25,6 +29,7 @@ import com.freedom.lauzy.gankpro.common.utils.ToastUtils;
 import com.freedom.lauzy.gankpro.function.utils.RxSavePic;
 import com.freedom.lauzy.gankpro.function.utils.SDCardUtils;
 import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.tbruyelle.rxpermissions.Permission;
@@ -66,8 +71,15 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_back);
         setSupportActionBar(mToolbarCommon);
         mToolbarCommon.setTitle("");
-        ViewCompat.setTransitionName(mImgBeauty, "transitionDetailImg");
+        ViewCompat.setTransitionName(mImgBeauty, getString(R.string.string_img_share_elements));
+        setupWindowAnimations();
+    }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupWindowAnimations() {
+        getWindow().setEnterTransition(TransitionUtils.buildSlideEnterTrans(new BounceInterpolator()));
+        getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new LinearInterpolator()));
+        getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new LinearInterpolator()));
     }
 
     @Override

@@ -1,11 +1,12 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
+import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,16 +16,20 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
+import com.freedom.lauzy.gankpro.common.utils.TransitionHelper;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
 import com.freedom.lauzy.gankpro.function.utils.DateUtils;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 import com.freedom.lauzy.gankpro.function.view.DailyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.DailyPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.DailyAdapter;
@@ -37,9 +42,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
-import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PIC_DESC;
-import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.IMAGE_URL;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.PIC_DESC;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.PUBLISH_DATE;
+
 
 public class DailyActivity extends BaseToolbarActivity {
 
@@ -129,8 +135,8 @@ public class DailyActivity extends BaseToolbarActivity {
     @Override
     protected void initViews() {
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
+        setupWindowAnimations();
         initTitle();
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvDaily.setLayoutManager(linearLayoutManager);
@@ -166,6 +172,13 @@ public class DailyActivity extends BaseToolbarActivity {
         mRvDaily.addItemDecoration(new DailyItemDecoration(DailyActivity.this, mItemBeen));
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupWindowAnimations() {
+        getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new BounceInterpolator()));
+        getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new AccelerateDecelerateInterpolator()));
+        getWindow().setReturnTransition(TransitionUtils.buildExplodeExitAnim(new AnticipateInterpolator()));
+    }
+
     private void initTitle() {
         mPublishDate = (Date) getIntent().getSerializableExtra(PUBLISH_DATE);
         mToolbarLayout.setTitle(DateUtils.toDate(mPublishDate));
@@ -193,12 +206,18 @@ public class DailyActivity extends BaseToolbarActivity {
               /*  Toast.makeText(this, "hh", Toast.LENGTH_SHORT).show();
                 break;*/
             case R.id.img_title:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc), ActivityOptions
+
+
+                Intent intent = ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc);
+                final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(DailyActivity.this, false, new
+                        Pair<>(mImgTitle, getString(R.string.string_img_share_elements)));
+                TransitionUtils.transitionTo(DailyActivity.this, intent, pairs);
+               /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions
                             .makeSceneTransitionAnimation(this, mImgTitle, "transitionDetailImg").toBundle());
                 } else {
-                    startActivity(ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc));
-                }
+                    startActivity(intent);
+                }*/
                 break;
         }
     }

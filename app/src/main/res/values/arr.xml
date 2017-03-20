@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="CategoryArr">
+        <item>@string/category_ios</item>
+        <item>@string/category_html</item>
+        <item>@string/category_video</item>
+        <item>@string/category_expand</item>
+        <item>@string/category_recommend</item>
+        <item>@string/category_app</item>
+    </string-array>
+</resources>

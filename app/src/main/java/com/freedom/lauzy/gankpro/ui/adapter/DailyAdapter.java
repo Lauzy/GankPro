@@ -1,5 +1,6 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -15,12 +16,16 @@ import android.widget.TextView;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 import com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.BOUNCE_ENTER_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ENTER_TYPE;
 
 /**
  * daily
@@ -70,7 +75,9 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GankDetailActivity.class);
                 intent.putExtra(ValueConstants.GANK_DETAIL, itemBean.getUrl());
-                mContext.startActivity(intent);
+//                mContext.startActivity(intent);
+                intent.putExtra(ENTER_TYPE, BOUNCE_ENTER_TYPE);
+                TransitionUtils.transitionTo((Activity) mContext,intent);
             }
         };
     }

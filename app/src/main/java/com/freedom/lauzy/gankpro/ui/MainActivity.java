@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
+import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -75,8 +77,10 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
         switch (item.getItemId()) {
             case R.id.menu_main_item_beauty:
+//                mToolbar.setVisibility(View.VISIBLE);
                 mTxtToolbarTitle.setText("妹纸");
                 mGankBehavior.show();
+                mGankBehavior.setCanScroll(true);
 //                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
@@ -87,8 +91,10 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_android:
+//                mToolbar.setVisibility(View.VISIBLE);
                 mGankBehavior.show();
                 mTxtToolbarTitle.setText("安卓");
+                mGankBehavior.setCanScroll(true);
 //                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
                 if (mAndroidFragment == null) {
                     mAndroidFragment = new AndroidFragment();
@@ -99,11 +105,14 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_category:
+//                mToolbar.setVisibility(View.GONE);
                 mGankBehavior.show();
                 mTxtToolbarTitle.setText("分类");
+                mGankBehavior.setCanScroll(false);
 //                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
+//                    mCategoryFragment = CategoryFragment.newInstance(mBottomBehavior);
                     transaction.add(R.id.main_frame, mCategoryFragment);
                     mFragments.add(mCategoryFragment);
                 } else {
@@ -111,8 +120,10 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_mine:
+//                mToolbar.setVisibility(View.VISIBLE);
                 mGankBehavior.show();
                 mTxtToolbarTitle.setText("我的");
+                mGankBehavior.setCanScroll(true);
 //                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();

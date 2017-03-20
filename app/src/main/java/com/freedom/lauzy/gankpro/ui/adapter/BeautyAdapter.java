@@ -1,36 +1,28 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v4.util.Pair;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.freedom.lauzy.gankpro.R;
-import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
+import com.freedom.lauzy.gankpro.common.utils.TransitionHelper;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 import com.freedom.lauzy.gankpro.ui.activity.DailyActivity;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.List;
-import java.util.Random;
 
-import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.IMAGE_URL;
-import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PIC_DESC;
-import static com.freedom.lauzy.gankpro.function.ValueConstants.ImageValue.PUBLISH_DATE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.IMAGE_URL;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.PIC_DESC;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.PUBLISH_DATE;
 
 /**
  * BaseQuickAdapter方便添加header，footer，emptyView，以及加载更多
@@ -73,11 +65,16 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
                 intent.putExtra(IMAGE_URL, item.getUrl());
                 intent.putExtra(PUBLISH_DATE, item.getPublishedAt());
                 intent.putExtra(PIC_DESC, item.getDesc());
-                if (Build.VERSION.SDK_INT >= 21) {
+
+                final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(((Activity) mContext), false, new
+                        Pair<>(helper.getView(R.id.img_beauty_item), "transitionImg"));
+                TransitionUtils.transitionTo(((Activity) mContext), intent, pairs);
+
+               /* if (Build.VERSION.SDK_INT >= 21) {
                     mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, v, "transitionImg").toBundle());
                 } else {
                     mContext.startActivity(intent);
-                }
+                }*/
             }
         });
     }

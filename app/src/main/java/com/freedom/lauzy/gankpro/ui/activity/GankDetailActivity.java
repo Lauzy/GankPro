@@ -1,21 +1,22 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -23,12 +24,15 @@ import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
-import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
-import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 
 import butterknife.BindView;
+
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.BOUNCE_ENTER_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ENTER_TYPE;
 
 public class GankDetailActivity extends BaseToolbarActivity {
 
@@ -52,6 +56,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
 
     @Override
     protected void initViews() {
+        setupWindowAnimations();
         String detailUrl = getIntent().getStringExtra(ValueConstants.GANK_DETAIL);
         mWbDetail.loadUrl(detailUrl);
 //        mToolbarSubtitle.setText(detailUrl);
@@ -64,6 +69,20 @@ public class GankDetailActivity extends BaseToolbarActivity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) mWbDetail.getLayoutParams();
         mlp.topMargin = webTopPadding;
         mWbDetail.setLayoutParams(mlp);*/
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupWindowAnimations() {
+        /*getWindow().setEnterTransition(TransitionUtils.buildEnterTransition());
+        getWindow().setExitTransition(TransitionUtils.buildReturnTransition());*/
+        int enterType = getIntent().getIntExtra(ENTER_TYPE, -1);
+        if (enterType == BOUNCE_ENTER_TYPE){
+            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new BounceInterpolator()));
+//            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new BounceInterpolator()));
+        }else if (enterType == ACCELERATE_DECELERATE_ENTER_TYPE){
+            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new AccelerateDecelerateInterpolator()));
+//            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new AccelerateDecelerateInterpolator()));
+        }
     }
 
     @Override

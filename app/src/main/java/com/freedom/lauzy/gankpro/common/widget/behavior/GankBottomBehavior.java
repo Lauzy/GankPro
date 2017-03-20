@@ -7,11 +7,13 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
+
 /**
  * Created by Lauzy on 2017/3/14.
  */
 
-public class GankBottomBehavior extends CoordinatorLayout.Behavior<View> {
+public class GankBottomBehavior extends CoordinatorLayout.Behavior<View>  implements Serializable{
 
     private static final String LYTAG = GankBottomBehavior.class.getSimpleName();
     private GankBottomBehaviorAnim mGankBottomBehaviorAnim;

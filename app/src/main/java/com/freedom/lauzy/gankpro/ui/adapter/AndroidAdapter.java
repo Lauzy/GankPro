@@ -1,5 +1,6 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -16,6 +17,7 @@ import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.CommonAdapte
 import com.freedom.lauzy.gankpro.common.widget.recyclerview.adapter.RvViewHolder;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 import com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity;
 
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
  */
 
 //public class AndroidAdapter extends CommonAdapter<GankData.ResultsBean>{
-public class AndroidAdapter extends BaseQuickAdapter<GankData.ResultsBean,BaseViewHolder> {
+public class AndroidAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseViewHolder> {
 
     public AndroidAdapter(int layoutResId, List<GankData.ResultsBean> data) {
         super(layoutResId, data);
@@ -58,7 +60,9 @@ public class AndroidAdapter extends BaseQuickAdapter<GankData.ResultsBean,BaseVi
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GankDetailActivity.class);
                 intent.putExtra(ValueConstants.GANK_DETAIL, item.getUrl());
-                mContext.startActivity(intent);
+                intent.putExtra(ValueConstants.ImageValue.ENTER_TYPE,ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE);
+//                mContext.startActivity(intent);
+                TransitionUtils.transitionTo(((Activity) mContext), intent);
             }
         };
     }
