@@ -32,7 +32,7 @@ public class GankBottomBehaviorAnim {
     }
 
     public void showBottom() {
-//        ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mBottomView.getY() - mBottomView.getHeight());
+//        ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mBottomView.getY() - mBottomView.getHeight());//Y值会发生变化，采用全局OriginalY
         ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mOriginalY);
         va.setDuration(400);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

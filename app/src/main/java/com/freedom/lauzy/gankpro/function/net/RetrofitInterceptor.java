@@ -48,7 +48,7 @@ public class RetrofitInterceptor implements Interceptor {
 //                    Log.d("OkHttp", "net work is useless, response intercept");
             response = response.newBuilder()
                     //覆盖服务器响应头的Cache-Control,用我们自己的,因为服务器响应回来的可能不支持缓存
-                    .header("Cache-Control", "public,max-age=" + mMaxCacheTime)
+                    .header("Cache-Control", "public, max-age=" + mMaxCacheTime)
                     .removeHeader("Pragma")
                     .build();
         } else {

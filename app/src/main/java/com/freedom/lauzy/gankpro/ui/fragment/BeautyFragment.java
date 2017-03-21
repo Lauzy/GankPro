@@ -1,6 +1,8 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.function.BehaviorListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.view.BeautyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.BeautyPresenter;
@@ -47,7 +50,12 @@ public class BeautyFragment extends BaseFragment {
         staggeredGridLayoutManager.setAutoMeasureEnabled(true);
         staggeredGridLayoutManager.setItemPrefetchEnabled(false);*/
 //        mBeautyRecyclerView.setHasFixedSize(true);
+        initRecyclerView();
+//        mBehaviorListener.setBehaviorCanScroll(false);
+        mBeautyRecyclerView.setNestedScrollingEnabled(false);
+    }
 
+    private void initRecyclerView() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity, 2);
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -113,9 +121,10 @@ public class BeautyFragment extends BaseFragment {
                     mBeautyRecyclerView.setNestedScrollingEnabled(false);
                     mAdapter.setEmptyView(mEmptyView);
                 } else {
-                    mBeautyRecyclerView.setNestedScrollingEnabled(true);
                     mResultsBeen.addAll(data);
                     mAdapter.notifyDataSetChanged();
+//                    mBehaviorListener.setBehaviorCanScroll(true);
+                    mBeautyRecyclerView.setNestedScrollingEnabled(true);
                 }
                 mBeautyRefreshLayout.setRefreshing(false);
             }

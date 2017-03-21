@@ -14,9 +14,9 @@ import static com.freedom.lauzy.gankpro.function.LoadData.LOAD_MORE_DATA_TYPE;
 import static com.freedom.lauzy.gankpro.function.LoadData.REFRESH_DATA_TYPE;
 
 /**
+ * categoryPresenter代替
  * Created by Lauzy on 2017/2/4.
  */
-
 public class AndroidPresenter extends BasePresenter<AndroidView> {
     private AndroidModel mAndroidModel;
     private LoadData GET_DATA_TYPE;

@@ -72,7 +72,7 @@ public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
-        if (dyConsumed < 0) {
+        /*if (dyConsumed < 0) {
             if (isHide) {
                 mGankFabBehaviorAnim.showFab();
                 isHide = false;
@@ -82,13 +82,9 @@ public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
                 mGankFabBehaviorAnim.hideFab();
                 isHide = true;
             }
-        }
+        }*/
     }
 
-    @Override
-    public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
-        return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
-    }
 
     public void show() {
         if (mGankFabBehaviorAnim !=null){

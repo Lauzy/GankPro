@@ -63,6 +63,11 @@ public class CategoryChildFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        initRecyclerView();
+        mRvCategory.setNestedScrollingEnabled(false);
+    }
+
+    private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvCategory.setLayoutManager(linearLayoutManager);
@@ -117,6 +122,7 @@ public class CategoryChildFragment extends BaseFragment {
                 if (data != null) {
                     mResultsBeen.addAll(data);
                     mAdapter.notifyDataSetChanged();
+                    mRvCategory.setNestedScrollingEnabled(true);
                 } else {
                     mAdapter.setEmptyView(mEmptyView);
 //                    mRvAndroid.addEmptyView(mEmptyView);

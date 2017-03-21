@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,7 @@ import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageV
 
 public class GankDetailActivity extends BaseToolbarActivity {
 
+    private static final String LYTAG = GankDetailActivity.class.getSimpleName();
     @BindView(R.id.wb_detail)
     LyWebView mWbDetail;
     @BindView(R.id.toolbar_title)
@@ -63,6 +66,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
     protected void initViews() {
         setupWindowAnimations();
         String detailUrl = getIntent().getStringExtra(ValueConstants.GANK_DETAIL);
+        Log.i(LYTAG, "WebView Url is: " + detailUrl);
         mWbDetail.loadUrl(detailUrl);
 //        mToolbarSubtitle.setText(detailUrl);
         mToolbarCommon.setTitle("");
@@ -85,10 +89,10 @@ public class GankDetailActivity extends BaseToolbarActivity {
         getWindow().setExitTransition(TransitionUtils.buildReturnTransition());*/
         int enterType = getIntent().getIntExtra(ENTER_TYPE, -1);
         if (enterType == BOUNCE_ENTER_TYPE){
-            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new BounceInterpolator()));
+            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
 //            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new BounceInterpolator()));
         }else if (enterType == ACCELERATE_DECELERATE_ENTER_TYPE){
-            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new AccelerateDecelerateInterpolator()));
+            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
 //            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new AccelerateDecelerateInterpolator()));
         }
     }

@@ -35,16 +35,21 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
         return super.layoutDependsOn(parent, child, dependency);
     }
 
+
     //判断垂直滑动
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
         return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
+    private int mY;
+
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-        if (canScroll){
-            if (Math.abs(dy) > 10) {
+
+        if (canScroll) {
+            mY += dy;
+            if (Math.abs(dy) > 10 || Math.abs(mY) > 50) {
                 if (dy < 0) {
                     if (isHide) {
                         mGankBehaviorAnim.showTitle();
@@ -56,6 +61,10 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
                         isHide = true;
                     }
                 }
+                /*if (child.getY() >= 0 || Math.abs(child.getY()) <= child.getHeight()) {
+                    mY = 0;
+                }*/
+                mY = 0;
             }
         }
     }

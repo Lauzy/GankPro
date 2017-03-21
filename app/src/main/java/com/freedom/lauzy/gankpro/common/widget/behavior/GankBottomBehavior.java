@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Created by Lauzy on 2017/3/14.
  */
 
-public class GankBottomBehavior extends CoordinatorLayout.Behavior<View>  implements Serializable{
+public class GankBottomBehavior extends CoordinatorLayout.Behavior<View> implements Serializable {
 
     private static final String LYTAG = GankBottomBehavior.class.getSimpleName();
     private GankBottomBehaviorAnim mGankBottomBehaviorAnim;
@@ -47,42 +47,39 @@ public class GankBottomBehavior extends CoordinatorLayout.Behavior<View>  implem
         return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
+    private int mY;
+
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
 
-        if (Math.abs(dy) > 10){
-
-            if (dy < 0) {
-            /*if (mGankBehaviorAnim.getCurrentState() == GankBehaviorAnim.STATE_HIDE) {
-                mGankBehaviorAnim.showTitle();
-                mGankBehaviorAnim.setCurrentState(GankBehaviorAnim.STATE_SHOW);
-            }*/
-                if (isHide) {
-                    mGankBottomBehaviorAnim.showBottom();
-                    isHide = false;
+        if (canScroll){
+            mY += dy;//总滑动距离超过指定值后，即便当前滑动距离<10，也实现滑动
+            if (Math.abs(dy) > 10 || Math.abs(mY) > 50) {
+                if (dy < 0) {
+                    if (isHide) {
+                        mGankBottomBehaviorAnim.showBottom();
+                        isHide = false;
+                    }
+                } else if (dy > 0) {
+                    if (!isHide) {
+                        mGankBottomBehaviorAnim.hideBottom();
+                        isHide = true;
+                    }
                 }
-            } else if (dy > 0) {
-            /*if (mGankBehaviorAnim.getCurrentState() == GankBehaviorAnim.STATE_SHOW){
-                mGankBehaviorAnim.hideTitle();
-                mGankBehaviorAnim.setCurrentState(GankBehaviorAnim.STATE_HIDE);
-            }*/
-                if (!isHide) {
-                    mGankBottomBehaviorAnim.hideBottom();
-                    isHide = true;
-                }
+                mY = 0;////总滑动距离重置0
             }
         }
     }
 
     public void show() {
-        if (mGankBottomBehaviorAnim !=null){
+        if (mGankBottomBehaviorAnim != null) {
             isHide = false;
             mGankBottomBehaviorAnim.showBottom();
         }
     }
 
     public void hide() {
-        if (mGankBottomBehaviorAnim !=null){
+        if (mGankBottomBehaviorAnim != null) {
             isHide = true;
             mGankBottomBehaviorAnim.hideBottom();
         }
@@ -100,4 +97,8 @@ public class GankBottomBehavior extends CoordinatorLayout.Behavior<View>  implem
         return (GankBottomBehavior) behavior;
     }
 
+    private boolean canScroll = true;
+    public void setCanScroll(boolean canScroll) {
+        this.canScroll = canScroll;
+    }
 }

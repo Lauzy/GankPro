@@ -1,5 +1,8 @@
 package com.freedom.lauzy.gankpro.model;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 import com.freedom.lauzy.gankpro.function.net.LySubscriber;
@@ -11,8 +14,25 @@ import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
  */
 
 public class CategoryGankModel {
+    private static final String LYTAG = CategoryGankModel.class.getSimpleName();
+    private Context mContext;
+
+    public CategoryGankModel(Context context) {
+        mContext = context;
+    }
+
+    public CategoryGankModel(){
+
+    }
+
     public void getCategoryGankData(String type, int page, final OnResponse<GankData> response) {
-        ApiFactory.getInstance().getGankData(new LySubscriber<GankData>() {
+        ApiFactory.getInstance().getGankData(new LySubscriber<GankData>(mContext) {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
             @Override
             public void onNext(GankData o) {
                 if (o == null) {

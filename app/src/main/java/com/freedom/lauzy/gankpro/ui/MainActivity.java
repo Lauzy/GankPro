@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -15,6 +14,7 @@ import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
+import com.freedom.lauzy.gankpro.function.BehaviorListener;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -25,7 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseToolbarActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseToolbarActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     //    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.bottom_main_navigation)
@@ -43,6 +43,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     private AndroidFragment mAndroidFragment;
     private MineFragment mMineFragment;
     private GankBehavior mGankBehavior;
+    private GankBottomBehavior mGankBottomBehavior;
 
     @Override
     protected int getLayoutResId() {
@@ -56,6 +57,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     @Override
     protected void initViews() {
         mGankBehavior = GankBehavior.from(mToolbar);
+        mGankBottomBehavior = GankBottomBehavior.from(mBottomMainNavigation);
 //        mGankBehavior.show();
 //        setStatusColor(R.color.colorPrimaryDark);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
@@ -65,7 +67,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);*/
         setSupportActionBar(mToolbar);
         mTxtToolbarTitle.setText("妹纸");
-
     }
 
     @Override
@@ -145,4 +146,10 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
             transaction.hide(fragment);
         }
     }
+
+   /* @Override
+    public void setBehaviorCanScroll(boolean canScroll) {
+        mGankBehavior.setCanScroll(canScroll);
+        mGankBottomBehavior.setCanScroll(canScroll);
+    }*/
 }

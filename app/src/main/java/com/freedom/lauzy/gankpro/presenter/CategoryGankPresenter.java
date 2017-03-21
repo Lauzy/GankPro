@@ -1,5 +1,7 @@
 package com.freedom.lauzy.gankpro.presenter;
 
+import android.content.Context;
+
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
 import com.freedom.lauzy.gankpro.function.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
