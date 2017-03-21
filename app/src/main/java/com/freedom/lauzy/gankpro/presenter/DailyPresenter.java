@@ -3,7 +3,7 @@ package com.freedom.lauzy.gankpro.presenter;
 import android.util.Log;
 
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
-import com.freedom.lauzy.gankpro.function.LoadData;
+import com.freedom.lauzy.gankpro.function.constants.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.DailyData;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
 import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;

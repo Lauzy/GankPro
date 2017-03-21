@@ -1,9 +1,7 @@
 package com.freedom.lauzy.gankpro.presenter;
 
-import android.content.Context;
-
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
-import com.freedom.lauzy.gankpro.function.LoadData;
+import com.freedom.lauzy.gankpro.function.constants.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
 import com.freedom.lauzy.gankpro.model.CategoryGankModel;
@@ -11,9 +9,9 @@ import com.freedom.lauzy.gankpro.view.CategoryGankView;
 
 import java.util.List;
 
-import static com.freedom.lauzy.gankpro.function.LoadData.INIT_DATA_TYPE;
-import static com.freedom.lauzy.gankpro.function.LoadData.LOAD_MORE_DATA_TYPE;
-import static com.freedom.lauzy.gankpro.function.LoadData.REFRESH_DATA_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.LoadData.INIT_DATA_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.LoadData.LOAD_MORE_DATA_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.LoadData.REFRESH_DATA_TYPE;
 
 /**
  * 分类Presenter

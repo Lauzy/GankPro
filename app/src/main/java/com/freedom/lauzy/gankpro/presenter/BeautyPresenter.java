@@ -1,7 +1,7 @@
 package com.freedom.lauzy.gankpro.presenter;
 
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
-import com.freedom.lauzy.gankpro.function.LoadData;
+import com.freedom.lauzy.gankpro.function.constants.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
 import com.freedom.lauzy.gankpro.model.BeautyModel;
@@ -9,9 +9,9 @@ import com.freedom.lauzy.gankpro.view.BeautyView;
 
 import java.util.List;
 
-import static com.freedom.lauzy.gankpro.function.LoadData.INIT_DATA_TYPE;
-import static com.freedom.lauzy.gankpro.function.LoadData.LOAD_MORE_DATA_TYPE;
-import static com.freedom.lauzy.gankpro.function.LoadData.REFRESH_DATA_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.LoadData.INIT_DATA_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.LoadData.LOAD_MORE_DATA_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.LoadData.REFRESH_DATA_TYPE;
 
 /**
  * Created by Lauzy on 2017/1/20.

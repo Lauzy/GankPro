@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -113,7 +112,7 @@ public class GankBehavior extends CoordinatorLayout.Behavior<View> {
         }
         CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         if (!(behavior instanceof GankBehavior)) {
-            throw new IllegalArgumentException("The view is not associated with ByeBurgerBehavior");
+            throw new IllegalArgumentException("The view is not associated with GankBehavior");
         }
         return (GankBehavior) behavior;
     }

@@ -62,7 +62,7 @@ public class FabBehavior extends FloatingActionButton.Behavior {
         }
         CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         if (!(behavior instanceof FabBehavior)) {
-            throw new IllegalArgumentException("The view is not associated with ScaleDownShowBehavior");
+            throw new IllegalArgumentException("The view is not associated with FabBehavior");
         }
         return (FabBehavior) behavior;
     }

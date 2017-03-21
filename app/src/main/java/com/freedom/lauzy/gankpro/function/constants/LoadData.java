@@ -1,4 +1,4 @@
-package com.freedom.lauzy.gankpro.function;
+package com.freedom.lauzy.gankpro.function.constants;
 
 /**
  * 获取数据类型

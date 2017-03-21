@@ -16,28 +16,28 @@ public class GankBehaviorAnim {
     }
 
     public void hideTitle() {
-        ValueAnimator va = ValueAnimator.ofFloat(mHeadView.getY(), -mHeadView.getHeight());
-        va.setDuration(400);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        ValueAnimator animator = ValueAnimator.ofFloat(mHeadView.getY(), -mHeadView.getHeight());
+        animator.setDuration(400);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mHeadView.setY((Float) valueAnimator.getAnimatedValue());
             }
         });
-        va.start();
+        animator.start();
     }
 
     public void showTitle() {
 
-        ValueAnimator va = ValueAnimator.ofFloat(mHeadView.getY(), 0);
-        va.setDuration(400);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        ValueAnimator animator = ValueAnimator.ofFloat(mHeadView.getY(), 0);
+        animator.setDuration(400);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mHeadView.setY((Float) valueAnimator.getAnimatedValue());
             }
         });
-        va.start();
+        animator.start();
     }
 
 }

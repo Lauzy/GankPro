@@ -8,27 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Lauzy on 2017/3/15.
+ * Created by Lauzy on 2017/3/21.
  */
 
-public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
+public class GankFabVertialBehavior extends CoordinatorLayout.Behavior<View> {
 
-    private GankFabBehaviorAnim mGankFabBehaviorAnim;
-    private boolean isHide;
-    private boolean isInit = true;
-    //    private static final Interpolator INTERPOLATOR = new FastOutLinearInInterpolator();
-
-
-    public GankFabBehavior(Context context, AttributeSet attrs) {
+    public GankFabVertialBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        if (isInit) {
-            mGankFabBehaviorAnim = new GankFabBehaviorAnim(child);
-            isInit = false;
-        }
+//        mGankFabBehaviorAnim = new GankFabBehaviorAnim(child);
         return super.layoutDependsOn(parent, child, dependency);
     }
 
@@ -40,21 +31,7 @@ public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-        /*if (Math.abs(dy) > 2){
-            if (dy < 0) {
-                if (isHide) {
-                    mGankFabBehaviorAnim.showFab();
-                    isHide = false;
-                }
-            } else if (dy > 0) {
-                if (!isHide) {
-                    mGankFabBehaviorAnim.hideFab();
-                    isHide = true;
-                }
-            }
-        }*/
-
-        if (dy < 0) {
+        /*if (dy < 0) {
             if (isHide) {
                 mGankFabBehaviorAnim.showFab();
                 isHide = false;
@@ -64,38 +41,21 @@ public class GankFabBehavior extends CoordinatorLayout.Behavior<View> {
                 mGankFabBehaviorAnim.hideFab();
                 isHide = true;
             }
-        }
+        }*/
     }
 
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
-        /*if (dyConsumed < 0) {
-            if (isHide) {
-                mGankFabBehaviorAnim.showFab();
-                isHide = false;
-            }
-        } else if (dyConsumed > 0) {
-            if (!isHide) {
-                mGankFabBehaviorAnim.hideFab();
-                isHide = true;
-            }
-        }*/
     }
 
 
     public void show() {
-        if (mGankFabBehaviorAnim !=null){
-            isHide = false;
-            mGankFabBehaviorAnim.showFab();
-        }
+
     }
 
     public void hide() {
-        if (mGankFabBehaviorAnim !=null){
-            isHide = true;
-            mGankFabBehaviorAnim.hideFab();
-        }
+
     }
 
     public static GankFabBehavior from(View view) {

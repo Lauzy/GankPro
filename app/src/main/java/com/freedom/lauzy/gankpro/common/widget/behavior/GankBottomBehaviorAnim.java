@@ -20,28 +20,28 @@ public class GankBottomBehaviorAnim {
 
     public void hideBottom() {
 //        ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mBottomView.getY() + mBottomView.getHeight());
-        ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mOriginalY + mBottomView.getHeight());
-        va.setDuration(400);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        ValueAnimator animator = ValueAnimator.ofFloat(mBottomView.getY(), mOriginalY + mBottomView.getHeight());
+        animator.setDuration(400);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mBottomView.setY((Float) valueAnimator.getAnimatedValue());
             }
         });
-        va.start();
+        animator.start();
     }
 
     public void showBottom() {
 //        ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mBottomView.getY() - mBottomView.getHeight());//Y值会发生变化，采用全局OriginalY
-        ValueAnimator va = ValueAnimator.ofFloat(mBottomView.getY(), mOriginalY);
-        va.setDuration(400);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        ValueAnimator animator = ValueAnimator.ofFloat(mBottomView.getY(), mOriginalY);
+        animator.setDuration(400);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mBottomView.setY((Float) valueAnimator.getAnimatedValue());
             }
         });
-        va.start();
+        animator.start();
     }
 
 }
