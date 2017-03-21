@@ -19,12 +19,14 @@ import android.view.animation.BounceInterpolator;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
+import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 
@@ -48,6 +50,9 @@ public class GankDetailActivity extends BaseToolbarActivity {
     Toolbar mToolbarCommon;
     @BindView(R.id.nsv_web)
     NestedScrollView mNsvWeb;
+    @BindView(R.id.tool_web_layout)
+    LinearLayout mToolWebLayout;
+    private GankBehavior mGankBehavior;
 
     @Override
     protected int getLayoutResId() {
@@ -69,6 +74,9 @@ public class GankDetailActivity extends BaseToolbarActivity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) mWbDetail.getLayoutParams();
         mlp.topMargin = webTopPadding;
         mWbDetail.setLayoutParams(mlp);*/
+
+        mGankBehavior = GankBehavior.from(mToolWebLayout);
+        mGankBehavior.setCanScroll(false);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -96,6 +104,10 @@ public class GankDetailActivity extends BaseToolbarActivity {
                     mWebProgressbar.setVisibility(View.GONE);
                 else
                     mWebProgressbar.setVisibility(View.VISIBLE);
+
+                if (newProgress >= 90){//加载到90%设置可滑动
+                    mGankBehavior.setCanScroll(true);
+                }
             }
 
             @Override
