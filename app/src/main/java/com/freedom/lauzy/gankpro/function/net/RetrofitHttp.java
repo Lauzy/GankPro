@@ -40,7 +40,7 @@ public class RetrofitHttp {
 
     //cache
     private boolean isUseCache;
-    private int maxCacheTime = 60;
+    private int maxCacheTime = 500;
 
     public void setMaxCacheTime(int maxCacheTime) {
         this.maxCacheTime = maxCacheTime;

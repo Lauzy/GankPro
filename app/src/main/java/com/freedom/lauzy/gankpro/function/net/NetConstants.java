@@ -9,5 +9,5 @@ class NetConstants {
     static final String BASE_URL = "http://gank.io/api/";
     static final String GANK_URL = "data/";
 
-    static final int defaultSize = 10;
+    static final int defaultSize = 15;
 }

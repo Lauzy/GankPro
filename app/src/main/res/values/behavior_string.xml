@@ -3,5 +3,6 @@
     <!--<string name="toolbar_behavior">com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior</string>-->
     <string name="toolbar_behavior">com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior</string>
     <string name="fab_behavior">com.freedom.lauzy.gankpro.common.widget.behavior.GankFabBehavior</string>
+    <string name="fab_vertical_behavior">com.freedom.lauzy.gankpro.common.widget.behavior.GankFabVerticalBehavior</string>
     <string name="bottom_behavior">com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior</string>
 </resources>

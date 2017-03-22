@@ -1,6 +1,5 @@
 package com.freedom.lauzy.gankpro.common.widget.behavior;
 
-import android.animation.ValueAnimator;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -54,7 +53,7 @@ public class GankFabBehaviorAnim {
     }
 
     public void showFab() {
-        ValueAnimator anim = ValueAnimator.ofFloat(mFabView.getY(), 1);
+        /*ValueAnimator anim = ValueAnimator.ofFloat(mFabView.getY(), 1);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -65,7 +64,7 @@ public class GankFabBehaviorAnim {
             }
         });
         anim.setDuration(300);
-        anim.start();
+        anim.start();*/
 
 
         ViewCompat.animate(mFabView).scaleX(1f).scaleY(1f)

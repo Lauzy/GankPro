@@ -4,13 +4,14 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="me.chkfung.meizhigank.ui.WebActivity">
 
-    <!--设置第四个type为视频，暂不添加收藏
+    <!--设置第四个type为视频，暂不添加收藏-->
     <item
         android:id="@+id/menu_collection"
         android:icon="@mipmap/icon_collection"
         android:title="收藏"
-        app:showAsAction="always"/>-->
+        app:showAsAction="always"/>
 
+    <!--分享-->
     <item
         android:id="@+id/menu_share"
         android:icon="@mipmap/icon_share"

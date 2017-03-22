@@ -1,5 +1,7 @@
 package com.freedom.lauzy.gankpro.presenter;
 
+import android.util.Log;
+
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
 import com.freedom.lauzy.gankpro.function.constants.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
@@ -19,6 +21,7 @@ import static com.freedom.lauzy.gankpro.function.constants.LoadData.REFRESH_DATA
 
 public class BeautyPresenter extends BasePresenter<BeautyView> {
 
+    private static final String LYTAG = BeautyPresenter.class.getSimpleName();
     private BeautyModel mBeautyModel;
     private LoadData GET_DATA_TYPE;
     private OnResponse<GankData> mGankDataResponse;
@@ -41,6 +44,9 @@ public class BeautyPresenter extends BasePresenter<BeautyView> {
                     getMvpBaseView().refreshRvData(gankDataResults);
                 } else if (GET_DATA_TYPE == LOAD_MORE_DATA_TYPE) {
                     getMvpBaseView().loadMoreRvData(gankDataResults);
+                }
+                if (gankDataResults == null || gankDataResults.isEmpty() || gankDataResults.size() == 0) {
+                    Log.i(LYTAG, "There is no beauty data");//可以设置添加View接口方法，以便更简话Activity，此处只设置了初始化，刷新，加载更多等。
                 }
             }
 

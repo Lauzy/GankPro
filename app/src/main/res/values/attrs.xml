@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UserSettingItemView">
+        <attr name="itemIcon" format="reference"/>
+        <attr name="itemName" format="reference|string"/>
+        <attr name="itemTip" format="reference|string"/>
+        <attr name="itemMore" format="boolean"/>
+    </declare-styleable>
+
+</resources>

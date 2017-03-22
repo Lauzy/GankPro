@@ -25,7 +25,7 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property ImgUrl = new Property(1, String.class, "imgUrl", false, "IMAGE_URL");
+        public final static Property DetailUrl = new Property(1, String.class, "detailUrl", false, "DETAIL_URL");
         public final static Property Date = new Property(2, String.class, "date", false, "DATE");
         public final static Property Desc = new Property(3, String.class, "desc", false, "DESC");
     }
@@ -44,7 +44,7 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"COLLECTION_ENTITY\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"IMAGE_URL\" TEXT," + // 1: imgUrl
+                "\"DETAIL_URL\" TEXT," + // 1: detailUrl
                 "\"DATE\" TEXT," + // 2: date
                 "\"DESC\" TEXT);"); // 3: desc
     }
@@ -64,9 +64,9 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
             stmt.bindLong(1, id);
         }
  
-        String imgUrl = entity.getImgUrl();
-        if (imgUrl != null) {
-            stmt.bindString(2, imgUrl);
+        String detailUrl = entity.getDetailUrl();
+        if (detailUrl != null) {
+            stmt.bindString(2, detailUrl);
         }
  
         String date = entity.getDate();
@@ -89,9 +89,9 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
             stmt.bindLong(1, id);
         }
  
-        String imgUrl = entity.getImgUrl();
-        if (imgUrl != null) {
-            stmt.bindString(2, imgUrl);
+        String detailUrl = entity.getDetailUrl();
+        if (detailUrl != null) {
+            stmt.bindString(2, detailUrl);
         }
  
         String date = entity.getDate();
@@ -114,7 +114,7 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
     public CollectionEntity readEntity(Cursor cursor, int offset) {
         CollectionEntity entity = new CollectionEntity( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // imgUrl
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // detailUrl
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // date
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // desc
         );
@@ -124,7 +124,7 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
     @Override
     public void readEntity(Cursor cursor, CollectionEntity entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setImgUrl(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDetailUrl(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setDesc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }

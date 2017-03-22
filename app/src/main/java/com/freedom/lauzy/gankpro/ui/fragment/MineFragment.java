@@ -2,47 +2,36 @@ package com.freedom.lauzy.gankpro.ui.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.freedom.lauzy.gankpro.R;
+import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 
-public class MineFragment extends Fragment {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class MineFragment extends BaseFragment {
 
-    private String mParam1;
-    private String mParam2;
-
-
-    public MineFragment() {
-    }
-
-    public static MineFragment newInstance(String param1, String param2) {
-        MineFragment fragment = new MineFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_mine;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    protected void initViews() {
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mine, container, false);
-    }
+    protected void loadData() {
 
+    }
 }

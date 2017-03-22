@@ -13,12 +13,6 @@
     <!--app:layout_behavior="@string/bye_burger_title_behavior"-->
     <!--app:layout_behavior="@string/toolbar_behavior"-->
 
-    <!--<TextView
-        android:id="@+id/txt_toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40">
@@ -36,6 +30,7 @@
             android:id="@+id/txt_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:layout_centerInParent="true"
             android:textColor="@color/color_title_white"/>
 

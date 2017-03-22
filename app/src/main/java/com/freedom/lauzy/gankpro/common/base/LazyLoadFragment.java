@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 
 /**
- * 懒加载Fragment
  * Created by Lauzy on 2017/2/10.
  */
 

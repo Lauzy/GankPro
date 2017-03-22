@@ -27,10 +27,6 @@ import rx.subscriptions.CompositeSubscription;
  * base
  * Created by Lauzy on 2017/1/17.
  */
-/**
- * activity基类
- * Created by Lauzy on 2016/11/26.
- */
 public abstract class BaseActivity extends AppCompatActivity {
 
     private CompositeSubscription mCompositeSubscription;

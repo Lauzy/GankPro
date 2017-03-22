@@ -30,6 +30,7 @@ import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
+import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 
 import butterknife.BindView;
@@ -172,6 +173,12 @@ public class GankDetailActivity extends BaseToolbarActivity {
             case R.id.menu_open_browser:
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWbDetail.getUrl()));
                 startActivity(intent);
+                break;
+            case R.id.menu_collection:
+                SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content),"收藏").show();
+                break;
+            case R.id.menu_share:
+                SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content),"分享").show();
                 break;
         }
         return super.onOptionsItemSelected(item);

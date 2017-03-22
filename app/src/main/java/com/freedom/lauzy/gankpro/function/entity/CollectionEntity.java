@@ -13,43 +13,53 @@ import org.greenrobot.greendao.annotation.Generated;
 public class CollectionEntity {
     @Id
     private Long id;
-    @Property(nameInDb = "IMAGE_URL")
-    private String imgUrl;
+    @Property(nameInDb = "DETAIL_URL")
+    private String detailUrl;
     @Property(nameInDb = "DATE")
     private String date;
     @Property(nameInDb = "DESC")
     private String desc;
-    @Generated(hash = 254575603)
-    public CollectionEntity(Long id, String imgUrl, String date, String desc) {
+
+    @Generated(hash = 1442452034)
+    public CollectionEntity(Long id, String detailUrl, String date, String desc) {
         this.id = id;
-        this.imgUrl = imgUrl;
+        this.detailUrl = detailUrl;
         this.date = date;
         this.desc = desc;
     }
+
     @Generated(hash = 1951715304)
     public CollectionEntity() {
     }
+
     public Long getId() {
-        return this.id;
+        return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
-    public String getImgUrl() {
-        return this.imgUrl;
+
+    public String getDetailUrl() {
+        return detailUrl;
     }
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+
+    public void setDetailUrl(String detailUrl) {
+        this.detailUrl = detailUrl;
     }
+
     public String getDate() {
-        return this.date;
+        return date;
     }
+
     public void setDate(String date) {
         this.date = date;
     }
+
     public String getDesc() {
-        return this.desc;
+        return desc;
     }
+
     public void setDesc(String desc) {
         this.desc = desc;
     }

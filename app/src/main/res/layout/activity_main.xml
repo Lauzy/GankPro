@@ -10,8 +10,8 @@
     <!--    android:fitsSystemWindows="true"
     android:clipToPadding="true"-->
 
-     <include
-         layout="@layout/layout_toolbar"/>
+    <include
+        layout="@layout/layout_toolbar"/>
 
 
     <FrameLayout
@@ -27,10 +27,27 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/color_transparent_white"
-        app:layout_behavior="@string/bottom_behavior"
         app:itemIconTint="@color/bottom_item_color"
         app:itemTextColor="@color/bottom_item_color"
+        app:layout_behavior="@string/bottom_behavior"
         app:menu="@menu/menu_bottom_navigation_view"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_72"
+        android:layout_marginRight="@dimen/dp_20"
+        android:backgroundTint="@color/color_transparent_white"
+        android:clickable="true"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="auto"
+        app:layout_anchor="@id/main_frame"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_behavior="@string/fab_vertical_behavior"
+        app:rippleColor="@color/color_style_unselected_gray"
+        app:srcCompat="@mipmap/icon_change_day_night_mode"/>
 
 </android.support.design.widget.CoordinatorLayout>
 

@@ -2,11 +2,13 @@ package com.freedom.lauzy.gankpro.ui;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -36,6 +38,8 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     TextView mTxtToolbarTitle;
     @BindView(R.id.main_frame)
     FrameLayout mMainFrameLayout;
+    @BindView(R.id.fab_mode)
+    FloatingActionButton mFabMode;
 
     private List<Fragment> mFragments = new ArrayList<>();
     private BeautyFragment mBeautyFragment;
@@ -82,6 +86,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 mTxtToolbarTitle.setText("妹纸");
                 mGankBehavior.show();
                 mGankBehavior.setCanScroll(true);
+                mFabMode.setVisibility(View.VISIBLE);
 //                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
@@ -94,8 +99,9 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
             case R.id.menu_main_item_android:
 //                mToolbar.setVisibility(View.VISIBLE);
                 mGankBehavior.show();
-                mTxtToolbarTitle.setText("安卓");
+                mTxtToolbarTitle.setText("Android");
                 mGankBehavior.setCanScroll(true);
+                mFabMode.setVisibility(View.VISIBLE);
 //                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
                 if (mAndroidFragment == null) {
                     mAndroidFragment = new AndroidFragment();
@@ -110,6 +116,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 mGankBehavior.show();
                 mTxtToolbarTitle.setText("分类");
                 mGankBehavior.setCanScroll(false);
+                mFabMode.setVisibility(View.VISIBLE);
 //                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
@@ -125,6 +132,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 mGankBehavior.show();
                 mTxtToolbarTitle.setText("我的");
                 mGankBehavior.setCanScroll(true);
+                mFabMode.setVisibility(View.GONE);
 //                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();

@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.common.widget.behavior;
 
 import android.animation.ValueAnimator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.view.View;
 
 /**
@@ -10,6 +11,7 @@ import android.view.View;
 public class GankBehaviorAnim {
 
     private View mHeadView;
+    private static final LinearOutSlowInInterpolator INTERPOLATOR = new LinearOutSlowInInterpolator();
 
     public GankBehaviorAnim(View headView) {
         mHeadView = headView;
@@ -18,6 +20,7 @@ public class GankBehaviorAnim {
     public void hideTitle() {
         ValueAnimator animator = ValueAnimator.ofFloat(mHeadView.getY(), -mHeadView.getHeight());
         animator.setDuration(400);
+        animator.setInterpolator(INTERPOLATOR);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -31,6 +34,7 @@ public class GankBehaviorAnim {
 
         ValueAnimator animator = ValueAnimator.ofFloat(mHeadView.getY(), 0);
         animator.setDuration(400);
+        animator.setInterpolator(INTERPOLATOR);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
