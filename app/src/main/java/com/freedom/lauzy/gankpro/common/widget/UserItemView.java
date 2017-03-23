@@ -20,7 +20,6 @@ import com.freedom.lauzy.gankpro.R;
 public class UserItemView extends LinearLayout {
     private ImageView mImgItemIcon;
     private TextView mTxtItemName;
-    private TextView mTxtTip;
 //    private ImageView mImgItemMore;
 //    private boolean mItemMore;
 
@@ -45,12 +44,10 @@ public class UserItemView extends LinearLayout {
                 R.styleable.UserSettingItemView);
         Drawable itemIcon = array.getDrawable(R.styleable.UserSettingItemView_itemIcon);
         String itemName = array.getString(R.styleable.UserSettingItemView_itemName);
-        String itemTip = array.getString(R.styleable.UserSettingItemView_itemTip);
 //        mItemMore = array.getBoolean(R.styleable.UserSettingItemView_itemMore, false);
 
         mImgItemIcon.setImageDrawable(itemIcon);
         mTxtItemName.setText(itemName);
-        mTxtTip.setText(itemTip);
     }
 
     private void initViews(Context context) {

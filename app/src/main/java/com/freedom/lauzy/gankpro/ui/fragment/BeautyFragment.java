@@ -57,8 +57,8 @@ public class BeautyFragment extends BaseFragment {
 
     private void initRecyclerView() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity, 2);
-        LinearLayoutManager manager = new LinearLayoutManager(mActivity);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        /*LinearLayoutManager manager = new LinearLayoutManager(mActivity);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);*/
         mBeautyRecyclerView.setLayoutManager(gridLayoutManager);
 
         mBeautyRefreshLayout.setProgressViewOffset(true, 120, 240);

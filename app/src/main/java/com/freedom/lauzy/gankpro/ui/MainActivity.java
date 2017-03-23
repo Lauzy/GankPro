@@ -16,7 +16,6 @@ import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
-import com.freedom.lauzy.gankpro.function.BehaviorListener;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -27,7 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseToolbarActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseToolbarActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     //    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.bottom_main_navigation)
@@ -48,6 +47,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     private MineFragment mMineFragment;
     private GankBehavior mGankBehavior;
     private GankBottomBehavior mGankBottomBehavior;
+    private int mPosition;
 
     @Override
     protected int getLayoutResId() {
@@ -82,71 +82,65 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
         switch (item.getItemId()) {
             case R.id.menu_main_item_beauty:
-//                mToolbar.setVisibility(View.VISIBLE);
-                mTxtToolbarTitle.setText("妹纸");
-                mGankBehavior.show();
-                mGankBehavior.setCanScroll(true);
-                mFabMode.setVisibility(View.VISIBLE);
-//                setActTitle(R.string.bottom_main_item_beauty, Color.WHITE);
+                setNavigationItem("妹纸", true, View.VISIBLE);
+                mPosition = 0;
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
                     transaction.add(R.id.main_frame, mBeautyFragment);
-                    mFragments.add(mBeautyFragment);
+//                    mFragments.add(mBeautyFragment);
+                    addToFragments(mBeautyFragment);
                 } else {
                     transaction.show(mBeautyFragment);
                 }
                 break;
             case R.id.menu_main_item_android:
-//                mToolbar.setVisibility(View.VISIBLE);
-                mGankBehavior.show();
-                mTxtToolbarTitle.setText("Android");
-                mGankBehavior.setCanScroll(true);
-                mFabMode.setVisibility(View.VISIBLE);
-//                setActTitle(R.string.bottom_main_item_android, Color.WHITE);
+                setNavigationItem("Android", true, View.VISIBLE);
+                mPosition = 1;
                 if (mAndroidFragment == null) {
                     mAndroidFragment = new AndroidFragment();
                     transaction.add(R.id.main_frame, mAndroidFragment);
-                    mFragments.add(mAndroidFragment);
+//                    mFragments.add(mAndroidFragment);
+                    addToFragments(mAndroidFragment);
                 } else {
                     transaction.show(mAndroidFragment);
                 }
                 break;
             case R.id.menu_main_item_category:
-//                mToolbar.setVisibility(View.GONE);
-                mGankBehavior.show();
-                mTxtToolbarTitle.setText("分类");
-                mGankBehavior.setCanScroll(false);
-                mFabMode.setVisibility(View.VISIBLE);
-//                setActTitle(R.string.bottom_main_item_category, Color.WHITE);
+                setNavigationItem("分类", false, View.VISIBLE);
+                mPosition = 2;
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
 //                    mCategoryFragment = CategoryFragment.newInstance(mBottomBehavior);
                     transaction.add(R.id.main_frame, mCategoryFragment);
-                    mFragments.add(mCategoryFragment);
+//                    mFragments.add(mCategoryFragment);
+                    addToFragments(mCategoryFragment);
                 } else {
                     transaction.show(mCategoryFragment);
                 }
                 break;
             case R.id.menu_main_item_mine:
-//                mToolbar.setVisibility(View.VISIBLE);
-                mGankBehavior.show();
-                mTxtToolbarTitle.setText("我的");
-                mGankBehavior.setCanScroll(true);
-                mFabMode.setVisibility(View.GONE);
-//                setActTitle(R.string.bottom_main_item_mine, Color.WHITE);
+                mPosition = 3;
+                setNavigationItem("我的", true, View.GONE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();
                     transaction.add(R.id.main_frame, mMineFragment);
-                    mFragments.add(mMineFragment);
+//                    mFragments.add(mMineFragment);
+                    addToFragments(mMineFragment);
                 } else {
                     transaction.show(mMineFragment);
                 }
                 break;
         }
-
         transaction.commit();
-
         return true;
+    }
+
+    private void setNavigationItem(String title, boolean canScroll, int fabVisible) {
+        //                mToolbar.setVisibility(View.VISIBLE);
+        mTxtToolbarTitle.setText(title);
+        mGankBehavior.show();
+        mGankBehavior.setCanScroll(canScroll);
+        mFabMode.setVisibility(fabVisible);
     }
 
     private void hideFragment(FragmentTransaction transaction) {
@@ -155,9 +149,30 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         }
     }
 
+    private void addToFragments(Fragment fragment) {
+        mFragments.add(fragment);
+    }
+
    /* @Override
     public void setBehaviorCanScroll(boolean canScroll) {
         mGankBehavior.setCanScroll(canScroll);
         mGankBottomBehavior.setCanScroll(canScroll);
     }*/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getSupportFragmentManager().popBackStack();
+        /*if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            if (mPosition != 0) {
+                onNavigationItemSelected(mBottomMainNavigation.getMenu().getItem(0));//选中第一个
+                mBottomMainNavigation.getMenu().getItem(0).setChecked(true);
+            } else {
+                finish();
+            }
+        }*/
+    }
+
 }

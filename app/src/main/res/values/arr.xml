@@ -8,4 +8,18 @@
         <item>@string/category_recommend</item>
         <item>@string/category_app</item>
     </string-array>
+
+    <array name="MineItemArr">
+        <item>@mipmap/icon_collection_gray</item>
+        <item>@mipmap/icon_night_mode_gray</item>
+        <item>@mipmap/icon_github_gray</item>
+        <item>@mipmap/icon_about_author_gray</item>
+    </array>
+
+    <string-array name="MineItemContentArr">
+        <item>我的收藏</item>
+        <item>夜间模式</item>
+        <item>开源库</item>
+        <item>关于作者</item>
+    </string-array>
 </resources>
