@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class CollectionEntity {
-    @Id
+    @Id(autoincrement = true)
     private Long id;
     @Property(nameInDb = "DETAIL_URL")
     private String detailUrl;
@@ -19,13 +19,17 @@ public class CollectionEntity {
     private String date;
     @Property(nameInDb = "DESC")
     private String desc;
+    @Property(nameInDb = "TYPE")
+    private String type;
 
-    @Generated(hash = 1442452034)
-    public CollectionEntity(Long id, String detailUrl, String date, String desc) {
+    @Generated(hash = 1337947557)
+    public CollectionEntity(Long id, String detailUrl, String date, String desc,
+            String type) {
         this.id = id;
         this.detailUrl = detailUrl;
         this.date = date;
         this.desc = desc;
+        this.type = type;
     }
 
     @Generated(hash = 1951715304)
@@ -62,5 +66,13 @@ public class CollectionEntity {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -26,14 +26,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
+import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
+import com.freedom.lauzy.gankpro.function.entity.CollectionEntity;
+import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
 import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 
+import java.util.concurrent.Future;
+
 import butterknife.BindView;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE;
 import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.BOUNCE_ENTER_TYPE;
@@ -57,6 +69,10 @@ public class GankDetailActivity extends BaseToolbarActivity {
     @BindView(R.id.tool_web_layout)
     LinearLayout mToolWebLayout;
     private GankBehavior mGankBehavior;
+    private String mDetailUrl;
+    private String mPublishTime;
+    private String mGankDesc;
+    private String mGankType;
 
     @Override
     protected int getLayoutResId() {
@@ -66,9 +82,12 @@ public class GankDetailActivity extends BaseToolbarActivity {
     @Override
     protected void initViews() {
         setupWindowAnimations();
-        String detailUrl = getIntent().getStringExtra(ValueConstants.GANK_DETAIL);
-        Log.i(LYTAG, "WebView Url is: " + detailUrl);
-        mWbDetail.loadUrl(detailUrl);
+        getIntentData();
+        initMainView();
+    }
+
+    private void initMainView() {
+        mWbDetail.loadUrl(mDetailUrl);
 //        mToolbarSubtitle.setText(detailUrl);
         mToolbarCommon.setTitle("");
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_close);
@@ -84,15 +103,23 @@ public class GankDetailActivity extends BaseToolbarActivity {
         mGankBehavior.setCanScroll(false);
     }
 
+    private void getIntentData() {
+        mDetailUrl = getIntent().getStringExtra(ValueConstants.GANK_DETAIL);
+        Log.i(LYTAG, "WebView Url is: " + mDetailUrl);
+        mPublishTime = getIntent().getStringExtra(ValueConstants.GANK_PUBLISH_TIME);
+        mGankDesc = getIntent().getStringExtra(ValueConstants.GANK_DESC);
+        mGankType = getIntent().getStringExtra(ValueConstants.GANK_TYPE);
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupWindowAnimations() {
         /*getWindow().setEnterTransition(TransitionUtils.buildEnterTransition());
         getWindow().setExitTransition(TransitionUtils.buildReturnTransition());*/
         int enterType = getIntent().getIntExtra(ENTER_TYPE, -1);
-        if (enterType == BOUNCE_ENTER_TYPE){
+        if (enterType == BOUNCE_ENTER_TYPE) {
             getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
 //            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new BounceInterpolator()));
-        }else if (enterType == ACCELERATE_DECELERATE_ENTER_TYPE){
+        } else if (enterType == ACCELERATE_DECELERATE_ENTER_TYPE) {
             getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
 //            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new AccelerateDecelerateInterpolator()));
         }
@@ -110,7 +137,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
                 else
                     mWebProgressbar.setVisibility(View.VISIBLE);
 
-                if (newProgress >= 90){//加载到90%设置可滑动
+                if (newProgress >= 90) {//加载到90%设置可滑动
                     mGankBehavior.setCanScroll(true);
                 }
             }
@@ -175,13 +202,61 @@ public class GankDetailActivity extends BaseToolbarActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_collection:
-                SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content),"收藏").show();
+                collectionTheGank();
                 break;
             case R.id.menu_share:
-                SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content),"分享").show();
+                SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "分享").show();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void collectionTheGank() {
+
+        Subscription collectionSub = Observable
+                .create(new Observable.OnSubscribe<CollectionEntity>() {
+                    @Override
+                    public void call(Subscriber<? super CollectionEntity> subscriber) {
+                        CollectionEntityDao entityDao = GankApp.getInstance().getDaoSession()
+                                .getCollectionEntityDao();
+
+                        CollectionEntity gankEntity;
+                        try {
+                            gankEntity = entityDao.queryBuilder().where(CollectionEntityDao
+                                    .Properties.DetailUrl.eq(mDetailUrl)).unique();
+                        } catch (Exception e) {
+                            gankEntity = null;
+                        }
+                        if (gankEntity == null) {
+                            gankEntity = new CollectionEntity();
+                            gankEntity.setDetailUrl(mDetailUrl);
+                            gankEntity.setDate(mPublishTime);
+                            gankEntity.setDesc(mGankDesc);
+                            gankEntity.setType(mGankType);
+                        }
+
+                        entityDao.insertOrReplace(gankEntity);
+                        subscriber.onNext(gankEntity);
+                        subscriber.onCompleted();
+                        Log.i(LYTAG, "call: " + mGankType + "--" + mGankDesc);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<CollectionEntity>() {
+                    @Override
+                    public void call(CollectionEntity collectionEntity) {
+                        SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "收藏成功").show();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                        SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "收藏失败，再试试").show();
+                    }
+                });
+        addSubscription(collectionSub);
+
     }
 
     @Override

@@ -6,6 +6,9 @@ package com.freedom.lauzy.gankpro.function.constants;
 
 public class ValueConstants {
     public static final String GANK_DETAIL = "gank_detail";
+    public static final String GANK_PUBLISH_TIME = "publish_time";
+    public static final String GANK_DESC = "gank_desc";
+    public static final String GANK_TYPE = "gank_type";
 
     /**
      * Created by Lauzy on 2017/1/23.

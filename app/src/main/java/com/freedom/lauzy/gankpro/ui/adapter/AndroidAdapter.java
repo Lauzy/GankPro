@@ -60,7 +60,10 @@ public class AndroidAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseV
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GankDetailActivity.class);
                 intent.putExtra(ValueConstants.GANK_DETAIL, item.getUrl());
-                intent.putExtra(ValueConstants.ImageValue.ENTER_TYPE,ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE);
+                intent.putExtra(ValueConstants.GANK_PUBLISH_TIME, item.getPublishedAt());
+                intent.putExtra(ValueConstants.GANK_DESC, item.getDesc());
+                intent.putExtra(ValueConstants.GANK_TYPE, item.getType());
+                intent.putExtra(ValueConstants.ImageValue.ENTER_TYPE, ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE);
 //                mContext.startActivity(intent);
                 TransitionUtils.transitionTo(((Activity) mContext), intent);
             }

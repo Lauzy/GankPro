@@ -75,9 +75,12 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GankDetailActivity.class);
                 intent.putExtra(ValueConstants.GANK_DETAIL, itemBean.getUrl());
+                intent.putExtra(ValueConstants.GANK_PUBLISH_TIME, itemBean.getPublishedAt());
+                intent.putExtra(ValueConstants.GANK_DESC, itemBean.getDesc());
+                intent.putExtra(ValueConstants.GANK_TYPE, itemBean.getType());
 //                mContext.startActivity(intent);
                 intent.putExtra(ENTER_TYPE, BOUNCE_ENTER_TYPE);
-                TransitionUtils.transitionTo((Activity) mContext,intent);
+                TransitionUtils.transitionTo((Activity) mContext, intent);
             }
         };
     }

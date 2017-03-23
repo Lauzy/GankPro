@@ -28,6 +28,7 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
         public final static Property DetailUrl = new Property(1, String.class, "detailUrl", false, "DETAIL_URL");
         public final static Property Date = new Property(2, String.class, "date", false, "DATE");
         public final static Property Desc = new Property(3, String.class, "desc", false, "DESC");
+        public final static Property Type = new Property(4, String.class, "type", false, "TYPE");
     }
 
 
@@ -43,10 +44,11 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"COLLECTION_ENTITY\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"DETAIL_URL\" TEXT," + // 1: detailUrl
                 "\"DATE\" TEXT," + // 2: date
-                "\"DESC\" TEXT);"); // 3: desc
+                "\"DESC\" TEXT," + // 3: desc
+                "\"TYPE\" TEXT);"); // 4: type
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,11 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
         if (desc != null) {
             stmt.bindString(4, desc);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(5, type);
+        }
     }
 
     @Override
@@ -103,6 +110,11 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
         if (desc != null) {
             stmt.bindString(4, desc);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(5, type);
+        }
     }
 
     @Override
@@ -116,7 +128,8 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // detailUrl
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // date
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // desc
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // desc
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // type
         );
         return entity;
     }
@@ -127,6 +140,7 @@ public class CollectionEntityDao extends AbstractDao<CollectionEntity, Long> {
         entity.setDetailUrl(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setDesc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setType(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override
