@@ -35,6 +35,7 @@
 
     <dimen name="txt_daily_item_category_size">18sp</dimen>
     <dimen name="text_sp_18">18sp</dimen>
+    <dimen name="dp_6">6dp</dimen>
 
 
 </resources>

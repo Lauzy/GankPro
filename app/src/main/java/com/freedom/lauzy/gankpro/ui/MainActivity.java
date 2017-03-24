@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MainActivity extends BaseToolbarActivity implements BottomNavigationView
-        .OnNavigationItemSelectedListener ,MineTitleListener{
+        .OnNavigationItemSelectedListener, MineTitleListener {
 
     //    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.bottom_main_navigation)
@@ -50,6 +50,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     private GankBehavior mGankBehavior;
     private GankBottomBehavior mGankBottomBehavior;
     private int mPosition;
+    private String mTitle;
 
     @Override
     protected int getLayoutResId() {
@@ -122,7 +123,11 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 break;
             case R.id.menu_main_item_mine:
                 mPosition = 3;
-                setNavigationItem("我的", true, View.GONE);
+                /*mTxtToolbarTitle.setText(mTitle);
+                mGankBehavior.show();
+                mGankBehavior.setCanScroll(true);
+                mFabMode.setVisibility(View.GONE);*/
+                setNavigationItem(mTitle, true, View.GONE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();
                     transaction.add(R.id.main_frame, mMineFragment);
@@ -180,5 +185,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     @Override
     public void setTitle(String title) {
         mTxtToolbarTitle.setText(title);
+        mTitle = title;
     }
 }

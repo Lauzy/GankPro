@@ -4,9 +4,16 @@
              android:layout_height="match_parent"
              tools:context="com.freedom.lauzy.gankpro.ui.fragment.CollectionFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_collection"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_collection"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_52"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_collection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

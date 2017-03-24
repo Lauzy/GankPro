@@ -96,6 +96,8 @@ public class MinePageFragment extends BaseFragment {
                                 .addToBackStack(null);
                         break;
                     case 4:
+                        transaction.replace(R.id.layout_mine_content, AuthorFragment.newInstance("", ""))
+                                .addToBackStack(null);
                         break;
                 }
                 transaction.commit();
@@ -112,7 +114,7 @@ public class MinePageFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         if (mMineTitleListener != null) {
-            mMineTitleListener.setTitle("我的");
+            mMineTitleListener.setTitle("关于");
         }
     }
 }

@@ -7,11 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
+import com.freedom.lauzy.gankpro.function.entity.LibEntity;
 import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
 import com.freedom.lauzy.gankpro.model.LibsModel;
+import com.freedom.lauzy.gankpro.ui.activity.LibsGithubActivity;
 import com.freedom.lauzy.gankpro.ui.adapter.OpenLibsAdapter;
 
 import butterknife.BindView;
@@ -86,6 +90,14 @@ public class OpenLibsFragment extends BaseFragment {
         }
         View headView = View.inflate(mActivity, R.layout.layout_head_lib_view, null);
         mAdapter.addHeaderView(headView);
+
+        mRvOpenLibs.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                LibEntity libEntity = (LibEntity) adapter.getData().get(position);
+                mActivity.startActivity(LibsGithubActivity.newInstance(mActivity, libEntity.getLink()));
+            }
+        });
     }
 
 }

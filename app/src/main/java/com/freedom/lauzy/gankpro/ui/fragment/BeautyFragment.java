@@ -1,19 +1,14 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.function.BehaviorListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.view.BeautyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.BeautyPresenter;
@@ -91,14 +86,7 @@ public class BeautyFragment extends BaseFragment {
                 mBeautyRefreshLayout.setEnabled(false);
                 mBeautyPresenter.loadMoreData();
             }
-        });
-
-        mBeautyRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                startActivity(new Intent(mActivity,DailyActivity.class));
-            }
-        });
+        }, mBeautyRecyclerView);
 
         mBeautyRecyclerView.addItemDecoration(new BeautyItemDecoration(mActivity));
     }

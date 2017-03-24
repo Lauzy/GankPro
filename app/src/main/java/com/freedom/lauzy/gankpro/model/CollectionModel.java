@@ -14,7 +14,7 @@ import rx.Subscriber;
  */
 
 public class CollectionModel {
-   /* public interface CollectionListener{
+    /*public interface CollectionListener{
         void onSuccess(List<CollectionEntity> collectionEntities);
         void onError(Throwable e);
     }*/
