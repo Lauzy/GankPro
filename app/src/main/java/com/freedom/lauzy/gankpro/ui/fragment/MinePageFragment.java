@@ -1,13 +1,16 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.common.widget.RvItemTouchListener;
+import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
 import com.freedom.lauzy.gankpro.ui.adapter.MineAdapter;
 
@@ -23,6 +26,15 @@ public class MinePageFragment extends BaseFragment {
     @BindView(R.id.rv_mine)
     RecyclerView mRvMine;
 
+    private MineTitleListener mMineTitleListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MineTitleListener) {
+            mMineTitleListener = (MineTitleListener) context;
+        }
+    }
 
     public MinePageFragment() {
     }
@@ -71,20 +83,22 @@ public class MinePageFragment extends BaseFragment {
 
             @Override
             public void rvItemClick(int position) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 switch (position) {
                     case 0:
                         break;
                     case 1:
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.layout_mine_content, CollectionFragment.newInstance("", ""))
-                                .addToBackStack(null)
-                                .commit();
+                        transaction.replace(R.id.layout_mine_content, CollectionFragment.newInstance("", ""))
+                                .addToBackStack(null);
                         break;
                     case 3:
+                        transaction.replace(R.id.layout_mine_content, OpenLibsFragment.newInstance("", ""))
+                                .addToBackStack(null);
                         break;
                     case 4:
                         break;
                 }
+                transaction.commit();
             }
 
             @Override
@@ -94,4 +108,11 @@ public class MinePageFragment extends BaseFragment {
         }));
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mMineTitleListener != null) {
+            mMineTitleListener.setTitle("我的");
+        }
+    }
 }

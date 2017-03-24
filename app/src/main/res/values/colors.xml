@@ -26,4 +26,6 @@
     <color name="color_positive">#087766</color>
     <color name="color_negative">#e24107</color>
 
+    <color name="color_libs">#0657ed</color>
+
 </resources>

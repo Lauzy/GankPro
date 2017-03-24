@@ -16,6 +16,7 @@ import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
+import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -26,7 +27,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseToolbarActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseToolbarActivity implements BottomNavigationView
+        .OnNavigationItemSelectedListener ,MineTitleListener{
 
     //    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.bottom_main_navigation)
@@ -175,4 +177,8 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         }*/
     }
 
+    @Override
+    public void setTitle(String title) {
+        mTxtToolbarTitle.setText(title);
+    }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
+    private static final String LYTAG = BaseFragment.class.getSimpleName();
     protected Activity mActivity;
 //    private View rootView;
 
@@ -63,5 +65,45 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void loadData();
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(getClass().getSimpleName(), "onStart: ");
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(getClass().getSimpleName(), "onPause: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(getClass().getSimpleName(), "onResume: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(getClass().getSimpleName(), "onStop: ");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i(getClass().getSimpleName(), "onDestroyView: ");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i(getClass().getSimpleName(), "onDetach: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(getClass().getSimpleName(), "onDestroy: ");
+    }
 }

@@ -81,6 +81,8 @@ public class MineAdapter extends RecyclerView.Adapter {
 
         @BindView(R.id.img_avatar)
         ImageView mImgAvatar;
+        @BindView(R.id.txt_user)
+        TextView mTxtUser;
 
         public HeadHolder(View itemView) {
             super(itemView);

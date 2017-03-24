@@ -6,7 +6,6 @@ import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 
 public class MineFragment extends BaseFragment {
 
-
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_mine;
@@ -19,6 +18,6 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-    }
 
+    }
 }

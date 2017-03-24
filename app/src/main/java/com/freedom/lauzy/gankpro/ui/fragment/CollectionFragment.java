@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.util.Log;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.entity.CollectionEntity;
 import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
 import com.freedom.lauzy.gankpro.function.view.DailyItemDecoration;
@@ -37,6 +39,16 @@ public class CollectionFragment extends BaseFragment {
 
 
     public CollectionFragment() {
+    }
+
+    private MineTitleListener mMineTitleListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MineTitleListener) {
+            mMineTitleListener = (MineTitleListener) context;
+        }
     }
 
     public static CollectionFragment newInstance(String param1, String param2) {
@@ -91,6 +103,10 @@ public class CollectionFragment extends BaseFragment {
                         throwable.printStackTrace();
                     }
                 });
+
+        if (mMineTitleListener != null) {
+            mMineTitleListener.setTitle("我的收藏");
+        }
     }
 
 }
