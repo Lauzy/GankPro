@@ -64,11 +64,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void loadData();
 
-    protected Observable<Permission> reQuestEachPermission(String... permissions){
+    protected Observable<Permission> reQuestEachPermission(String... permissions) {
         return mRxPermissions.requestEach(permissions);
     }
 
-    protected Observable<Boolean> reQuestPermission(String... permissions){
+    protected Observable<Boolean> reQuestPermission(String... permissions) {
         return mRxPermissions.request(permissions);
     }
 
@@ -83,7 +83,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
     }*/
-
     public void addSubscription(Subscription s) {
         if (this.mCompositeSubscription == null) {
             this.mCompositeSubscription = new CompositeSubscription();

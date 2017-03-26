@@ -6,19 +6,15 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
-import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.entity.CollectionEntity;
 import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
@@ -53,6 +49,7 @@ public class CollectionFragment extends BaseFragment {
     private List<CollectionEntity> mCollectionEntities = new ArrayList<>();
     private CollectionAdapter mAdapter;
     private CollectionPresenter mCollectionPresenter;
+    private View mEmptyView;
 
 
     public CollectionFragment() {
@@ -114,6 +111,7 @@ public class CollectionFragment extends BaseFragment {
         mRvCollection.setAdapter(mAdapter);
         mRvCollection.addItemDecoration(new AndroidItemDecoration(mActivity));
         mRvCollection.setNestedScrollingEnabled(false);
+        mEmptyView = View.inflate(mActivity, R.layout.layout_empty_view, null);
     }
 
     @Override
@@ -179,7 +177,7 @@ public class CollectionFragment extends BaseFragment {
                     mCollectionEntities.addAll(data);
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    mAdapter.setEmptyView(R.layout.layout_empty_view);
+                    mAdapter.setEmptyView(mEmptyView);
                 }
                 mSrlCollection.setRefreshing(false);
             }

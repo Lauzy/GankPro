@@ -1,6 +1,11 @@
 package com.freedom.lauzy.gankpro.ui;
 
+import android.animation.Animator;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -26,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseToolbarActivity implements BottomNavigationView
         .OnNavigationItemSelectedListener, MineTitleListener {
@@ -49,7 +56,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     private MineFragment mMineFragment;
     private GankBehavior mGankBehavior;
     private GankBottomBehavior mGankBottomBehavior;
-    private int mPosition;
     private String mTitle;
 
     @Override
@@ -59,6 +65,58 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
     @Override
     protected void loadData() {
+    }
+
+
+    @OnClick(R.id.fab_mode)
+    public void onClick(){
+
+        final View rootView = getWindow().getDecorView();
+        rootView.setDrawingCacheEnabled(true);
+        rootView.buildDrawingCache(true);
+
+        final Bitmap localBitmap = Bitmap.createBitmap(rootView.getDrawingCache());
+        rootView.setDrawingCacheEnabled(false);
+        if (null != localBitmap && rootView instanceof ViewGroup) {
+            final View tmpView = new View(getApplicationContext());
+            tmpView.setBackgroundDrawable(new BitmapDrawable(getResources(), localBitmap));
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            ((ViewGroup) rootView).addView(tmpView, params);
+            tmpView.animate().rotation(360).translationY(1000).alpha(0.4f).setDuration(2000).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    System.gc();
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ((ViewGroup) rootView).removeView(tmpView);
+                    localBitmap.recycle();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            }).start();
+        }
+
+        recreate();
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        /*if (savedInstanceState == null){
+            MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
+            onNavigationItemSelected(item);//默认选中第一个
+            mBottomMainNavigation.setOnNavigationItemSelectedListener(this);
+        }*/
     }
 
     @Override
@@ -86,7 +144,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         switch (item.getItemId()) {
             case R.id.menu_main_item_beauty:
                 setNavigationItem("妹纸", true, View.VISIBLE);
-                mPosition = 0;
                 if (mBeautyFragment == null) {
                     mBeautyFragment = new BeautyFragment();
                     transaction.add(R.id.main_frame, mBeautyFragment);
@@ -98,7 +155,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 break;
             case R.id.menu_main_item_android:
                 setNavigationItem("Android", true, View.VISIBLE);
-                mPosition = 1;
                 if (mAndroidFragment == null) {
                     mAndroidFragment = new AndroidFragment();
                     transaction.add(R.id.main_frame, mAndroidFragment);
@@ -110,7 +166,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 break;
             case R.id.menu_main_item_category:
                 setNavigationItem("分类", false, View.VISIBLE);
-                mPosition = 2;
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
 //                    mCategoryFragment = CategoryFragment.newInstance(mBottomBehavior);
@@ -122,7 +177,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_mine:
-                mPosition = 3;
                 /*mTxtToolbarTitle.setText(mTitle);
                 mGankBehavior.show();
                 mGankBehavior.setCanScroll(true);
