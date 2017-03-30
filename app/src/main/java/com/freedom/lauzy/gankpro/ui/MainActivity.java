@@ -105,8 +105,16 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
             }).start();
         }
-
         recreate();
+    }
+
+    /**
+     * 不保存fragment状态
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -168,7 +176,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 setNavigationItem("分类", false, View.VISIBLE);
                 if (mCategoryFragment == null) {
                     mCategoryFragment = new CategoryFragment();
-//                    mCategoryFragment = CategoryFragment.newInstance(mBottomBehavior);
                     transaction.add(R.id.main_frame, mCategoryFragment);
 //                    mFragments.add(mCategoryFragment);
                     addToFragments(mCategoryFragment);
@@ -177,10 +184,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
                 }
                 break;
             case R.id.menu_main_item_mine:
-                /*mTxtToolbarTitle.setText(mTitle);
-                mGankBehavior.show();
-                mGankBehavior.setCanScroll(true);
-                mFabMode.setVisibility(View.GONE);*/
                 setNavigationItem(mTitle, true, View.GONE);
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();
