@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,9 +79,9 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupWindowAnimations() {
-        getWindow().setEnterTransition(TransitionUtils.buildSlideEnterTrans(new BounceInterpolator()));
-        getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new LinearInterpolator()));
-        getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new LinearInterpolator()));
+        getWindow().setEnterTransition(TransitionUtils.buildExplodeExitAnim(new LinearOutSlowInInterpolator()));
+        getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new FastOutLinearInInterpolator()));
+        getWindow().setReturnTransition(TransitionUtils.buildExplodeExitAnim(new LinearInterpolator()));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.view.BeautyItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.BeautyPresenter;
@@ -37,6 +39,7 @@ public class BeautyFragment extends BaseFragment {
     protected int getLayoutResId() {
         return R.layout.fragment_beauty;
     }
+
 
     @Override
     protected void initViews() {

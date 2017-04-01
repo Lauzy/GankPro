@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -174,9 +175,9 @@ public class DailyActivity extends BaseToolbarActivity {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupWindowAnimations() {
-        getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new BounceInterpolator()));
-        getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new AccelerateDecelerateInterpolator()));
-        getWindow().setReturnTransition(TransitionUtils.buildExplodeExitAnim(new AnticipateInterpolator()));
+        getWindow().setEnterTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
+        getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
+        getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
     }
 
     private void initTitle() {

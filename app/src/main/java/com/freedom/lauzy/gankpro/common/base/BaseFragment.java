@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment {
         mActivity = (Activity) context;
     }
 
-    @Override
+   /* @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
@@ -49,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

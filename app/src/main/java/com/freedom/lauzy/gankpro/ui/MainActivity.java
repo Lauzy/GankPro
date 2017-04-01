@@ -145,15 +145,11 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         mTxtToolbarTitle.setText("妹纸");
     }
 
-    private boolean isInit = true;
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (isInit) {
-            mTxtToolbarTitle.setText("妹纸");
-            isInit = false;
-        }
+//        mTxtToolbarTitle.setText("妹纸");
     }
 
     @Override
@@ -227,41 +223,6 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
-
-        /*final View rootView = getWindow().getDecorView();
-        rootView.setDrawingCacheEnabled(true);
-        rootView.buildDrawingCache(true);
-
-        final Bitmap localBitmap = Bitmap.createBitmap(rootView.getDrawingCache());
-        rootView.setDrawingCacheEnabled(false);
-        if (null != localBitmap && rootView instanceof ViewGroup) {
-            final View tmpView = new View(getApplicationContext());
-            tmpView.setBackgroundDrawable(new BitmapDrawable(getResources(), localBitmap));
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            ((ViewGroup) rootView).addView(tmpView, params);
-            tmpView.animate().rotation(360).translationY(1000).alpha(0.4f).setDuration(2000).setListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-                    System.gc();
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    ((ViewGroup) rootView).removeView(tmpView);
-                    localBitmap.recycle();
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            }).start();
-        }*/
         recreate();
     }
 }

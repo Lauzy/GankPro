@@ -5,11 +5,13 @@ import android.content.Context;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.common.base.BaseLazyLoadFragment;
+import com.freedom.lauzy.gankpro.common.base.LazyLoadFragment;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends LazyLoadFragment{
 
-    private MineTitleListener mMineTitleListener;
+   /* private MineTitleListener mMineTitleListener;
 
     @Override
     public void onAttach(Context context) {
@@ -18,7 +20,7 @@ public class MineFragment extends BaseFragment {
             mMineTitleListener = (MineTitleListener) context;
         }
     }
-
+*/
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_mine;
@@ -26,13 +28,13 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        getFragmentManager().beginTransaction().replace(R.id.layout_mine_content, MinePageFragment.newInstance("", "")).commit();
     }
 
     @Override
     protected void loadData() {
-        if (mMineTitleListener != null){
-            mMineTitleListener.setTitle("关于");
-        }
+        getFragmentManager().beginTransaction().replace(R.id.layout_mine_content, MinePageFragment.newInstance("", "")).commit();
+        /*if (mMineTitleListener != null){
+            mMineTitleListener.setTitle("Mine");
+        }*/
     }
 }

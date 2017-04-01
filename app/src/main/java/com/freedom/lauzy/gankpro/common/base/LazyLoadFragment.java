@@ -20,6 +20,7 @@ public abstract class LazyLoadFragment extends Fragment {
     private boolean isVisible;
     //setUserVisibleHint比onCreateView优先执行，用在ViewPager中会空指针，所以设置标记判断。
     private boolean isPrepared;
+    private boolean isFirstLoad = true;
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -55,12 +56,12 @@ public abstract class LazyLoadFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews();
         isPrepared = true;
+        lazyLoad();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        lazyLoad();
     }
 
     protected abstract int getLayoutResId();

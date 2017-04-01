@@ -66,7 +66,7 @@ public class TransitionUtils {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Slide buildSlideEnterTrans(Interpolator interpolator){
         Slide enterSlide = new Slide(Gravity.RIGHT);
-        enterSlide.setDuration(400);
+        enterSlide.setDuration(500);
         enterSlide.setInterpolator(interpolator);
         return enterSlide;
     }
@@ -74,7 +74,7 @@ public class TransitionUtils {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Slide buildSlideExitTrans(Interpolator interpolator){
         Slide exitSlide = new Slide(Gravity.LEFT);
-        exitSlide.setDuration(200);
+        exitSlide.setDuration(400);
         exitSlide.setInterpolator(interpolator);
         return exitSlide;
     }
@@ -90,9 +90,9 @@ public class TransitionUtils {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Transition buildExplodeExitAnim(Interpolator interpolator){
-        Explode exitTranstion = new Explode();
-        exitTranstion.setDuration(200);
-        exitTranstion.setInterpolator(interpolator);
-        return exitTranstion;
+        Explode exitTransition = new Explode();
+        exitTransition.setDuration(400);
+        exitTransition.setInterpolator(interpolator);
+        return exitTransition;
     }
 }

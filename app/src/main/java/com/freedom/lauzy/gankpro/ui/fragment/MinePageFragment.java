@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.common.base.BaseLazyLoadFragment;
+import com.freedom.lauzy.gankpro.common.base.LazyLoadFragment;
 import com.freedom.lauzy.gankpro.common.widget.RvItemTouchListener;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
@@ -16,10 +19,11 @@ import com.freedom.lauzy.gankpro.ui.adapter.MineAdapter;
 
 import butterknife.BindView;
 
-public class MinePageFragment extends BaseFragment {
+public class MinePageFragment extends LazyLoadFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String LYTAG = MinePageFragment.class.getSimpleName();
 
     private String mParam1;
     private String mParam2;
@@ -79,6 +83,10 @@ public class MinePageFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
+        Log.e(LYTAG, "loadData: ");
+        if (mMineTitleListener != null) {
+            mMineTitleListener.setTitle("Mine");
+        }
         mRvMine.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvMine, new RvItemTouchListener.RvItemClickListener() {
 
             @Override
@@ -113,8 +121,8 @@ public class MinePageFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (mMineTitleListener != null) {
-            mMineTitleListener.setTitle("关于");
-        }
+        /*if (mMineTitleListener != null) {
+            mMineTitleListener.setTitle("Mine");
+        }*/
     }
 }
