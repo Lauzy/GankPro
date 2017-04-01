@@ -1,7 +1,10 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,11 +56,17 @@ public class MineAdapter extends RecyclerView.Adapter {
             String[] mineContentArr = mContext.getResources().getStringArray(R.array.MineItemContentArr);
             ((ItemHolder) holder).mTxtItemContent.setText(mineContentArr[position - 1]);
             ((ItemHolder) holder).mSwitchMineItem.setVisibility(position == 2 ? View.VISIBLE : View.GONE);
-            if (position == 2){
+            if (position == 2) {
                 ((ItemHolder) holder).mSwitchMineItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                        int mode = mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                        if (mode == Configuration.UI_MODE_NIGHT_YES) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        }
+                        ((Activity) mContext).recreate();
                     }
                 });
             }

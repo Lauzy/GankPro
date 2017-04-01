@@ -57,7 +57,7 @@ public class BeautyFragment extends BaseFragment {
         mBeautyRecyclerView.setLayoutManager(gridLayoutManager);
 
         mBeautyRefreshLayout.setProgressViewOffset(true, 120, 240);
-        mBeautyRefreshLayout.setColorSchemeResources(R.color.color_style_gray);
+        mBeautyRefreshLayout.setColorSchemeResources(R.color.color_srl_gray);
         mBeautyRefreshLayout.setRefreshing(true);
         mAdapter = new BeautyAdapter(R.layout.layout_beauty_item, mResultsBeen);
 //        mAdapter = new BeautyAdapter(mResultsBeen);

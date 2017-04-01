@@ -141,7 +141,7 @@ public class DailyActivity extends BaseToolbarActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvDaily.setLayoutManager(linearLayoutManager);
 
-        mSrlDaily.setColorSchemeResources(R.color.color_style_gray);
+        mSrlDaily.setColorSchemeResources(R.color.color_srl_gray);
         mSrlDaily.setRefreshing(true);
         mAdapter = new DailyAdapter(DailyActivity.this, mItemBeen);
         mRvDaily.setAdapter(mAdapter);

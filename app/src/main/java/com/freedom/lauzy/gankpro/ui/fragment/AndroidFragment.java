@@ -53,7 +53,7 @@ public class AndroidFragment extends BaseFragment {
         mRvAndroid.setAdapter(mAdapter);
 
         mAndroidRefreshLayout.setProgressViewOffset(true, 120, 240);
-        mAndroidRefreshLayout.setColorSchemeResources(R.color.color_style_gray);
+        mAndroidRefreshLayout.setColorSchemeResources(R.color.color_srl_gray);
         mAndroidRefreshLayout.setRefreshing(true);
         mAndroidRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

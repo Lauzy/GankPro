@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1296db</color>
-    <color name="colorPrimaryDark">#1296db</color>
-    <color name="colorAccent">#1296db</color>
+    <color name="colorPrimary">#0d0d0d</color>
+    <color name="colorPrimaryDark">#0d0d0d</color>
+    <color name="colorAccent">#151414</color>
 
     <color name="color_half_transparent">#70000000</color>
 
-    <color name="color_white">#FFFFFF</color>
-    <color name="color_transparent_white">#f0FFFFFF</color>
-    <color name="color_black">#000000</color>
+    <color name="color_white">#000000</color>
+    <color name="color_transparent_white">#f0000000</color>
+    <color name="color_black">#FFFFFF</color>
 
-    <color name="color_press_gray">#0a74ac</color>
+    <color name="color_press_gray">#d0000000</color>
     <!--<color name="color_style_gray">#505050</color>-->
-    <color name="color_style_gray">#1296db</color>
-    <color name="color_srl_gray">#1296db</color>
+    <color name="color_style_gray">#f0000000</color>
+    <color name="color_srl_gray">#f0000000</color>
     <color name="color_style_unselected_gray">#8A8A8A</color>
 
-    <color name="color_menu_black">#d91296db</color>
+    <color name="color_menu_black">#df000000</color>
 
     <color name="color_img_bg">#80000000</color>
 
@@ -29,8 +29,8 @@
     <color name="color_positive">#087766</color>
     <color name="color_negative">#e24107</color>
 
-    <color name="color_libs">#0657ed</color>
-    <color name="color_bottom_selected_gray">#1296db</color>
+    <color name="color_libs">#FFFFFF</color>
+    <color name="color_bottom_selected_gray">#FFFFFF</color>
     <color name="color_unselected_tab">#1d2e38</color>
 
 </resources>

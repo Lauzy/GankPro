@@ -5,12 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.function.entity.ItemBean;
 
 import java.util.List;
@@ -22,8 +24,10 @@ import java.util.List;
 
 public class DailyItemDecoration extends RecyclerView.ItemDecoration {
 
-    private static final int COLOR_TITLE_BG = Color.parseColor("#FFFFFE");
-    private static final int COLOR_TITLE_FONT = Color.parseColor("#000000");
+    /*private static int COLOR_TITLE_BG = Color.parseColor("#FFFFFE");
+    private static int COLOR_TITLE_FONT = Color.parseColor("#000000");*/
+    private static int COLOR_TITLE_BG;
+    private static int COLOR_TITLE_FONT;
     private static final String LYTAG = DailyItemDecoration.class.getSimpleName();
     private final Paint mPaint;
     private final Rect mTextRect;
@@ -31,6 +35,8 @@ public class DailyItemDecoration extends RecyclerView.ItemDecoration {
     private List<ItemBean> mItemBeen;
 
     public DailyItemDecoration(Context context, List<ItemBean> itemBeen) {
+        COLOR_TITLE_BG = ContextCompat.getColor(context, R.color.color_white);
+        COLOR_TITLE_FONT = ContextCompat.getColor(context, R.color.color_black);
         mItemBeen = itemBeen;
         mPaint = new Paint();
         mTextRect = new Rect();
@@ -99,33 +105,34 @@ public class DailyItemDecoration extends RecyclerView.ItemDecoration {
         if (mItemBeen == null || mItemBeen.size() == 0) {
             return;
         }
+        if (position != -1){
+            String type = mItemBeen.get(position).getType();
+            View itemView = parent.findViewHolderForLayoutPosition(position).itemView;
 
-        String type = mItemBeen.get(position).getType();
-        View itemView = parent.findViewHolderForLayoutPosition(position).itemView;
-
-        boolean flag = false;//定义一个flag，Canvas是否位移过的标志
-        if (null != type && !type.equals(mItemBeen.get(position + 1).getType())) {//当前第一个可见的Item的tag，不等于其后一个item的tag，说明悬浮的View要切换了
-            Log.i(LYTAG, "onDrawOver ----- " + itemView.getTop());//当getTop开始变负，它的绝对值，是第一个可见的Item移出屏幕的距离，
-            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
-            if (itemView.getHeight() + itemView.getTop() + layoutParams.bottomMargin <= mTitleHeight) {//当第一个可见的item在屏幕中还剩的高度小于title区域的高度时，我们也该开始做悬浮Title的“交换动画”
-                c.save();//每次绘制前 保存当前Canvas状态，
-                flag = true;
-                //上滑时，将canvas上移 （y为负数） ,所以后面canvas 画出来的Rect和Text都上移了，有种切换的“动画”感觉
-                c.translate(0, itemView.getHeight() + itemView.getTop() + layoutParams.bottomMargin - mTitleHeight);
+            boolean flag = false;//定义一个flag，Canvas是否位移过的标志
+            if (null != type && !type.equals(mItemBeen.get(position + 1).getType())) {//当前第一个可见的Item的tag，不等于其后一个item的tag，说明悬浮的View要切换了
+                Log.i(LYTAG, "onDrawOver ----- " + itemView.getTop());//当getTop开始变负，它的绝对值，是第一个可见的Item移出屏幕的距离，
+                RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
+                if (itemView.getHeight() + itemView.getTop() + layoutParams.bottomMargin <= mTitleHeight) {//当第一个可见的item在屏幕中还剩的高度小于title区域的高度时，我们也该开始做悬浮Title的“交换动画”
+                    c.save();//每次绘制前 保存当前Canvas状态，
+                    flag = true;
+                    //上滑时，将canvas上移 （y为负数） ,所以后面canvas 画出来的Rect和Text都上移了，有种切换的“动画”感觉
+                    c.translate(0, itemView.getHeight() + itemView.getTop() + layoutParams.bottomMargin - mTitleHeight);
+                }
             }
-        }
 
 
-        mPaint.setColor(COLOR_TITLE_BG);
-        c.drawRect(parent.getPaddingLeft(), parent.getPaddingTop(), parent.getRight() - parent.getPaddingRight(), parent.getPaddingTop() + mTitleHeight, mPaint);
-        mPaint.setColor(COLOR_TITLE_FONT);
-        mPaint.getTextBounds(type, 0, type.length(), mTextRect);
-        c.drawText(type, itemView.getPaddingLeft() + 70,
-                parent.getPaddingTop() + mTitleHeight - (mTitleHeight / 2 - mTextRect.height() / 2),
-                mPaint);
+            mPaint.setColor(COLOR_TITLE_BG);
+            c.drawRect(parent.getPaddingLeft(), parent.getPaddingTop(), parent.getRight() - parent.getPaddingRight(), parent.getPaddingTop() + mTitleHeight, mPaint);
+            mPaint.setColor(COLOR_TITLE_FONT);
+            mPaint.getTextBounds(type, 0, type.length(), mTextRect);
+            c.drawText(type, itemView.getPaddingLeft() + 70,
+                    parent.getPaddingTop() + mTitleHeight - (mTitleHeight / 2 - mTextRect.height() / 2),
+                    mPaint);
 
-        if (flag){
-            c.restore();
+            if (flag){
+                c.restore();
+            }
         }
     }
 }

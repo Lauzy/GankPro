@@ -93,7 +93,7 @@ public class CollectionFragment extends BaseFragment {
         initRecyclerView();
         mSrlCollection.setProgressViewOffset(true, 120, 240);
         mSrlCollection.setRefreshing(true);
-        mSrlCollection.setColorSchemeResources(R.color.color_style_gray);
+        mSrlCollection.setColorSchemeResources(R.color.color_srl_gray);
         mSrlCollection.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

@@ -76,7 +76,7 @@ public class CategoryChildFragment extends BaseFragment {
         mRvCategory.setAdapter(mAdapter);
 
 //        mSrlCategory.setProgressViewOffset(true, 120, 240);
-        mSrlCategory.setColorSchemeResources(R.color.color_style_gray);
+        mSrlCategory.setColorSchemeResources(R.color.color_srl_gray);
         mSrlCategory.setRefreshing(true);
         mSrlCategory.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
