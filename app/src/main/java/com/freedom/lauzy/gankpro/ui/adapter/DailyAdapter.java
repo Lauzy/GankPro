@@ -58,7 +58,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         ((ViewHolder) holder).mTxtDailyCategory.setText(itemBean.getType());*/
         ((ViewHolder) holder).mTxtDailyContent.setText(itemBean.getDesc());
-//        ((ViewHolder) holder).mCvGankItem.setOnClickListener(gankDetailListener(itemBean));
+        ((ViewHolder) holder).mCvGankItem.setOnClickListener(gankDetailListener(itemBean));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int[] attrs = new int[]{R.attr.selectableItemBackgroundBorderless};
