@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/color_bg_white"
     android:id="@+id/layout_mine_content"
     tools:context="com.freedom.lauzy.gankpro.ui.fragment.MineFragment">
 

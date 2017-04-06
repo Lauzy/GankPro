@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
+             android:background="@color/color_bg_white"
              android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -14,10 +15,5 @@
         </android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <include
-        android:id="@+id/empty_view"
-        layout="@layout/layout_empty_view"
-        android:visibility="gone"/>
 
 </FrameLayout>

@@ -65,5 +65,7 @@ public class CategoryFragment extends BaseFragment {
     @Override
     protected void loadData() {
 //        mNsCategory.setFillViewport(true);
+        //设置Vp缓存
+        mVpCategory.setOffscreenPageLimit(6);
     }
 }

@@ -126,9 +126,21 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         if (AndroidFragment.class.getSimpleName().equals(tag)) {
             mBottomMainNavigation.getMenu().getItem(1).setChecked(true);
             onNavigationItemSelected(mBottomMainNavigation.getMenu().getItem(1));
+            mTxtToolbarTitle.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTxtToolbarTitle.setText("Android");
+                }
+            });
         } else if (MineFragment.class.getSimpleName().equals(tag)) {
             mBottomMainNavigation.getMenu().getItem(3).setChecked(true);
             onNavigationItemSelected(mBottomMainNavigation.getMenu().getItem(3));
+            mTxtToolbarTitle.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTxtToolbarTitle.setText("Mine");
+                }
+            });
         }
     }
 
@@ -142,9 +154,14 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         /*mToolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
         mToolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);*/
         setSupportActionBar(mToolbar);
-        mTxtToolbarTitle.setText("妹纸");
-    }
 
+        mTxtToolbarTitle.post(new Runnable() {
+            @Override
+            public void run() {
+                mTxtToolbarTitle.setText("妹纸");
+            }
+        });
+    }
 
     @Override
     protected void onStart() {

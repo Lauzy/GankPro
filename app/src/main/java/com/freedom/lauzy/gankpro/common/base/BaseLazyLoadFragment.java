@@ -3,6 +3,7 @@ package com.freedom.lauzy.gankpro.common.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,6 @@ public abstract class BaseLazyLoadFragment extends Fragment{
             isVisible = true;
             lazyLoad();
         } else {
-            //设置已经不是可见的
             isVisible = false;
         }
     }
@@ -45,13 +45,17 @@ public abstract class BaseLazyLoadFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View convertView = inflater.inflate(getLayoutResId(), container, false);
         ButterKnife.bind(this, convertView);
-        initViews();
-        isInitView = true;
-        lazyLoad();
         return convertView;
     }
 
-    //懒加载
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews();
+        isInitView = true;
+        lazyLoad();
+    }
+
     private void lazyLoad() {
         if (!isFirstLoad || !isVisible || !isInitView) {
             //如果不是第一次加载、不是可见的、不是初始化View，则不加载数据

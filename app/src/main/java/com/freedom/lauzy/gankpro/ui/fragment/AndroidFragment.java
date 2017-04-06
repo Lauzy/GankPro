@@ -1,16 +1,13 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.CategoryGankPresenter;
@@ -29,8 +26,6 @@ public class AndroidFragment extends BaseFragment {
     RecyclerView mRvAndroid;
     @BindView(R.id.android_refresh_layout)
     SwipeRefreshLayout mAndroidRefreshLayout;
-    @BindView(R.id.empty_view)
-    View mEmptyView;
     private CategoryGankPresenter mGankPresenter;
     private List<GankData.ResultsBean> mResultsBeen = new ArrayList<>();
     private AndroidAdapter mAdapter;
@@ -65,33 +60,14 @@ public class AndroidFragment extends BaseFragment {
             }
         });
 
-        /*mRvAndroid.setLoadMore(0, new OnLoadMoreListener() {
-            @Override
-            public void loadMore() {
-                mGankPresenter.loadMoreData();
-            }
-
-        });*/
-
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 mGankPresenter.loadMoreData();
                 mAndroidRefreshLayout.setEnabled(false);
             }
-        });
+        }, mRvAndroid);
 
-       /* mRvAndroid.addOnItemTouchListener(new RvItemTouchListener(mActivity, mRvAndroid, new RvItemClickListener() {
-            @Override
-            public void rvItemClick(int position) {
-                Log.e(LYTAG, "rvItemClick: " + position);
-            }
-
-            @Override
-            public void rvItemLongClick(int position) {
-
-            }
-        }));*/
         mRvAndroid.addItemDecoration(new AndroidItemDecoration(mActivity));
     }
 
@@ -110,7 +86,6 @@ public class AndroidFragment extends BaseFragment {
                     mAdapter.notifyDataSetChanged();
                     mRvAndroid.setNestedScrollingEnabled(true);
                 } else {
-                    mAdapter.setEmptyView(mEmptyView);
 //                    mRvAndroid.addEmptyView(mEmptyView);
                 }
                 mAndroidRefreshLayout.setRefreshing(false);

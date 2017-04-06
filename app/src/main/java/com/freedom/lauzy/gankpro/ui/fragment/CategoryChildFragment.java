@@ -10,6 +10,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
+import com.freedom.lauzy.gankpro.common.base.BaseLazyLoadFragment;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.presenter.CategoryGankPresenter;
 import com.freedom.lauzy.gankpro.ui.adapter.AndroidAdapter;
@@ -20,7 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class CategoryChildFragment extends BaseFragment {
+public class CategoryChildFragment extends BaseLazyLoadFragment {
 
 
     private static final String CATEGORY_TYPE = "category";
@@ -28,8 +29,6 @@ public class CategoryChildFragment extends BaseFragment {
     RecyclerView mRvCategory;
     @BindView(R.id.srl_category)
     SwipeRefreshLayout mSrlCategory;
-    @BindView(R.id.empty_view)
-    View mEmptyView;
     private String mType;
     private CategoryGankPresenter mGankPresenter;
     private AndroidAdapter mAdapter;
@@ -124,8 +123,6 @@ public class CategoryChildFragment extends BaseFragment {
                     mAdapter.notifyDataSetChanged();
                     mRvCategory.setNestedScrollingEnabled(true);
                 } else {
-                    mAdapter.setEmptyView(mEmptyView);
-//                    mRvAndroid.addEmptyView(mEmptyView);
                 }
                 mSrlCategory.setRefreshing(false);
             }

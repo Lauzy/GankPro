@@ -1,15 +1,10 @@
 package com.freedom.lauzy.gankpro.ui.fragment;
 
 
-import android.content.Context;
-
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.common.base.BaseLazyLoadFragment;
-import com.freedom.lauzy.gankpro.common.base.LazyLoadFragment;
-import com.freedom.lauzy.gankpro.function.MineTitleListener;
 
-public class MineFragment extends LazyLoadFragment{
+public class MineFragment extends BaseFragment{
 
    /* private MineTitleListener mMineTitleListener;
 

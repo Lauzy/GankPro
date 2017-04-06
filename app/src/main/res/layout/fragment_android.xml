@@ -2,6 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:background="@color/color_bg_white"
              tools:context="com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -17,9 +18,5 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <include
-        android:visibility="gone"
-        android:id="@+id/empty_view"
-        layout="@layout/layout_empty_view"/>
 
 </FrameLayout>

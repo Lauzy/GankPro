@@ -32,5 +32,7 @@
     <color name="color_libs">#0657ed</color>
     <color name="color_bottom_selected_gray">#1296db</color>
     <color name="color_unselected_tab">#1d2e38</color>
+    <color name="color_tab_selected">#FFFFFF</color>
+    <color name="color_bg_white">#FFFFFF</color>
 
 </resources>

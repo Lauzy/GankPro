@@ -83,7 +83,6 @@ public class MinePageFragment extends LazyLoadFragment {
 
     @Override
     protected void loadData() {
-        Log.e(LYTAG, "loadData: ");
         if (mMineTitleListener != null) {
             mMineTitleListener.setTitle("Mine");
         }
