@@ -13,6 +13,7 @@
     app:cardElevation="@dimen/dp_1">
 
     <LinearLayout
+        android:background="@color/color_item_bg_white"
         android:padding="@dimen/dp_10"
         android:orientation="horizontal"
         android:layout_width="match_parent"

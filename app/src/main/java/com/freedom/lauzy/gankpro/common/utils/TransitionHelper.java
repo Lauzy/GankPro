@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ public class TransitionHelper {
         List<Pair> participants = new ArrayList<>(3);
         addNonNullViewToTransitionParticipants(statusBar, participants);
         addNonNullViewToTransitionParticipants(navBar, participants);
+
         // only add transition participants if there's at least one none-null element
         // 只有添加过渡参与者，如果至少有一个非空元素
         if (otherParticipants != null && !(otherParticipants.length == 1 && otherParticipants[0] == null)) {

@@ -7,13 +7,13 @@
     <color name="color_half_transparent">#701b2a32</color>
 
     <color name="color_white">#000000</color>
-    <color name="color_transparent_white">#f012181e</color>
-    <color name="color_black">#FFFFFF</color>
+    <color name="color_transparent_white">#f712181e</color>
+    <color name="color_black">#d9d9d9</color>
 
     <color name="color_press_gray">#d0000000</color>
     <!--<color name="color_style_gray">#505050</color>-->
-    <color name="color_style_gray">#f012181e</color>
-    <color name="color_srl_gray">#f012181e</color>
+    <color name="color_style_gray">#f712181e</color>
+    <color name="color_srl_gray">#282f36</color>
     <color name="color_style_unselected_gray">#8A8A8A</color>
 
     <color name="color_menu_black">#f012181e</color>
@@ -34,6 +34,8 @@
     <color name="color_unselected_tab">#6c808c</color>
     <color name="color_tab_selected">#FFFFFF</color>
 
-    <color name="color_bg_white">#181f25</color>
+    <color name="color_bg_white">#282f36</color>
+    <!--<color name="color_bg_white">#181f25</color>-->
+    <color name="color_item_bg_white">#394047</color>
 
 </resources>

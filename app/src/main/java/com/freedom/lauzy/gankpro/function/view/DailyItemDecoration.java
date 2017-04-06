@@ -35,7 +35,7 @@ public class DailyItemDecoration extends RecyclerView.ItemDecoration {
     private List<ItemBean> mItemBeen;
 
     public DailyItemDecoration(Context context, List<ItemBean> itemBeen) {
-        COLOR_TITLE_BG = ContextCompat.getColor(context, R.color.color_white);
+        COLOR_TITLE_BG = ContextCompat.getColor(context, R.color.color_bg_white);
         COLOR_TITLE_FONT = ContextCompat.getColor(context, R.color.color_black);
         mItemBeen = itemBeen;
         mPaint = new Paint();

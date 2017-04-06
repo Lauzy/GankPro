@@ -5,10 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
 
@@ -20,8 +22,10 @@ public class AndroidItemDecoration extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
     private int mTitleHeight;
+    private static int COLOR_STYLE;
 
     public AndroidItemDecoration(Context context) {
+        COLOR_STYLE = ContextCompat.getColor(context, R.color.color_bg_white);
         mPaint = new Paint();
         float toolbarHeight = 40 + DensityUtils.px2dp(context,ScreenUtils.getStatusHeight(context));
         mTitleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toolbarHeight, context.getResources().getDisplayMetrics());
@@ -60,7 +64,7 @@ public class AndroidItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawEmpty(Canvas c, int left, int right, View child, RecyclerView.LayoutParams params, int position) {
-        mPaint.setColor(Color.WHITE);
+        mPaint.setColor(COLOR_STYLE);
         c.drawRect(left, child.getTop() - params.topMargin - mTitleHeight, right, child.getTop() - params.topMargin, mPaint);
     }
 }

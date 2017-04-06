@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/color_bg_white"
     tools:context="com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity">
 
     <android.support.v4.widget.NestedScrollView

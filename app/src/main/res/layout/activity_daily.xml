@@ -6,7 +6,7 @@
     android:id="@+id/act_daily"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_white"
+    android:background="@color/color_bg_white"
     tools:context="com.freedom.lauzy.gankpro.ui.activity.DailyActivity">
 
 

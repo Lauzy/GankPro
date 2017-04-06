@@ -66,7 +66,7 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
                 intent.putExtra(PUBLISH_DATE, item.getPublishedAt());
                 intent.putExtra(PIC_DESC, item.getDesc());
 
-                final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(((Activity) mContext), false, new
+                final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(((Activity) mContext), true, new
                         Pair<>(helper.getView(R.id.img_beauty_item), "transitionImg"));
                 TransitionUtils.transitionTo(((Activity) mContext), intent, pairs);
 

@@ -31,7 +31,7 @@ public class TransitionUtils {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void transitionTo(Activity context, Intent i) {
-        final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(context, false);
+        final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(context, true);
         ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(context,
                 pairs);
         context.startActivity(i, transitionActivityOptions.toBundle());
@@ -93,6 +93,13 @@ public class TransitionUtils {
         Explode exitTransition = new Explode();
         exitTransition.setDuration(400);
         exitTransition.setInterpolator(interpolator);
+        return exitTransition;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static Transition buildWebActExitAnim(){
+        Explode exitTransition = new Explode();
+        exitTransition.setDuration(0);
         return exitTransition;
     }
 }
