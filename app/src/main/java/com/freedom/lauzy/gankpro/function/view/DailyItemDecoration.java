@@ -121,7 +121,6 @@ public class DailyItemDecoration extends RecyclerView.ItemDecoration {
                 }
             }
 
-
             mPaint.setColor(COLOR_TITLE_BG);
             c.drawRect(parent.getPaddingLeft(), parent.getPaddingTop(), parent.getRight() - parent.getPaddingRight(), parent.getPaddingTop() + mTitleHeight, mPaint);
             mPaint.setColor(COLOR_TITLE_FONT);
