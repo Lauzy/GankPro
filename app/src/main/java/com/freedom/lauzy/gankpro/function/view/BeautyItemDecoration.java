@@ -26,7 +26,7 @@ public class BeautyItemDecoration extends RecyclerView.ItemDecoration {
     private static int COLOR_STYLE;
 
     public BeautyItemDecoration(Context context) {
-        COLOR_STYLE = ContextCompat.getColor(context, R.color.color_style_gray);
+        COLOR_STYLE = ContextCompat.getColor(context, R.color.color_bg_white);
         mPaint = new Paint();
         float toolbarHeight = 40 + DensityUtils.px2dp(context,ScreenUtils.getStatusHeight(context));
         mTitleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toolbarHeight, context.getResources().getDisplayMetrics());

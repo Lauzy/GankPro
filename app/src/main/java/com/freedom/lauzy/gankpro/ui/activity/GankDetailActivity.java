@@ -6,8 +6,11 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -17,7 +20,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -68,6 +76,8 @@ public class GankDetailActivity extends BaseToolbarActivity {
     NestedScrollView mNsvWeb;
     @BindView(R.id.tool_web_layout)
     LinearLayout mToolWebLayout;
+    @BindView(R.id.activity_gank_detail)
+    CoordinatorLayout mDetailView;
     private GankBehavior mGankBehavior;
     private String mDetailUrl;
     private String mPublishTime;
@@ -115,14 +125,20 @@ public class GankDetailActivity extends BaseToolbarActivity {
     private void setupWindowAnimations() {
         /*getWindow().setEnterTransition(TransitionUtils.buildEnterTransition());
         getWindow().setExitTransition(TransitionUtils.buildReturnTransition());*/
+        mDetailView.setTransitionGroup(true);//必须添加,指定父容器为过渡的整体单元
         int enterType = getIntent().getIntExtra(ENTER_TYPE, -1);
         if (enterType == BOUNCE_ENTER_TYPE) {
-            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
-//            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new BounceInterpolator()));
+            getWindow().setEnterTransition(TransitionUtils.buildSlideExitTrans(new AccelerateDecelerateInterpolator()));
+            getWindow().setExitTransition(TransitionUtils.buildSlideEnterTrans(new LinearOutSlowInInterpolator()));
+            getWindow().setReturnTransition(TransitionUtils.buildSlideEnterTrans(new LinearOutSlowInInterpolator()));
+//            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
         } else if (enterType == ACCELERATE_DECELERATE_ENTER_TYPE) {
-            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
-//            getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new AccelerateDecelerateInterpolator()));
+            getWindow().setEnterTransition(TransitionUtils.buildSlideEnterTrans(new FastOutSlowInInterpolator()));
+            getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new FastOutSlowInInterpolator()));
+            getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new FastOutSlowInInterpolator()));
+//            getWindow().setEnterTransition(TransitionUtils.buildExplodeEnterAnim(new FastOutLinearInInterpolator()));
         }
+
     }
 
     @Override
@@ -211,19 +227,21 @@ public class GankDetailActivity extends BaseToolbarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void collectionTheGank() {
+    private static final String COLLECTION_REPEAT = "Already collection this article.";
 
+    private void collectionTheGank() {
         Subscription collectionSub = Observable
                 .create(new Observable.OnSubscribe<CollectionEntity>() {
                     @Override
                     public void call(Subscriber<? super CollectionEntity> subscriber) {
                         CollectionEntityDao entityDao = GankApp.getInstance().getDaoSession()
                                 .getCollectionEntityDao();
-
                         CollectionEntity gankEntity;
                         try {
                             gankEntity = entityDao.queryBuilder().where(CollectionEntityDao
                                     .Properties.DetailUrl.eq(mDetailUrl)).unique();
+                            //如果重复收藏，则抛出指定信息的异常以提示正确的语句
+                            subscriber.onError(new Throwable(COLLECTION_REPEAT));
                         } catch (Exception e) {
                             gankEntity = null;
                         }
@@ -252,11 +270,14 @@ public class GankDetailActivity extends BaseToolbarActivity {
                     @Override
                     public void call(Throwable throwable) {
                         throwable.printStackTrace();
-                        SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "收藏失败，再试试").show();
+                        if (COLLECTION_REPEAT.equals(throwable.getMessage())) {
+                            SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "已经收藏过该文章了哦").show();
+                        } else {
+                            SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "收藏失败，再试试").show();
+                        }
                     }
                 });
         addSubscription(collectionSub);
-
     }
 
     @Override
@@ -285,6 +306,9 @@ public class GankDetailActivity extends BaseToolbarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mWebProgressbar != null) {
+            mWebProgressbar.setVisibility(View.GONE);
+        }
         if (mWbDetail != null)
             mWbDetail.destroy();
     }

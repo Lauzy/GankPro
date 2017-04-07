@@ -17,9 +17,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 
 import com.freedom.lauzy.gankpro.R;

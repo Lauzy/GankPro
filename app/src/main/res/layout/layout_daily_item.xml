@@ -16,6 +16,7 @@
     app:cardElevation="@dimen/dp_1">
 
     <TextView
+        android:background="@color/color_item_bg_white"
         android:id="@+id/txt_daily_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

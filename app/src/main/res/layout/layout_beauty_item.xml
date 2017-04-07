@@ -11,6 +11,7 @@
     app:cardElevation="@dimen/dp_2">
 
     <ImageView
+        android:background="@color/color_item_bg_white"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:transitionName="@string/transition_img"

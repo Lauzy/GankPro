@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -10,6 +10,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:popupMenuStyle">@style/GankPopupMenu</item>
     </style>
 
     <style name="ImgActTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -39,7 +40,7 @@
     </style>
 
     <style name="WhiteText" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColor">@color/color_daily_title_white</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
@@ -54,5 +55,17 @@
         <item name="overlapAnchor">false</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
     </style>
 
+    <!--设置PopupMenu背景-->
+    <style name="GankPopupMenu"
+           parent="@android:style/Widget.Holo.PopupMenu">
+        <item name="android:popupBackground">@color/color_item_bg_white</item>
+        <item name="android:popupElevation" tools:targetApi="lollipop">@dimen/dp_10</item>
+        <item name="android:popupAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <style name="GankPopupMenuCallScreen"
+           parent="Widget.AppCompat.Light.PopupMenu">
+        <item name="android:popupMenuStyle">@style/GankPopupMenu</item>
+    </style>
 
 </resources>

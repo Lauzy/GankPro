@@ -50,6 +50,7 @@ public class CollectionFragment extends BaseFragment {
     private CollectionAdapter mAdapter;
     private CollectionPresenter mCollectionPresenter;
     private View mEmptyView;
+    private int mCurrentPos;
 
 
     public CollectionFragment() {
@@ -91,7 +92,7 @@ public class CollectionFragment extends BaseFragment {
     @Override
     protected void initViews() {
         initRecyclerView();
-        mSrlCollection.setProgressViewOffset(true, 120, 240);
+        mSrlCollection.setProgressViewOffset(true, 0, 100);
         mSrlCollection.setRefreshing(true);
         mSrlCollection.setColorSchemeResources(R.color.color_srl_gray);
         mSrlCollection.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -109,7 +110,8 @@ public class CollectionFragment extends BaseFragment {
         mAdapter = new CollectionAdapter
                 (R.layout.layout_collection_item, mCollectionEntities);
         mRvCollection.setAdapter(mAdapter);
-        mRvCollection.addItemDecoration(new AndroidItemDecoration(mActivity));
+        //删除第一个时会出现bug，故用View填充
+//        mRvCollection.addItemDecoration(new AndroidItemDecoration(mActivity));
         mRvCollection.setNestedScrollingEnabled(false);
         mEmptyView = View.inflate(mActivity, R.layout.layout_empty_view, null);
     }
@@ -134,13 +136,14 @@ public class CollectionFragment extends BaseFragment {
 
             @Override
             public void onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
+                mCurrentPos = position;
                 final CollectionEntity entity = (CollectionEntity) adapter.getData().get(position);
                 PopupMenu popupMenu = new PopupMenu(mActivity, view);
                 popupMenu.getMenuInflater().inflate(R.menu.menu_delete_item, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        removeItem(entity, position);
+                        removeItem(entity, mCurrentPos);
                         return false;
                     }
                 });
@@ -195,6 +198,8 @@ public class CollectionFragment extends BaseFragment {
                     } else {
                         mRvCollection.setNestedScrollingEnabled(true);
                     }*/
+                }else {
+                    mAdapter.setEmptyView(mEmptyView);
                 }
                 mSrlCollection.setRefreshing(false);
             }
@@ -218,8 +223,8 @@ public class CollectionFragment extends BaseFragment {
             @Override
             public void call(Subscriber<? super CollectionEntity> subscriber) {
                 CollectionEntityDao entityDao = GankApp.getInstance().getDaoSession().getCollectionEntityDao();
-                entityDao.delete(entity);
                 mCollectionEntities.remove(entity);
+                entityDao.delete(entity);
                 subscriber.onNext(entity);
                 subscriber.onCompleted();
             }
@@ -229,6 +234,11 @@ public class CollectionFragment extends BaseFragment {
                     @Override
                     public void call(CollectionEntity entity) {
                         mAdapter.notifyItemRemoved(position);
+                        mAdapter.notifyItemRangeChanged(position, mCollectionEntities.size() - position);
+//                        mAdapter.remove(position);
+                        if (mCollectionEntities == null || mCollectionEntities.size() == 0){
+                            mAdapter.setEmptyView(mEmptyView);
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
