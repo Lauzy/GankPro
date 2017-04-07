@@ -6,7 +6,7 @@
     <TextView
         android:padding="@dimen/dp_20"
         android:textSize="15sp"
-        android:background="@color/color_white"
+        android:background="@color/color_bg_white"
         android:textColor="@color/color_black"
         android:gravity="center"
         android:text="Awesome open source libraries."
