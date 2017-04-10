@@ -57,20 +57,24 @@ public class MineAdapter extends RecyclerView.Adapter {
             ((ItemHolder) holder).mTxtItemContent.setText(mineContentArr[position - 1]);
             ((ItemHolder) holder).mSwitchMineItem.setVisibility(position == 2 ? View.VISIBLE : View.GONE);
             if (position == 2) {
-                ((ItemHolder) holder).mSwitchMineItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        int mode = mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-                        if (mode == Configuration.UI_MODE_NIGHT_YES) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        }
-                        ((Activity) mContext).recreate();
-                    }
-                });
+                switchMode((ItemHolder) holder);
             }
         }
+    }
+
+    private void switchMode(ItemHolder holder) {
+        holder.mSwitchMineItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int mode = mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (mode == Configuration.UI_MODE_NIGHT_YES) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                ((Activity) mContext).recreate();
+            }
+        });
     }
 
     @Override
