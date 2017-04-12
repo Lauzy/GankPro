@@ -20,10 +20,8 @@
 
 ## 预览
 
-<img src="/imgs/ScreenshotS1.png" alt="screenshot" title="screenshot" width="270" height="486" />
-<img src="/imgs/ScreenshotS2.png" alt="screenshot" title="screenshot" width="270" height="486" />
-<img src="/imgs/ScreenshotS4.png" alt="screenshot" title="screenshot" width="270" height="486" />
-<img src="/imgs/ScreenshotS5.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/imgs/ScreenshotS1.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/imgs/ScreenshotS4.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS5.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 
 
