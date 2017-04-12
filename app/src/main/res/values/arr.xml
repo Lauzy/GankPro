@@ -49,4 +49,21 @@
         <item>https://github.com/tbruyelle/RxPermissions</item>
         <item>https://github.com/greenrobot/greenDAO</item>
     </string-array>
+
+
+    <string-array name="AuthorTipArr">
+        <item>我的Github：</item>
+        <item>个人网站：</item>
+        <item>微博：</item>
+        <item>项目地址：</item>
+        <item>求反馈：</item>
+    </string-array>
+
+    <string-array name="AuthorUrlArr">
+        <item>https://github.com/Lauzy</item>
+        <item>http://lauzy.me</item>
+        <item>http://weibo.com/freedompal</item>
+        <item>https://github.com/Lauzy/GankPro</item>
+        <item>https://github.com/Lauzy/GankPro/issues</item>
+    </string-array>
 </resources>

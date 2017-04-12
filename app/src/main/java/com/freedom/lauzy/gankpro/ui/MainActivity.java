@@ -1,8 +1,10 @@
 package com.freedom.lauzy.gankpro.ui;
 
+import android.animation.Animator;
+import android.app.Activity;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Build;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
@@ -21,6 +24,7 @@ import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
+import com.freedom.lauzy.gankpro.function.utils.SharePrefUtils;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
@@ -237,9 +241,48 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         if (mode == Configuration.UI_MODE_NIGHT_YES) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            SharePrefUtils.setNightMode(false);
         } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            SharePrefUtils.setNightMode(true);
         }
+        getWindow().setWindowAnimations(R.style.WindowSwitchDayNightModeAnimStyle);
         recreate();
+
+
+        /*final View rootView = getWindow().getDecorView();
+        rootView.setDrawingCacheEnabled(true);
+        rootView.buildDrawingCache(true);
+
+        final Bitmap localBitmap = Bitmap.createBitmap(rootView.getDrawingCache());
+        rootView.setDrawingCacheEnabled(false);
+        if (null != localBitmap && rootView instanceof ViewGroup) {
+            final View tmpView = new View(getApplicationContext());
+            tmpView.setBackgroundDrawable(new BitmapDrawable(getResources(), localBitmap));
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            ((ViewGroup) rootView).addView(tmpView, params);
+            tmpView.animate().alpha(0f).setDuration(1000).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    System.gc();
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ((ViewGroup) rootView).removeView(tmpView);
+                    localBitmap.recycle();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            }).start();
+        }*/
     }
 }

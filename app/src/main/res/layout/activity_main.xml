@@ -48,7 +48,7 @@
         app:layout_anchorGravity="bottom|end"
         app:layout_behavior="@string/fab_vertical_behavior"
         app:rippleColor="@color/color_style_unselected_gray"
-        app:srcCompat="@mipmap/icon_change_day_night_mode"/>
+        app:srcCompat="@mipmap/icon_fab_mode"/>
 
 </android.support.design.widget.CoordinatorLayout>
 

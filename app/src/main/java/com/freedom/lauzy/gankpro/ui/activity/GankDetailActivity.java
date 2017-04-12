@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
@@ -20,12 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -44,7 +37,7 @@ import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
 import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 
-import java.util.concurrent.Future;
+import java.util.List;
 
 import butterknife.BindView;
 import rx.Observable;
@@ -52,7 +45,6 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE;
@@ -238,10 +230,19 @@ public class GankDetailActivity extends BaseToolbarActivity {
                                 .getCollectionEntityDao();
                         CollectionEntity gankEntity;
                         try {
+                            List<CollectionEntity> collectionEntities = entityDao.queryBuilder().build().list();
                             gankEntity = entityDao.queryBuilder().where(CollectionEntityDao
                                     .Properties.DetailUrl.eq(mDetailUrl)).unique();
+
+                            for (int i = 0; i < collectionEntities.size(); i++) {
+                                if (collectionEntities.get(i).getDetailUrl().equals(mDetailUrl)) {
+                                    subscriber.onError(new Throwable(COLLECTION_REPEAT));
+                                    break;
+                                }
+                            }
                             //如果重复收藏，则抛出指定信息的异常以提示正确的语句
-                            subscriber.onError(new Throwable(COLLECTION_REPEAT));
+//                            subscriber.onError(new Throwable(COLLECTION_REPEAT));
+
                         } catch (Exception e) {
                             gankEntity = null;
                         }

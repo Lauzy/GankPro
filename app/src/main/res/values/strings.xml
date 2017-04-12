@@ -21,4 +21,11 @@
     <string name="title_activity_daily">DailyActivity</string>
     <string name="action_settings">Settings</string>
     <string name="string_img_share_elements">transitionImg</string>
+
+    <string name="about_me_desc">
+        我的Github: https://github.com/Lauzy\n个人网站：http://lauzy.me\n微博：http://weibo.com/freedompal\n\n
+
+        项目地址：https://github.com/Lauzy/GankPro\n
+        求反馈：https://github.com/Lauzy/GankPro/issues\n
+    </string>
 </resources>

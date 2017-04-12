@@ -68,4 +68,14 @@
         <item name="android:popupMenuStyle">@style/GankPopupMenu</item>
     </style>
 
+    <style name="WindowSwitchDayNightModeAnimStyle">
+        <item name="@android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="@android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="WindowBtnSwitchDayNightModeAnimStyle">
+        <item name="@android:windowEnterAnimation">@anim/fade_in_switch</item>
+        <item name="@android:windowExitAnimation">@anim/fade_out_switch</item>
+    </style>
+
 </resources>

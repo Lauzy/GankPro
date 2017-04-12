@@ -2,8 +2,10 @@ package com.freedom.lauzy.gankpro.function.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -24,9 +26,13 @@ public class AndroidItemDecoration extends RecyclerView.ItemDecoration {
     private static int COLOR_STYLE;
 
     public AndroidItemDecoration(Context context) {
-        COLOR_STYLE = ContextCompat.getColor(context, R.color.color_bg_white);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            COLOR_STYLE = ContextCompat.getColor(context, R.color.color_bg_white);
+        } else {
+            COLOR_STYLE = Color.parseColor("#00000000");
+        }
         mPaint = new Paint();
-        float toolbarHeight = 40 + DensityUtils.px2dp(context,ScreenUtils.getStatusHeight(context));
+        float toolbarHeight = 40 + DensityUtils.px2dp(context, ScreenUtils.getStatusHeight(context));
         mTitleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toolbarHeight, context.getResources().getDisplayMetrics());
     }
 

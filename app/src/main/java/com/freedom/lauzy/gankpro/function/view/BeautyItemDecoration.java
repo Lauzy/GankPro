@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -22,13 +23,17 @@ public class BeautyItemDecoration extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
     private int mTitleHeight;
-//    private static final int COLOR_STYLE = Color.parseColor("#f0000000");
+    //    private static final int COLOR_STYLE = Color.parseColor("#f0000000");
     private static int COLOR_STYLE;
 
     public BeautyItemDecoration(Context context) {
-        COLOR_STYLE = ContextCompat.getColor(context, R.color.color_bg_white);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            COLOR_STYLE = ContextCompat.getColor(context, R.color.color_bg_white);
+        }else {
+            COLOR_STYLE = Color.parseColor("#00000000");
+        }
         mPaint = new Paint();
-        float toolbarHeight = 40 + DensityUtils.px2dp(context,ScreenUtils.getStatusHeight(context));
+        float toolbarHeight = 40 + DensityUtils.px2dp(context, ScreenUtils.getStatusHeight(context));
         mTitleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toolbarHeight, context.getResources().getDisplayMetrics());
     }
 

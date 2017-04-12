@@ -1,17 +1,23 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,8 +30,13 @@ import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
+import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 
 import butterknife.BindView;
+
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.BOUNCE_ENTER_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ENTER_TYPE;
 
 public class LibsGithubActivity extends BaseToolbarActivity {
 
@@ -44,6 +55,8 @@ public class LibsGithubActivity extends BaseToolbarActivity {
     ProgressBar mWebProgressbar;
     @BindView(R.id.tool_web_layout)
     LinearLayout mToolWebLayout;
+    @BindView(R.id.activity_libs_detail)
+    CoordinatorLayout mDetailView;
     private GankBehavior mGankBehavior;
 
     public static Intent newInstance(Context context, String libLink) {
@@ -59,10 +72,19 @@ public class LibsGithubActivity extends BaseToolbarActivity {
 
     @Override
     protected void initViews() {
+        setupWindowAnimations();
         mToolbarCommon.setTitle("");
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_close);
         mGankBehavior = GankBehavior.from(mToolWebLayout);
         mGankBehavior.setCanScroll(false);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupWindowAnimations() {
+        mDetailView.setTransitionGroup(true);//必须添加,指定父容器为过渡的整体单元
+        getWindow().setEnterTransition(TransitionUtils.buildSlideEnterTrans(new AccelerateDecelerateInterpolator()));
+        getWindow().setExitTransition(TransitionUtils.buildSlideEnterTrans(new LinearOutSlowInInterpolator()));
+        getWindow().setReturnTransition(TransitionUtils.buildSlideEnterTrans(new LinearOutSlowInInterpolator()));
     }
 
     @Override

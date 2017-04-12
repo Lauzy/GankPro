@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.net.NetConstants;
+import com.freedom.lauzy.gankpro.function.utils.SharePrefUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,15 +64,19 @@ public class MineAdapter extends RecyclerView.Adapter {
     }
 
     private void switchMode(ItemHolder holder) {
+        holder.mSwitchMineItem.setChecked(SharePrefUtils.isNightMode());
         holder.mSwitchMineItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int mode = mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
                 if (mode == Configuration.UI_MODE_NIGHT_YES) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    SharePrefUtils.setNightMode(false);
                 } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    SharePrefUtils.setNightMode(true);
                 }
+                ((Activity) mContext).getWindow().setWindowAnimations(R.style.WindowBtnSwitchDayNightModeAnimStyle);
                 ((Activity) mContext).recreate();
             }
         });

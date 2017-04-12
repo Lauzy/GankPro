@@ -1,12 +1,17 @@
 package com.freedom.lauzy.gankpro.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.freedom.lauzy.gankpro.function.db.LyDaoHelper;
 import com.freedom.lauzy.gankpro.function.greendao.DaoMaster;
 import com.freedom.lauzy.gankpro.function.greendao.DaoSession;
 import com.freedom.lauzy.gankpro.function.net.ApiFactory;
+import com.freedom.lauzy.gankpro.function.utils.SharePrefUtils;
 
 /**
  * App
@@ -15,9 +20,11 @@ import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 @SuppressWarnings("unused")
 public class GankApp extends Application {
 
+    private static final String SHARED_PREF_NAME = "gank_config_share_pref";
     private static GankApp sContext;
     private SQLiteDatabase db;
     private DaoSession mDaoSession;
+    public static SharedPreferences sConfigPreferences;
 
     @Override
     public void onCreate() {
@@ -25,6 +32,12 @@ public class GankApp extends Application {
         sContext = this;
         ApiFactory.getInstance().init(this);
         initDataBase();
+        initPref();
+        AppCompatDelegate.setDefaultNightMode(SharePrefUtils.isNightMode() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+    }
+
+    private void initPref() {
+        sConfigPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
     }
 
     private void initDataBase() {

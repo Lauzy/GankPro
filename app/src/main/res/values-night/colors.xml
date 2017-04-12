@@ -6,13 +6,15 @@
 
     <color name="color_half_transparent">#701b2a32</color>
 
+    <color name="color_status_transparent">#30000000</color>
+
     <color name="color_white">#000000</color>
     <color name="color_transparent_white">#f712181e</color>
     <color name="color_black">#d9d9d9</color>
 
     <color name="color_press_gray">#d0000000</color>
     <!--<color name="color_style_gray">#505050</color>-->
-    <color name="color_style_gray">#f712181e</color>
+    <color name="color_style_gray">#f714191f</color>
     <color name="color_srl_gray">#282f36</color>
     <color name="color_style_unselected_gray">#8A8A8A</color>
 

@@ -2,6 +2,7 @@ package com.freedom.lauzy.gankpro.ui.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +17,12 @@ import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
+import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.entity.CollectionEntity;
 import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
 import com.freedom.lauzy.gankpro.function.view.AndroidItemDecoration;
 import com.freedom.lauzy.gankpro.presenter.CollectionPresenter;
+import com.freedom.lauzy.gankpro.ui.activity.GankDetailActivity;
 import com.freedom.lauzy.gankpro.ui.adapter.CollectionAdapter;
 import com.freedom.lauzy.gankpro.view.CollectionView;
 
@@ -32,6 +35,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.BOUNCE_ENTER_TYPE;
+import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ENTER_TYPE;
 
 public class CollectionFragment extends BaseFragment {
 
@@ -124,6 +130,18 @@ public class CollectionFragment extends BaseFragment {
         initPresenter();
         mCollectionPresenter.initData();
         longClickDelete();
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                CollectionEntity collectionEntity = (CollectionEntity) adapter.getData().get(position);
+                Intent intent = new Intent(mActivity, GankDetailActivity.class);
+                intent.putExtra(ValueConstants.GANK_DETAIL, collectionEntity.getDetailUrl());
+                intent.putExtra(ValueConstants.GANK_PUBLISH_TIME, collectionEntity.getDate());
+                intent.putExtra(ValueConstants.GANK_DESC, collectionEntity.getDesc());
+                intent.putExtra(ValueConstants.GANK_TYPE, collectionEntity.getType());
+                startActivity(intent);
+            }
+        });
     }
 
     private void longClickDelete() {
@@ -234,7 +252,8 @@ public class CollectionFragment extends BaseFragment {
                     @Override
                     public void call(CollectionEntity entity) {
                         mAdapter.notifyItemRemoved(position);
-                        mAdapter.notifyItemRangeChanged(position, mCollectionEntities.size() - position);
+                        List<CollectionEntity> list = GankApp.getInstance().getDaoSession().getCollectionEntityDao().queryBuilder().list();
+                        mAdapter.notifyItemRangeChanged(position, list.size() - position);
 //                        mAdapter.remove(position);
                         if (mCollectionEntities == null || mCollectionEntities.size() == 0){
                             mAdapter.setEmptyView(mEmptyView);

@@ -6,6 +6,8 @@
 
     <color name="color_half_transparent">#70000000</color>
 
+    <color name="color_status_transparent">#40000000</color>
+
     <color name="color_white">#FFFFFF</color>
     <color name="color_transparent_white">#f0FFFFFF</color>
     <color name="color_black">#000000</color>
@@ -29,7 +31,7 @@
     <color name="color_positive">#087766</color>
     <color name="color_negative">#e24107</color>
 
-    <color name="color_libs">#0657ed</color>
+    <color name="color_libs">#1b7fd9</color>
     <color name="color_bottom_selected_gray">#1296db</color>
     <color name="color_unselected_tab">#91c2e7</color>
     <color name="color_tab_selected">#FFFFFF</color>

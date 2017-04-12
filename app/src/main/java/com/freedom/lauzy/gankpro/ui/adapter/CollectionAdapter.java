@@ -1,7 +1,5 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
-import android.view.View;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.freedom.lauzy.gankpro.R;
