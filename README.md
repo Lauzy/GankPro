@@ -3,10 +3,10 @@
 
 ## 介绍
 
-「Gank」一款独特风格的干货集中营[Gank.io](http://gank.io)Android客户端。首页为妹子，还具有Android及其他分类的技术干货，可以保存妹子图片，本地收藏干货数据，切换夜间模式。
+「Gank」一款独特风格的干货集中营[Gank.io](http://gank.io)Android客户端。首页为妹子，还具有Android及其他分类的技术干货，可以保存妹子图片，本地收藏干货数据，切换夜间模式等。
 
 ## 体验
-[下载地址](https://github.com/Lauzy/GankPro/blob/master/apk/gank.apk)
+[下载地址](https://github.com/Lauzy/GankPro/raw/master/apk/gank.apk)
 
 ## 特征及技术点
 
@@ -23,7 +23,10 @@
 <img src="/imgs/ScreenshotS1.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS2.png" alt="screenshot" title="screenshot" width="270" height="486" />
 <img src="/imgs/ScreenshotS4.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS5.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-
+## TODO、TO SOLVE
+1. 分享功能
+2. 夜间模式7.0+动画(可采用换肤框架实现)
+3. ……
 
 欢迎提[issues](https://github.com/Lauzy/GankPro/issues/new)、建议或Bug。
 
