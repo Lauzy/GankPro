@@ -16,7 +16,8 @@
 4. 半透明(沉浸)状态栏，切换夜间模式；
 5. RxPermissions动态权限判断，GreenDao实现收藏功能；
 6. 个人中心页面及跳转均采用Fragment实现；
-7. 每日内容通过自定义RecyclerView.ItemDecoration实现分组及悬停。
+7. 每日内容通过自定义RecyclerView.ItemDecoration实现分组及悬停；
+8. RxJava线程调度保存图片及数据库增删改查。
 
 ## 预览
 
