@@ -92,7 +92,7 @@ public class GankBottomBehavior extends CoordinatorLayout.Behavior<View> impleme
         }
         CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         if (!(behavior instanceof GankBottomBehavior)) {
-            throw new IllegalArgumentException("The view is not associated with ByeBurgerBehavior");
+            throw new IllegalArgumentException("The view is not associated with GankBottomBehavior");
         }
         return (GankBottomBehavior) behavior;
     }
