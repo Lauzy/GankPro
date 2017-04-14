@@ -19,6 +19,11 @@
 7. 每日内容通过自定义RecyclerView.ItemDecoration实现分组及悬停；
 8. RxJava线程调度保存图片及数据库增删改查。
 
+## 仿知乎首页滑动隐藏显示的库
+
+自定义Behavior，跟随手势滑动，显示隐藏标题栏、底部导航栏及悬浮按钮的Android Behavior Library。
+求Star[https://github.com/Lauzy/LBehavior](https://github.com/Lauzy/LBehavior)
+
 ## 预览
 
 <img src="/imgs/ScreenshotS1.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS2.png" alt="screenshot" title="screenshot" width="270" height="486" />
