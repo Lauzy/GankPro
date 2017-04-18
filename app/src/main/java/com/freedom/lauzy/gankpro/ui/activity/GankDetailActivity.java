@@ -115,8 +115,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupWindowAnimations() {
-        /*getWindow().setEnterTransition(TransitionUtils.buildEnterTransition());
-        getWindow().setExitTransition(TransitionUtils.buildReturnTransition());*/
+
         mDetailView.setTransitionGroup(true);//必须添加,指定父容器为过渡的整体单元
         int enterType = getIntent().getIntExtra(ENTER_TYPE, -1);
         if (enterType == BOUNCE_ENTER_TYPE) {
@@ -163,18 +162,6 @@ public class GankDetailActivity extends BaseToolbarActivity {
         });
 
         mWbDetail.setWebViewClient(new WebViewClient() {
-            /*@Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                mWbDetail.loadUrl(view.getUrl());
-                return true;
-            }*/
-
-            /*@Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }*/
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
