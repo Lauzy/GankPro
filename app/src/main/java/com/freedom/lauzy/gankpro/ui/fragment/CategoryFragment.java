@@ -10,6 +10,7 @@ import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
 import com.freedom.lauzy.gankpro.common.utils.DensityUtils;
 import com.freedom.lauzy.gankpro.common.utils.ScreenUtils;
+import com.freedom.lauzy.gankpro.function.view.ZoomOutPageTransformer;
 import com.freedom.lauzy.gankpro.ui.adapter.CategoryPagerAdapter;
 
 import butterknife.BindArray;
@@ -59,7 +60,9 @@ public class CategoryFragment extends BaseFragment {
         mTabCategory.setupWithViewPager(mVpCategory);
 
         int statusTitle = DensityUtils.dp2px(mActivity, 40) + ScreenUtils.getStatusHeight(mActivity);
-        mCategoryContent.setPadding(0,statusTitle,0,0);
+        mCategoryContent.setPadding(0, statusTitle, 0, 0);
+
+        mVpCategory.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
     @Override
