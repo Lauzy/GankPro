@@ -72,7 +72,7 @@ public class LibsGithubActivity extends BaseToolbarActivity {
 
     @Override
     protected void initViews() {
-        setupWindowAnimations();
+//        setupWindowAnimations();
         mToolbarCommon.setTitle("");
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_close);
         mGankBehavior = GankBehavior.from(mToolWebLayout);
@@ -80,7 +80,7 @@ public class LibsGithubActivity extends BaseToolbarActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setupWindowAnimations() {
+    protected void setupWindowAnimations() {
         mDetailView.setTransitionGroup(true);//必须添加,指定父容器为过渡的整体单元
         getWindow().setEnterTransition(TransitionUtils.buildSlideEnterTrans(new AccelerateDecelerateInterpolator()));
         getWindow().setExitTransition(TransitionUtils.buildSlideEnterTrans(new LinearOutSlowInInterpolator()));

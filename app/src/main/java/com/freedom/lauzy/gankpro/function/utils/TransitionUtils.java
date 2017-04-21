@@ -64,19 +64,25 @@ public class TransitionUtils {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Slide buildSlideEnterTrans(Interpolator interpolator){
-        Slide enterSlide = new Slide(Gravity.RIGHT);
-        enterSlide.setDuration(500);
-        enterSlide.setInterpolator(interpolator);
-        return enterSlide;
+    public static Slide buildSlideEnterTrans(Interpolator interpolator) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Slide enterSlide = new Slide(Gravity.RIGHT);
+            enterSlide.setDuration(500);
+            enterSlide.setInterpolator(interpolator);
+            return enterSlide;
+        }
+        return null;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Slide buildSlideExitTrans(Interpolator interpolator){
-        Slide exitSlide = new Slide(Gravity.LEFT);
-        exitSlide.setDuration(400);
-        exitSlide.setInterpolator(interpolator);
-        return exitSlide;
+    public static Slide buildSlideExitTrans(Interpolator interpolator) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Slide exitSlide = new Slide(Gravity.LEFT);
+            exitSlide.setDuration(400);
+            exitSlide.setInterpolator(interpolator);
+            return exitSlide;
+        }
+        return null;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -89,15 +95,18 @@ public class TransitionUtils {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Transition buildExplodeExitAnim(Interpolator interpolator){
-        Explode exitTransition = new Explode();
-        exitTransition.setDuration(400);
-        exitTransition.setInterpolator(interpolator);
-        return exitTransition;
+    public static Transition buildExplodeExitAnim(Interpolator interpolator) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Explode exitTransition = new Explode();
+            exitTransition.setDuration(400);
+            exitTransition.setInterpolator(interpolator);
+            return exitTransition;
+        }
+        return null;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Transition buildWebActExitAnim(){
+    public static Transition buildWebActExitAnim() {
         Explode exitTransition = new Explode();
         exitTransition.setDuration(0);
         return exitTransition;

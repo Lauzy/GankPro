@@ -74,11 +74,11 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         setSupportActionBar(mToolbarCommon);
         mToolbarCommon.setTitle("");
         ViewCompat.setTransitionName(mImgBeauty, getString(R.string.string_img_share_elements));
-        setupWindowAnimations();
+//        setupWindowAnimations();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setupWindowAnimations() {
+    protected void setupWindowAnimations() {
         getWindow().setEnterTransition(TransitionUtils.buildExplodeExitAnim(new LinearOutSlowInInterpolator()));
         getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new FastOutLinearInInterpolator()));
         getWindow().setReturnTransition(TransitionUtils.buildExplodeExitAnim(new LinearInterpolator()));

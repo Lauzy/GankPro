@@ -64,7 +64,7 @@ public abstract class BaseToolbarActivity extends BaseActivity {
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.color_status_transparent));
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.color_status_transparent));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -74,7 +74,20 @@ public abstract class BaseToolbarActivity extends BaseActivity {
 //        ButterKnife.bind(this);
         setToolBar();
 //        loadData();
+        setWindowAnim();
+
     }
+
+    private void setWindowAnim() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            setupWindowAnimations();
+        }
+    }
+
+    protected void setupWindowAnimations() {
+
+    }
+
 
     private void setToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_common);

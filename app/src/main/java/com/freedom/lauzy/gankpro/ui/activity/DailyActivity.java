@@ -133,7 +133,6 @@ public class DailyActivity extends BaseToolbarActivity {
     @Override
     protected void initViews() {
         ViewCompat.setTransitionName(mImgTitle, "transitionImg");
-        setupWindowAnimations();
         initTitle();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -171,7 +170,8 @@ public class DailyActivity extends BaseToolbarActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setupWindowAnimations() {
+    @Override
+    protected void setupWindowAnimations() {
         getWindow().setEnterTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
         getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
         getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));

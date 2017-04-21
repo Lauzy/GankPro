@@ -83,7 +83,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
 
     @Override
     protected void initViews() {
-        setupWindowAnimations();
+//        setupWindowAnimations();
         getIntentData();
         initMainView();
     }
@@ -114,7 +114,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setupWindowAnimations() {
+    protected void setupWindowAnimations() {
 
         mDetailView.setTransitionGroup(true);//必须添加,指定父容器为过渡的整体单元
         int enterType = getIntent().getIntExtra(ENTER_TYPE, -1);
