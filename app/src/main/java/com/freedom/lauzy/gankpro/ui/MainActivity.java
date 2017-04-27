@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +30,7 @@ import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.MineFragment;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,6 +64,8 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
     @Override
     protected void loadData() {
+        /*TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath()
+        +"/gank_patch.apk");*/
     }
 
     /**

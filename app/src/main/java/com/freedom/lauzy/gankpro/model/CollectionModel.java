@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.model;
 
 import com.freedom.lauzy.gankpro.app.GankApp;
+import com.freedom.lauzy.gankpro.app.GankWithTinkerApp;
 import com.freedom.lauzy.gankpro.function.entity.CollectionEntity;
 import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
 
@@ -24,6 +25,7 @@ public class CollectionModel {
             @Override
             public void call(Subscriber<? super List<CollectionEntity>> subscriber) {
                 CollectionEntityDao entityDao = GankApp.getInstance().getDaoSession().getCollectionEntityDao();
+//                CollectionEntityDao entityDao = GankWithTinkerApp.getGankWithTinkerApp().getDaoSession().getCollectionEntityDao();
                 List<CollectionEntity> collectionEntities = entityDao.loadAll();
                 subscriber.onNext(collectionEntities);
                 subscriber.onCompleted();

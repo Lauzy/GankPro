@@ -10,6 +10,7 @@ buildscript {
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+//        classpath "com.tencent.tinker:tinker-patch-gradle-plugin:${TINKER_VERSION}"
     }
 }
 
@@ -24,4 +25,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    compileSdk = 25
+    minSdk = 14
+    targetSdk = 25
+    support = "25.3.1"
+    buildTools = "25.0.2"
 }

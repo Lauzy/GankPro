@@ -92,8 +92,8 @@ public abstract class BaseToolbarActivity extends BaseActivity {
     private void setToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_common);
         if (toolbar != null) {
-            toolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(GankApp.getInstance());
-            toolbar.setPadding(0, ScreenUtils.getStatusHeight(GankApp.getInstance()), 0, 0);
+            toolbar.getLayoutParams().height += ScreenUtils.getStatusHeight(getApplicationContext());
+            toolbar.setPadding(0, ScreenUtils.getStatusHeight(getApplicationContext()), 0, 0);
             setSupportActionBar(toolbar);
         }
     }
