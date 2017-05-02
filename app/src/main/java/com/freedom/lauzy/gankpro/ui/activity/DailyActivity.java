@@ -51,6 +51,8 @@ public class DailyActivity extends BaseToolbarActivity {
     private static final String LYTAG = DailyActivity.class.getSimpleName();
     @BindView(R.id.img_title)
     ImageView mImgTitle;
+    @BindView(R.id.img_title2)
+    ImageView mImgTitle2;
     @BindView(R.id.toolbar_daily)
     Toolbar mToolbar;
     @BindView(R.id.toolbar_layout)
@@ -173,8 +175,8 @@ public class DailyActivity extends BaseToolbarActivity {
     @Override
     protected void setupWindowAnimations() {
         getWindow().setEnterTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
-        getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
-        getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
+//        getWindow().setExitTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
+//        getWindow().setReturnTransition(TransitionUtils.buildSlideExitTrans(new LinearOutSlowInInterpolator()));
     }
 
     private void initTitle() {
@@ -207,9 +209,11 @@ public class DailyActivity extends BaseToolbarActivity {
 
 
                 Intent intent = ImgBeautyActivity.newInstance(DailyActivity.this, mImgUrl, mPicDesc);
-                final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(DailyActivity.this, false, new
+                final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(DailyActivity.this, true, new
                         Pair<>(mImgTitle, getString(R.string.string_img_share_elements)));
                 TransitionUtils.transitionTo(DailyActivity.this, intent, pairs);
+                mImgTitle2.setVisibility(View.VISIBLE);
+                ImageLoader.loadImage(this, mImgUrl, mImgTitle2);
                /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions
                             .makeSceneTransitionAnimation(this, mImgTitle, "transitionDetailImg").toBundle());
@@ -218,6 +222,12 @@ public class DailyActivity extends BaseToolbarActivity {
                 }*/
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mImgTitle2.setVisibility(View.GONE);
     }
 
     @Override

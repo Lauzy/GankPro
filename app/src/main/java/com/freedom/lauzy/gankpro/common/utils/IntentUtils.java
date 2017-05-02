@@ -516,4 +516,13 @@ public class IntentUtils {
         intent.setData(uri);
         return intent;
     }
+
+    public static Intent shareIntent(Context context, String Title, String url, String ChooserText) {
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_SUBJECT, Title);
+        i.putExtra(Intent.EXTRA_TEXT, url);
+        return Intent.createChooser(i, ChooserText);
+    }
 }

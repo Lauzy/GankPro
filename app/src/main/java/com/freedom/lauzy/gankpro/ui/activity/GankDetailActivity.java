@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
+import com.freedom.lauzy.gankpro.common.utils.IntentUtils;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
 import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
@@ -200,7 +201,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
                 collectionTheGank();
                 break;
             case R.id.menu_share:
-                SnackBarUtils.simpleSnackBar(findViewById(android.R.id.content), "分享").show();
+                startActivity(IntentUtils.shareIntent(GankDetailActivity.this,"分享",mWbDetail.getUrl(),"分享链接"));
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -13,8 +13,15 @@
         <item name="android:popupMenuStyle">@style/GankPopupMenu</item>
     </style>
 
-    <style name="ImgActTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="ImgActTheme" parent="AppTheme">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/color_img_bg</item>
+        <item name="alertDialogTheme">@style/LyAlertDialogStyle</item>
+    </style>
+
+    <!--<style name="ImgActTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -26,6 +33,15 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/color_img_bg</item>
         <item name="alertDialogTheme">@style/LyAlertDialogStyle</item>
+    </style>-->
+
+    <style name="TranslucentTheme" parent="AppTheme">
+        <item name="android:background">#00000000</item>
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation</item>-->
     </style>
 
     <!--对话框主题样式-->

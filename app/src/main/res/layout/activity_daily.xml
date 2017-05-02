@@ -73,6 +73,15 @@
                 app:layout_collapseMode="parallax"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"/>
 
+            <ImageView
+                android:id="@+id/img_title2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:visibility="gone"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"/>
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_daily"
                 android:layout_width="match_parent"

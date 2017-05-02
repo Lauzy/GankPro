@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.activity;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,16 +14,18 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
@@ -32,6 +35,7 @@ import com.freedom.lauzy.gankpro.function.utils.RxSavePic;
 import com.freedom.lauzy.gankpro.function.utils.SDCardUtils;
 import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
+import com.freedom.lauzy.gankpro.function.view.ImageOnTouchListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.tbruyelle.rxpermissions.Permission;
@@ -53,6 +57,8 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
     ImageView mImgBeauty;
     @BindView(R.id.pb_beauty)
     ProgressBar mPbBeauty;
+    @BindView(R.id.activity_img_beauty)
+    FrameLayout mImgBackground;
     private String mImgUrl;
     private String mPicDesc;
 
@@ -75,6 +81,29 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         mToolbarCommon.setTitle("");
         ViewCompat.setTransitionName(mImgBeauty, getString(R.string.string_img_share_elements));
 //        setupWindowAnimations();
+        mImgBackground.getBackground().setAlpha(255);
+        mImgBeauty.setOnTouchListener(new ImageOnTouchListener(mImgBackground, new ImageOnTouchListener.ImageEventListener() {
+            @Override
+            public void onActionBack() {
+                ViewCompat.animate(mImgBeauty).rotation(360)
+                        .setDuration(1000).setListener(new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(View view) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        onBackPressed();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(View view) {
+
+                    }
+                }).start();
+            }
+        }));
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -154,7 +183,7 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
                         startActivity(IntentUtils.openSetting(ImgBeautyActivity.this));
                     }
                 })
-                .setNegativeButton("取消",null)
+                .setNegativeButton("取消", null)
                 .create();
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override

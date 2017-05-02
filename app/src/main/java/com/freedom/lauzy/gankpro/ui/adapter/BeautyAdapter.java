@@ -1,6 +1,7 @@
 package com.freedom.lauzy.gankpro.ui.adapter;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.utils.TransitionHelper;
+import com.freedom.lauzy.gankpro.common.widget.ImageLoader;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
 import com.freedom.lauzy.gankpro.ui.activity.DailyActivity;
@@ -39,8 +41,7 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
     @Override
     protected void convert(final BaseViewHolder helper, final GankData.ResultsBean item) {
         //(ImageView) helper.getView(R.id.img_beauty_item)
-        Picasso.with(mContext).load(item.getUrl())
-                .into((ImageView) helper.getView(R.id.img_beauty_item));
+        ImageLoader.loadImage(mContext,item.getUrl(),(ImageView) helper.getView(R.id.img_beauty_item));
         /*ImageView imgItem = helper.getView(R.id.img_beauty_item);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (int) (DensityUtils.dp2px(mContext, 200) - 100 + Math.random() * 50));
@@ -69,8 +70,7 @@ public class BeautyAdapter extends BaseQuickAdapter<GankData.ResultsBean, BaseVi
                 final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(((Activity) mContext), true, new
                         Pair<>(helper.getView(R.id.img_beauty_item), "transitionImg"));
                 TransitionUtils.transitionTo(((Activity) mContext), intent, pairs);
-
-               /* if (Build.VERSION.SDK_INT >= 21) {
+                /*if (Build.VERSION.SDK_INT >= 21) {
                     mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, v, "transitionImg").toBundle());
                 } else {
                     mContext.startActivity(intent);
