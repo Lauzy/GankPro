@@ -85,7 +85,8 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         mImgBeauty.setOnTouchListener(new ImageOnTouchListener(mImgBackground, new ImageOnTouchListener.ImageEventListener() {
             @Override
             public void onActionBack() {
-                ViewCompat.animate(mImgBeauty).rotation(360)
+                onBackPressed();
+               /* ViewCompat.animate(mImgBeauty).rotation(360)
                         .setDuration(1000).setListener(new ViewPropertyAnimatorListener() {
                     @Override
                     public void onAnimationStart(View view) {
@@ -101,17 +102,17 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
                     public void onAnimationCancel(View view) {
 
                     }
-                }).start();
+                }).start();*/
             }
         }));
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    /*@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setupWindowAnimations() {
         getWindow().setEnterTransition(TransitionUtils.buildExplodeExitAnim(new LinearOutSlowInInterpolator()));
         getWindow().setExitTransition(TransitionUtils.buildExplodeExitAnim(new FastOutLinearInInterpolator()));
         getWindow().setReturnTransition(TransitionUtils.buildExplodeExitAnim(new LinearInterpolator()));
-    }
+    }*/
 
     @Override
     protected void loadData() {
@@ -150,7 +151,6 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
                 onBackPressed();
                 break;
             case R.id.menu_save_pic:
-
                 /*reQuestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE
                         , Manifest.permission.READ_EXTERNAL_STORAGE)//will emit 2 Permission objects*/
                 reQuestEachPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)

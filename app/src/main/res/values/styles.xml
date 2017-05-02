@@ -14,12 +14,15 @@
     </style>
 
     <style name="ImgActTheme" parent="AppTheme">
+        <item name="android:background">#00000000</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/color_img_bg</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowBackground">@color/color_transparent</item>
         <item name="alertDialogTheme">@style/LyAlertDialogStyle</item>
     </style>
+
 
     <!--<style name="ImgActTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>

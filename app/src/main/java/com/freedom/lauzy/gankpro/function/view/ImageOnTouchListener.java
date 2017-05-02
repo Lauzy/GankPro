@@ -1,9 +1,7 @@
 package com.freedom.lauzy.gankpro.function.view;
 
 
-import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +61,6 @@ public class ImageOnTouchListener implements View.OnTouchListener {
                 if (Math.abs(mMotionY) > 400) {
                     mImageEventListener.onActionBack();
                 } else {
-
                     //无动画
                     /*v.setScaleY(1);
                     v.setScaleX(1);
@@ -78,16 +75,15 @@ public class ImageOnTouchListener implements View.OnTouchListener {
                     setMarginAnim(v, layoutParams, Direction.TOP);
                     setMarginAnim(v, layoutParams, Direction.BOTTOM);
                     v.requestLayout();
-
-                    ValueAnimator animator = ValueAnimator.ofInt(mCurAlpha, 255);
-                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                        @Override
-                        public void onAnimationUpdate(ValueAnimator animation) {
-                            mContentLayout.getBackground().setAlpha((Integer) animation.getAnimatedValue());
-                        }
-                    });
-                    animator.setDuration(300).start();
                 }
+                ValueAnimator animator = ValueAnimator.ofInt(mCurAlpha, 255);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        mContentLayout.getBackground().setAlpha((Integer) animation.getAnimatedValue());
+                    }
+                });
+                animator.setDuration(300).start();
                 break;
         }
         return true;
