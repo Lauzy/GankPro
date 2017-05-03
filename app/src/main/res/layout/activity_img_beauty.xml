@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_style_gray"
-    android:orientation="vertical"
     tools:context="com.freedom.lauzy.gankpro.ui.activity.ImgBeautyActivity">
 
     <android.support.v7.widget.Toolbar

@@ -8,8 +8,23 @@
 ## 体验
 [下载地址](https://github.com/Lauzy/GankPro/raw/master/apk/gank.apk)
 
-## 特征及技术点
+## 抽离出的仿知乎首页滑动隐藏显示的库
 
+自定义Behavior，跟随手势滑动，显示隐藏标题栏、底部导航栏及悬浮按钮的Android Behavior Library。
+求Star[https://github.com/Lauzy/LBehavior](https://github.com/Lauzy/LBehavior)
+
+## 预览
+
+<img src="/imgs/20170502Gank1.gif" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/20170502Gank2.gif" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/imgs/20170502Gank3.gif" alt="screenshot" title="screenshot" width="270" height="486" />
+
+## Version
+
+### v1.0.1
+1. 添加分享功能；
+2. 图片详情页实现手势拖拽移动缩放及返回。
+
+### v1.0
 1. 采用BottomNavigationView作为导航，自定义Behavior高仿知乎首页滑动隐藏显示标题栏、底部导航栏及浮动按钮；
 2. MVP + RxJava + Retrofit + ButterKnife 开发，代码结构清晰，Retrofit+OkHttp实现网络加载及数据缓存；
 3. Android Transition实现Activity的转场及共享元素动画；
@@ -19,20 +34,9 @@
 7. 每日内容通过自定义RecyclerView.ItemDecoration实现分组及悬停；
 8. RxJava线程调度保存图片及数据库增删改查。
 
-## 仿知乎首页滑动隐藏显示的库
-
-自定义Behavior，跟随手势滑动，显示隐藏标题栏、底部导航栏及悬浮按钮的Android Behavior Library。
-求Star[https://github.com/Lauzy/LBehavior](https://github.com/Lauzy/LBehavior)
-
-## 预览
-
-<img src="/imgs/ScreenshotS1.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS2.png" alt="screenshot" title="screenshot" width="270" height="486" />
-<img src="/imgs/ScreenshotS4.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/imgs/ScreenshotS5.png" alt="screenshot" title="screenshot" width="270" height="486" />
-
 ## TODO、TO SOLVE
-1. 分享功能
-2. 夜间模式7.0+动画(可采用换肤框架实现)
-3. ……
+1. 夜间模式7.0+动画(可采用换肤框架实现)
+2. ……
 
 欢迎提[issues](https://github.com/Lauzy/GankPro/issues/new)、建议或Bug。
 

@@ -26,6 +26,7 @@ public class ImageOnTouchListener implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
 //        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) v.getLayoutParams();
+//        layoutParams.removeRule(RelativeLayout.CENTER_IN_PARENT);
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 mOriginalY = (int) event.getRawY();
@@ -41,20 +42,22 @@ public class ImageOnTouchListener implements View.OnTouchListener {
                 v.setScaleX(1 - ratioY);
                 v.setScaleY(1 - ratioY);
                 layoutParams.topMargin = mMotionY / 2;
-                layoutParams.bottomMargin = -mMotionY / 2;
                 layoutParams.leftMargin = mMotionX / 2;
+                layoutParams.bottomMargin = -mMotionY / 2;
                 layoutParams.rightMargin = -mMotionX / 2;
-//                layoutParams.setMargins(mMotionX / 2, mMotionY / 2, -mMotionX / 2, -mMotionY / 2);
-//                v.setLayoutParams(layoutParams);
+//                layoutParams.setMargins(mMotionX / 2, mMotionY / 2, -mMotionX / 2, mMotionY / 2);
+                v.setLayoutParams(layoutParams);
+
                 v.requestLayout();
                 if (Math.abs(mMotionY) > 500) {
                     mContentLayout.getBackground().setAlpha(100);
                     mCurAlpha = 100;
                 } else {
-                    double ratioAlpha = (Math.abs(mMotionY) / 500.0) * (255 - 100);
+                    float ratioAlpha = (Math.abs(mMotionY) / 500.0f) * (255 - 100);
                     mContentLayout.getBackground().setAlpha(255 - (int) ratioAlpha);
                     mCurAlpha = 255 - (int) ratioAlpha;
                 }
+                mContentLayout.invalidate();
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:

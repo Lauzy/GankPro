@@ -16,6 +16,27 @@ public class RvItemTouchListener implements RecyclerView.OnItemTouchListener {
     private RecyclerView mRecyclerView;
     private RvItemClickListener mListener;
 
+    public RvItemTouchListener(RecyclerView recyclerView, RvItemClickListener listener) {
+        mRecyclerView = recyclerView;
+        mListener = listener;
+        mDetector = new GestureDetector(recyclerView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+                super.onLongPress(e);
+                View view = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
+                int position = mRecyclerView.getChildAdapterPosition(view);
+                if (mListener != null) {
+                    mListener.rvItemLongClick(position);
+                }
+            }
+        });
+    }
+
     public RvItemTouchListener(Context context, RecyclerView recyclerView, RvItemClickListener listener) {
         mRecyclerView = recyclerView;
         mListener = listener;

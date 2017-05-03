@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -82,6 +83,9 @@ public class ImgBeautyActivity extends BaseToolbarActivity {
         ViewCompat.setTransitionName(mImgBeauty, getString(R.string.string_img_share_elements));
 //        setupWindowAnimations();
         mImgBackground.getBackground().setAlpha(255);
+       /* RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        mImgBeauty.setLayoutParams(layoutParams);*/
         mImgBeauty.setOnTouchListener(new ImageOnTouchListener(mImgBackground, new ImageOnTouchListener.ImageEventListener() {
             @Override
             public void onActionBack() {
