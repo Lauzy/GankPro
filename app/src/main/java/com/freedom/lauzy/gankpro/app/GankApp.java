@@ -13,6 +13,8 @@ import com.freedom.lauzy.gankpro.function.greendao.DaoSession;
 import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 import com.freedom.lauzy.gankpro.function.utils.SharePrefUtils;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * App
  * Created by Lauzy on 2017/1/18.
@@ -33,6 +35,8 @@ public class GankApp extends Application {
         ApiFactory.getInstance().init(this);
         initDataBase();
         initPref();
+        JPushInterface.setDebugMode(false);
+        JPushInterface.init(this);
         AppCompatDelegate.setDefaultNightMode(SharePrefUtils.isNightMode() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 

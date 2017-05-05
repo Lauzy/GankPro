@@ -30,16 +30,11 @@ import com.freedom.lauzy.gankpro.ui.fragment.MineFragment;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 public class MainActivity extends BaseToolbarActivity implements BottomNavigationView
         .OnNavigationItemSelectedListener, MineTitleListener {
