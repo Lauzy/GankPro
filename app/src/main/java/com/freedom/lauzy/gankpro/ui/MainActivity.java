@@ -82,85 +82,8 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
         Set<String> tagSet = new LinkedHashSet<>();
         Collections.addAll(tagSet, sArray);
 
-        /*mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, "Gank"));
-        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_TAGS, tagSet));*/
-
-
-        Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(final Subscriber<? super String> subscriber) {
-                Log.e(LYTAG, "call: ");
-                JPushInterface.setAliasAndTags(getApplicationContext(), "Gank2", null, new GankTagAliasCallback(new TagCallback() {
-                    @Override
-                    public void onSuccess() {
-                        subscriber.onNext("Gank2");
-                        subscriber.onCompleted();
-                        Log.e(LYTAG, "onSuccess: ");
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        subscriber.onError(throwable);
-                        Log.e(LYTAG, "onError: ");
-                    }
-                }));
-            }
-        }).retry(2).subscribe();
-
-    }
-
-
-    public class RetryWithDelay implements
-            Func1<Observable<? extends Throwable>, Observable<?>> {
-
-        private final int maxRetries;
-        private final int retryDelayMillis;
-        private int retryCount;
-
-        public RetryWithDelay(int maxRetries, int retryDelayMillis) {
-            this.maxRetries = maxRetries;
-            this.retryDelayMillis = retryDelayMillis;
-        }
-
-        @Override
-        public Observable<?> call(Observable<? extends Throwable> attempts) {
-            return attempts.flatMap(new Func1<Throwable, Observable<?>>() {
-                @Override
-                public Observable<?> call(Throwable throwable) {
-                    if (++retryCount <= maxRetries) {
-                        return Observable.timer(retryDelayMillis, TimeUnit.MILLISECONDS);
-                    }
-                    return Observable.error(throwable);
-                }
-            });
-        }
-    }
-
-    interface TagCallback {
-        void onSuccess();
-
-        void onError(Throwable throwable);
-    }
-
-    class GankTagAliasCallback implements TagAliasCallback {
-
-        private TagCallback mTagCallback;
-
-        public GankTagAliasCallback(TagCallback tagCallback) {
-            mTagCallback = tagCallback;
-        }
-
-        @Override
-        public void gotResult(int i, String s, Set<String> set) {
-            switch (i) {
-                case 0:
-                    mTagCallback.onSuccess();
-                    break;
-                case 6002:
-                    mTagCallback.onError(new Throwable("FAIL"));
-                    break;
-            }
-        }
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, "Gank"));
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_TAGS, tagSet));
     }
 
     @SuppressWarnings("unchecked")
