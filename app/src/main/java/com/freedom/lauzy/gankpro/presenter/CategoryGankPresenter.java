@@ -3,7 +3,7 @@ package com.freedom.lauzy.gankpro.presenter;
 import com.freedom.lauzy.gankpro.common.base.BasePresenter;
 import com.freedom.lauzy.gankpro.function.constants.LoadData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
-import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
+import com.freedom.lauzy.gankpro.function.net.OnResponse;
 import com.freedom.lauzy.gankpro.model.CategoryGankModel;
 import com.freedom.lauzy.gankpro.view.CategoryGankView;
 

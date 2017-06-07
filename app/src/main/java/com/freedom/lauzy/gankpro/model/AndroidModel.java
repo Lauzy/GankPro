@@ -3,7 +3,7 @@ package com.freedom.lauzy.gankpro.model;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
 import com.freedom.lauzy.gankpro.function.net.ApiFactory;
 import com.freedom.lauzy.gankpro.function.net.LySubscriber;
-import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
+import com.freedom.lauzy.gankpro.function.net.OnResponse;
 
 /**
  * android model

@@ -2,7 +2,6 @@ package com.freedom.lauzy.gankpro.function.net;
 
 import com.freedom.lauzy.gankpro.function.entity.DailyData;
 import com.freedom.lauzy.gankpro.function.entity.GankData;
-import com.freedom.lauzy.gankpro.function.net.callback.OnResponse;
 
 /**
  * retrofit工具类
