@@ -12,18 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseFragment;
-import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
-import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.MineFragment;
+import com.lauzy.freedom.lbehaviorlib.behavior.CommonBehavior;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +46,7 @@ public class MainFragment extends BaseFragment implements BottomNavigationView
     private CategoryFragment mCategoryFragment;
     private AndroidFragment mAndroidFragment;
     private MineFragment mMineFragment;
-    private GankBehavior mGankBehavior;
-    private GankBottomBehavior mGankBottomBehavior;
+    private CommonBehavior mGankBehavior;
     private String mTitle;
 
     public static MainFragment newInstance(String param1) {
@@ -67,8 +64,7 @@ public class MainFragment extends BaseFragment implements BottomNavigationView
 
     @Override
     protected void initViews() {
-        mGankBehavior = GankBehavior.from(mToolbar);
-        mGankBottomBehavior = GankBottomBehavior.from(mBottomMainNavigation);
+        mGankBehavior = CommonBehavior.from(mToolbar);
 //        mGankBehavior.show();
 //        setStatusColor(R.color.colorPrimaryDark);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);

@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
@@ -28,15 +27,10 @@ import android.widget.TextView;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
-import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
-import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
+import com.lauzy.freedom.lbehaviorlib.behavior.CommonBehavior;
 
 import butterknife.BindView;
-
-import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ACCELERATE_DECELERATE_ENTER_TYPE;
-import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.BOUNCE_ENTER_TYPE;
-import static com.freedom.lauzy.gankpro.function.constants.ValueConstants.ImageValue.ENTER_TYPE;
 
 public class LibsGithubActivity extends BaseToolbarActivity {
 
@@ -57,7 +51,7 @@ public class LibsGithubActivity extends BaseToolbarActivity {
     LinearLayout mToolWebLayout;
     @BindView(R.id.activity_libs_detail)
     CoordinatorLayout mDetailView;
-    private GankBehavior mGankBehavior;
+    private CommonBehavior mGankBehavior;
 
     public static Intent newInstance(Context context, String libLink) {
         Intent intent = new Intent(context, LibsGithubActivity.class);
@@ -75,7 +69,7 @@ public class LibsGithubActivity extends BaseToolbarActivity {
 //        setupWindowAnimations();
         mToolbarCommon.setTitle("");
         mToolbarCommon.setNavigationIcon(R.mipmap.icon_close);
-        mGankBehavior = GankBehavior.from(mToolWebLayout);
+        mGankBehavior = CommonBehavior.from(mToolWebLayout);
         mGankBehavior.setCanScroll(false);
     }
 

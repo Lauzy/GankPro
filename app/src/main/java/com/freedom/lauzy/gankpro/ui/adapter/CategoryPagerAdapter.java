@@ -4,10 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.freedom.lauzy.gankpro.common.widget.behavior.GankBottomBehavior;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryChildFragment;
-
-import java.util.List;
 
 /**
  * Created by Lauzy on 2017/3/20.

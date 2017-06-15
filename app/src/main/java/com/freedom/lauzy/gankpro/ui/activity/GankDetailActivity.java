@@ -31,12 +31,12 @@ import com.freedom.lauzy.gankpro.app.GankApp;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.utils.IntentUtils;
 import com.freedom.lauzy.gankpro.common.widget.LyWebView;
-import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.constants.ValueConstants;
 import com.freedom.lauzy.gankpro.function.entity.CollectionEntity;
 import com.freedom.lauzy.gankpro.function.greendao.CollectionEntityDao;
 import com.freedom.lauzy.gankpro.function.utils.SnackBarUtils;
 import com.freedom.lauzy.gankpro.function.utils.TransitionUtils;
+import com.lauzy.freedom.lbehaviorlib.behavior.CommonBehavior;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
     LinearLayout mToolWebLayout;
     @BindView(R.id.activity_gank_detail)
     CoordinatorLayout mDetailView;
-    private GankBehavior mGankBehavior;
+    private CommonBehavior mGankBehavior;
     private String mDetailUrl;
     private String mPublishTime;
     private String mGankDesc;
@@ -102,7 +102,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
         mlp.topMargin = webTopPadding;
         mWbDetail.setLayoutParams(mlp);*/
 
-        mGankBehavior = GankBehavior.from(mToolWebLayout);
+        mGankBehavior = CommonBehavior.from(mToolWebLayout);
         mGankBehavior.setCanScroll(false);
     }
 
@@ -201,7 +201,7 @@ public class GankDetailActivity extends BaseToolbarActivity {
                 collectionTheGank();
                 break;
             case R.id.menu_share:
-                startActivity(IntentUtils.shareIntent(GankDetailActivity.this,"分享",mWbDetail.getUrl(),"分享链接"));
+                startActivity(IntentUtils.shareIntent(GankDetailActivity.this, "分享", mWbDetail.getUrl(), "分享链接"));
                 break;
         }
         return super.onOptionsItemSelected(item);

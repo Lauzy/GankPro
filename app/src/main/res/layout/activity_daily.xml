@@ -34,7 +34,7 @@
         app:elevation="6dp"
         app:layout_anchor="@id/rv_daily"
         app:layout_anchorGravity="bottom|end"
-        app:layout_behavior="@string/fab_behavior"
+        app:layout_behavior="@string/fab_scale_behavior"
         app:rippleColor="@color/color_press_gray"
         app:srcCompat="@mipmap/icon_beauty_float_btn"/>
 

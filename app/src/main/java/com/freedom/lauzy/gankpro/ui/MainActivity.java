@@ -19,13 +19,13 @@ import android.widget.TextView;
 import com.freedom.lauzy.gankpro.R;
 import com.freedom.lauzy.gankpro.common.base.BaseToolbarActivity;
 import com.freedom.lauzy.gankpro.common.utils.NetUtils;
-import com.freedom.lauzy.gankpro.common.widget.behavior.GankBehavior;
 import com.freedom.lauzy.gankpro.function.MineTitleListener;
 import com.freedom.lauzy.gankpro.function.utils.SharePrefUtils;
 import com.freedom.lauzy.gankpro.ui.fragment.AndroidFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.BeautyFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.CategoryFragment;
 import com.freedom.lauzy.gankpro.ui.fragment.MineFragment;
+import com.lauzy.freedom.lbehaviorlib.behavior.CommonBehavior;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -54,7 +54,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
     private CategoryFragment mCategoryFragment;
     private AndroidFragment mAndroidFragment;
     private MineFragment mMineFragment;
-    private GankBehavior mGankBehavior;
+    private CommonBehavior mGankBehavior;
     //    private GankBottomBehavior mGankBottomBehavior;
     private String mTitle;
 
@@ -244,7 +244,7 @@ public class MainActivity extends BaseToolbarActivity implements BottomNavigatio
 
     @Override
     protected void initViews() {
-        mGankBehavior = GankBehavior.from(mToolbar);
+        mGankBehavior = CommonBehavior.from(mToolbar);
 //        mGankBottomBehavior = GankBottomBehavior.from(mBottomMainNavigation);
         MenuItem item = mBottomMainNavigation.getMenu().getItem(0);
         onNavigationItemSelected(item);//默认选中第一个

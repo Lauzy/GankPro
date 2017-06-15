@@ -28,7 +28,7 @@
         android:background="@color/color_transparent_white"
         app:itemIconTint="@color/bottom_item_color"
         app:itemTextColor="@color/bottom_item_color"
-        app:layout_behavior="@string/bottom_behavior"
+        app:layout_behavior="@string/bottom_view_behavior"
         app:menu="@menu/menu_bottom_navigation_view"/>
 
     <android.support.design.widget.FloatingActionButton

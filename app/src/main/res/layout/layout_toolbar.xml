@@ -8,7 +8,7 @@
     android:background="@color/color_style_gray"
     android:elevation="@dimen/dp_5"
     app:contentInsetStart="0dp"
-    app:layout_behavior="@string/toolbar_behavior"
+    app:layout_behavior="@string/title_view_behavior"
     >
     <!--app:layout_behavior="@string/bye_burger_title_behavior"-->
     <!--app:layout_behavior="@string/toolbar_behavior"-->
